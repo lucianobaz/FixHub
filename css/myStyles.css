@@ -1,0 +1,274 @@
+/* VARIABLES AND RESET */
+:root {
+    --bg: #f4f7fb;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* HEADER / NAVBAR beginning */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+}
+
+.logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2f6fed;
+}
+
+.nav {
+    display: flex;
+    gap: 12px;
+}
+
+.nav a {
+    padding: 6px 8px;
+    color: #555;
+}
+/* HEADER / NAVBAR ending */
+
+/* BUTTONS beginning */
+.button {
+    border: none;
+    border-radius: 999px;
+    padding: 8px 12px;
+    background: #2f6fed;
+    color: #fff;
+    cursor: pointer;
+}
+
+.button-primary {
+    background: #1e56d6;
+}
+
+.button-secondary {
+    background: #e8eefc;
+    color: #2f6fed;
+}
+/* BUTTONS ending*/
+
+/* MAIN CONTAINER beginning */
+.content,
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+/* MAIN CONTAINER ending */
+
+/* HERO SECTION beginning */
+.hero {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background: #2f6fed;
+    color: #fff;
+    border-radius: 16px;
+    align-items: stretch;
+    margin-bottom: 20px;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero h1 {
+    margin: 0 0 8px;
+    font-size: 1.8rem;
+}
+
+.hero p {
+    margin: 0;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.hero-card {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 16px;
+    border-radius: 12px;
+}
+
+.tagline {
+    opacity: 0.95;
+    margin: 0 0 8px 0;
+}
+/* HERO SECTION ending */
+/* INTRO PANEL beginning */
+.intro-panel {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
+    padding: 16px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+/* INTRO PANEL ending */
+
+/* GRID CARDS beginning */
+.grid {
+    display: grid;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.grid.home {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid.guides,
+.grid.diag {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #2f6fed;
+}
+
+.code-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    background: #e8eefc;
+    border-radius: 999px;
+    color: #2f6fed;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+/* GRID CARDS ending */
+
+/* FOOTER beginning */
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: #555;
+}
+/* FOOTER ending */
+
+/* AUTH PAGES beginning */
+.auth-body {
+    min-height: 100vh;
+    background: var(--bg);
+}
+
+.auth-page {
+    max-width: 900px;
+    margin: 20px auto 0;
+}
+
+.auth-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.auth-intro,
+.auth-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.auth-form input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.auth-link {
+    margin-top: 10px;
+    color: #555;
+}
+
+.auth-link a {
+    color: #2f6fed;
+}
+/* AUTH PAGES ending */
+.auth-body {
+    min-height: 100vh;
+    background: var(--bg);
+}
+
+.auth-page {
+    max-width: 900px;
+    margin: 20px auto 0;
+}
+
+.auth-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.auth-intro,
+.auth-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.auth-form input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.auth-link {
+    margin-top: 10px;
+    color: #555;
+}
+
+.auth-link a {
+    color: #2f6fed;
+}
+

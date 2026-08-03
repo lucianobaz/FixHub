@@ -1,0 +1,110 @@
+<!--GUIDE-->
+<!DOCTYPE html>
+
+<!--HTML LANGUAGE-->
+<html lang="en">
+
+<!--HEAD BEGGINING-->
+<head>
+    <meta charset="UTF-8">
+    <title>FixHub | Guides</title>
+    <link rel="stylesheet" href="../css/myStyles.css">
+</head>
+<!--HEAD ENDING-->
+
+<!--BODY BEGGINING-->
+<body>
+
+<!-- HEADER BEGINNING -->
+<header class="header">
+    <a class="logo" href="index.html">FixHub</a>
+    <nav class="nav" aria-label="navbar">
+        <a href="index.html">Home</a>
+        <a href="diagnose.html">Diagnose</a>
+        <a href="guide.html">Guides</a>
+        <a href="mainteinance.html">Maintenance</a>
+        <a href="support.html">Support</a>
+        <a class="login-btn" href="login.html">Login</a>
+    </nav>
+    <button id="langButton" class="lang-btn" type="button" aria-label="Switch language">Español</button>
+</header>
+<!-- HEADER ENDING -->
+
+<!-- PAGE CONTENT BEGINNING -->
+<main class="content">
+
+<!-- PAGE HERO BEGINNING -->
+<section class="hero">
+    <div class="hero-content">
+        <p class="tagline">Repair Guides</p>
+        <h1>Common Windowsblue screen issues and how to fix them.</h1>
+        <p>Use this guide to identify the error code and solve the problem.</p>
+    </div>
+</section>
+<!-- PAGE HERO ENDING -->
+
+<!-- GUIDE CARDS GRID BEGINNING -->
+<section class="grid guides" aria-label="Blue screen guide cards">
+
+<!--BSOD 0x0000007B-->
+<article class="card">
+    <h3>BSOD 0x0000007B</h3>
+    <p class="code-badge">Error code: 0x7B</p>
+    <p>This usually points to a storage or hard drive connection problem. Check that the drive is connected properly and try Safe Mode.</p>
+    <ul>
+        <li>Reconnect the storage drive</li>
+        <li>Run startup repair</li>
+        <li>Check BIOS settings</li>
+    </ul>
+</article>
+
+<!--BSOD 0x0000001A-->
+<article class="card">
+    <h3>BSOD 0x0000001A</h3>
+    <p class="code-badge">Error code: 0x1A</p>
+    <p>This is often related to memory or faulty drivers. Start by removing recently installed hardware and updating drivers.</p>
+    <ul>
+        <li>Update graphics and chipset drivers</li>
+        <li>Remove and test RAM modules one by one</li>
+        <li>Revert recent updates</li>
+    </ul>
+</article>
+
+<!--BSOD 0x00000050-->
+<article class="card">
+    <h3>BSOD 0x00000050</h3>
+    <p class="code-badge">Error code: 0x50</p>
+    <p>This commonly appears after a bad driver or a corrupted system file. Restore the system or run SFC.</p>
+    <ul>
+        <li>Run System File Checker</li>
+        <li>Boot into Safe Mode</li>
+        <li>Uninstall the last problematic driver</li>
+    </ul>
+</article>
+
+<!--BSOD 0x000000D1-->
+<article class="card">
+    <h3>BSOD 0x000000D1</h3>
+    <p class="code-badge">Error code: 0xD1</p>
+    <p>This can be caused by outdated or incompatible drivers. Update drivers and check if the problem started after recent changes.</p>
+    <ul>
+        <li>Check device drivers</li>
+        <li>Disable newly installed software</li>
+        <li>Use Windows Update</li>
+    </ul>
+</article>
+
+</section>
+<!-- GUIDE CARDS GRID ENDING -->
+
+</main>
+<!-- PAGE CONTENT ENDING -->
+
+<!-- FOOTER BEGINNING -->
+<footer class="footer">
+    <p>Copyright © 2026 FixHub. All rights reserved.</p>
+</footer>
+<!-- FOOTER ENDING -->
+
+</body>
+</html>
