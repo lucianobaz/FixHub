@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Layout Demo</title>
+    <link rel="stylesheet" href="responsive.css">
+</head>
+
+<body>
+
+    <header>
+        <!-- invisible checkbox that controls our mobile menu -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+
+        <!-- clickable three-line "hamburger" icon using unicode-->
+        <!--  &#9776;  and  &#x2630; work as well unique code for that specific hamburguer-->
+        <label for="nav-toggle" class="hamburger">&#9776;</label>
+
+        <nav class="flex-nav">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Portfolio</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Responsive Design Breakpoints</h1>
+        <p>Resize your browser window to see the layout adapt to desktop, tablet, and mobile sizes</p>
+
+        <div class="grid-container">
+            <div class="grid-item">Box 1</div>
+            <div class="grid-item">Box 2</div>
+            <div class="grid-item">Box 3</div>
+            <div class="grid-item">Box 4</div>
+            <div class="grid-item">Box 5</div>
+            <div class="grid-item">Box 6</div>
+        </div>
+    </main>
+
+</body>
+
+</html>

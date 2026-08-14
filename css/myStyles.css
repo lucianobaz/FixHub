@@ -34,16 +34,85 @@ a {
     color: #2f6fed;
 }
 
-.nav {
+/* Desktop Navigation */
+.flex-nav {
     display: flex;
+    flex-direction: row;
     gap: 12px;
+    align-items: center;
 }
 
-.nav a {
+.flex-nav a {
     padding: 6px 8px;
     color: #555;
 }
+
+.flex-nav a:hover {
+    color: #2f6fed;
+}
+
+/* Hide mobile menu toggle on desktop */
+.nav-toggle {
+    display: none;
+}
+
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    color: #555;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
 /* HEADER / NAVBAR ending */
+
+/* RESPONSIVE NAVIGATION */
+/* Tablet Breakpoint (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .flex-nav {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+/* Mobile Breakpoint (max-width: 768px) */
+@media (max-width: 768px) {
+    .header {
+        flex-wrap: wrap;
+    }
+
+    /* Show hamburger icon on mobile */
+    .hamburger {
+        display: block;
+        order: 2;
+    }
+
+    /* Hide nav by default on mobile */
+    .flex-nav {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 0;
+        margin-top: 1rem;
+        order: 3;
+    }
+
+    /* Show nav when checkbox is checked */
+    .nav-toggle:checked ~ .flex-nav {
+        display: flex;
+    }
+
+    .flex-nav a {
+        padding: 10px 8px;
+    }
+
+    /* Logo stays on first line on mobile */
+    .logo {
+        order: 1;
+    }
+}
 
 /* BUTTONS beginning */
 .button {
@@ -99,6 +168,18 @@ main {
     margin: 0;
 }
 
+/* Responsive Hero - Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        padding: 16px;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+}
+
 .hero-actions {
     display: flex;
     gap: 10px;
@@ -150,6 +231,25 @@ main {
     border: 1px solid #ddd;
     border-radius: 12px;
     padding: 16px;
+}
+
+/* Responsive Grid - Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .grid.home {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Responsive Grid - Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .grid.home {
+        grid-template-columns: 1fr;
+    }
+
+    .grid.guides,
+    .grid.diag {
+        grid-template-columns: 1fr;
+    }
 }
 
 .link {
@@ -226,49 +326,15 @@ main {
 .auth-link a {
     color: #2f6fed;
 }
+
+/* Responsive Auth Layout - Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .auth-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-page {
+        margin: 20px auto 0;
+    }
+}
 /* AUTH PAGES ending */
-.auth-body {
-    min-height: 100vh;
-    background: var(--bg);
-}
-
-.auth-page {
-    max-width: 900px;
-    margin: 20px auto 0;
-}
-
-.auth-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-}
-
-.auth-intro,
-.auth-card {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 16px;
-}
-
-.auth-form {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.auth-form input {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
-.auth-link {
-    margin-top: 10px;
-    color: #555;
-}
-
-.auth-link a {
-    color: #2f6fed;
-}
-

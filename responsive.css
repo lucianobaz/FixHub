@@ -1,0 +1,112 @@
+/* 1. DESKTOP (Default) */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+}
+
+/*  Flexbox Nav */
+header {
+    background-color: #2c3e50;
+    padding: 1rem 2rem;
+}
+
+.flex-nav {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-evenly; 
+    gap: 2rem;
+}
+
+.flex-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 0.5rem;
+}
+
+.flex-nav a:hover {
+    color: #3498db;
+}
+
+/* Hide mobile mechanics on desktop */
+.nav-toggle {
+    display: none; 
+}
+
+.hamburger {
+    display: none; 
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+}
+
+/*Grid*/
+main {
+    padding: 2rem;
+    text-align: center;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.grid-item {
+    background-color: #3498db;
+    color: white;
+    padding: 3rem 1rem;
+    font-size: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* 2. TABLET BREAKPOINT (Under 1024px) */
+@media (max-width: 1024px) {
+    
+    /* changes from horizontal to vertical */
+    .flex-nav {
+        flex-direction: column; 
+        align-items: center; 
+        gap: 1rem;
+    }
+
+    /* Grid reduces from 3 columns to 2 columns */
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+/*3. CELLPHONE BREAKPOINT (Under 768px)*/
+@media (max-width: 768px) {
+    
+    header {
+        text-align: right; /* Aligns hamburger icon to the right */
+    }
+
+    /* Show the clickable hamburger icon */
+    .hamburger {
+        display: inline-block;
+    }
+
+    /* Hide the navigation links by default on phones */
+    .flex-nav {
+        display: none; 
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    /* Toggle invisible button */
+    .nav-toggle:checked ~ .flex-nav {
+        display: flex; 
+    }
+
+    /* Grid reduces to a single vertical column */
+    .grid-container {
+        grid-template-columns: 1fr; 
+    }
+}
