@@ -1,340 +1,409 @@
 /* VARIABLES AND RESET */
+/* This section defines global CSS variables and resets used across the whole site.
+   It is shared by all HTML pages that include this stylesheet, such as index.html,
+   diagnose.html, guide.html, login.html, etc. */
 :root {
-    --bg: #f4f7fb;
+    --bg: #f4f7fb; /* Main page background color used in the app shell and auth pages. */
 }
 
 * {
-    box-sizing: border-box;
+    box-sizing: border-box; /* Ensures padding and borders are included inside each element's width/height. */
 }
 
 body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: var(--bg);
+    margin: 0; /* Removes default browser spacing around the page body. */
+    font-family: Arial, Helvetica, sans-serif; /* Default typeface for all text in the project. */
+    background: var(--bg); /* Applies the common soft-gray background to the page. */
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+    color: inherit; /* Prevents links from forcing a different text color than their parent. */
+    text-decoration: none; /* Removes default underline styling from links throughout the site. */
 }
 
 /* HEADER / NAVBAR beginning */
+/* This block styles the top navigation bar displayed on pages such as index.html and all other sections.
+   It sets the layout, spacing, colors, and the visual treatment of the logo and primary nav links. */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 20px;
-    background: #fff;
-    border-bottom: 1px solid #ccc;
+    display: flex; /* Makes the header content align in a single horizontal row. */
+    justify-content: space-between; /* Pushes the logo to the left and the nav to the right. */
+    align-items: center; /* Vertically centers everything inside the header. */
+    padding: 16px 20px; /* Adds internal spacing around the header content. */
+    background: #fff; /* White background for the top bar. */
+    border-bottom: 1px solid #ccc; /* Subtle divider line under the header. */
 }
 
 .logo {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #2f6fed;
+    font-size: 1.2rem; /* Sets the branding text size. */
+    font-weight: 700; /* Makes the FixHub word stronger and more prominent. */
+    color: #2f6fed; /* Blue brand color used for the logo. */
 }
 
 /* Desktop Navigation */
+/* These rules control the main navigation layout on larger screens before the tablet/mobile breakpoints. */
 .flex-nav {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-    align-items: center;
+    display: flex; /* Shows the nav items in a row. */
+    flex-direction: row; /* Ensures they stay horizontally aligned. */
+    gap: 12px; /* Adds consistent space between nav items. */
+    align-items: center; /* Aligns text vertically within the nav row. */
 }
 
 .flex-nav a {
-    padding: 6px 8px;
-    color: #555;
+    padding: 6px 8px; /* Adds clickable space around each nav link. */
+    color: #555; /* Neutral gray text for navigation item color. */
 }
 
 .flex-nav a:hover {
-    color: #2f6fed;
+    color: #2f6fed; /* Blue hover color gives a subtle interactive highlight. */
 }
 
 /* Hide mobile menu toggle on desktop */
+/* The checkbox and hamburger icon are hidden on desktop because the full nav is already visible there. */
 .nav-toggle {
     display: none;
 }
 
 .hamburger {
-    display: none;
-    font-size: 1.5rem;
-    color: #555;
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 0;
+    display: none; /* Hidden by default; only used in mobile/tablet menu behavior. */
+    width: 30px; /* Fixed width for the menu icon area. */
+    height: 30px; /* Fixed height for consistent size. */
+    background-image: url('../resources/menu.png'); /* Uses the custom menu icon asset in the resources folder. */
+    background-size: contain; /* Scales the icon to fit the box without distortion. */
+    background-repeat: no-repeat; /* Prevents tiling of the icon image. */
+    background-position: center; /* Centers the icon visually inside its container. */
+    cursor: pointer; /* Shows that the icon is clickable. */
+    background-color: transparent; /* Keeps the background transparent so it blends with the header. */
+    border: none; /* Removes the default button border. */
+    padding: 0; /* Removes extra padding so the icon maintains its intended size. */
 }
 
 /* HEADER / NAVBAR ending */
 
 /* RESPONSIVE NAVIGATION */
+/* This section changes the header and navigation behavior when the viewport is smaller than desktop.
+   It applies to all pages that use the shared layout, especially the home page and other content pages. */
+
 /* Tablet Breakpoint (max-width: 1024px) */
+/* This media query targets tablet-sized screens and keeps the navigation from feeling cramped.
+   The header wraps onto multiple lines, the nav items spread more evenly, and the main content blocks
+   switch into cleaner two-column proportions. */
 @media (max-width: 1024px) {
+    .header {
+        flex-wrap: wrap; /* Allows the logo, nav, and language control to wrap when space runs tight. */
+        gap: 12px 18px; /* Adds vertical and horizontal spacing between wrapped header elements. */
+    }
+
     .flex-nav {
-        flex-direction: column;
-        gap: 8px;
+        display: flex; /* Keeps the nav visible and usable on tablets, instead of collapsing it. */
+        flex: 1 1 100%; /* Makes the nav row take the full width of the header line before wrapping. */
+        order: 3; /* Places the nav underneath the logo on smaller layouts. */
+        flex-direction: row; /* Keeps links in a horizontal row for readability on tablet screens. */
+        flex-wrap: wrap; /* Allows the nav items to wrap if there isn’t enough horizontal room. */
+        justify-content: center; /* Centers the navigation links visually. */
+        gap: 8px 14px; /* Creates compact spacing between links while preserving readability. */
+        padding-top: 8px; /* Adds space between the nav and the header line above it. */
+        border-top: 1px solid #ebeff5; /* Adds a soft divider line separating the nav from the header content. */
+    }
+
+    .flex-nav a {
+        padding: 0; /* Removes extra clickable padding so the links sit cleaner without blue pill styling. */
+        border-radius: 0; /* Keeps the nav links visually flat and minimal. */
+        background: transparent; /* Removes any background fill that could distract from the layout. */
+    }
+
+    .hero {
+        display: grid; /* Converts the hero section from a row layout to a cleaner grid layout on tablets. */
+        grid-template-columns: 1.3fr 1fr; /* Gives the text column more space than the info panel column. */
+        align-items: center; /* Keeps the two hero columns vertically aligned. */
+    }
+
+    .intro-panel {
+        display: grid; /* Uses a 2-column configuration for the intro panel on tablet width. */
+        grid-template-columns: 1.05fr 1.45fr; /* Gives the explanatory text column slightly more room. */
+        align-items: center; /* Aligns the heading and paragraph sections vertically. */
+        gap: 18px; /* Adds spacing between the title block and the body text. */
     }
 }
 
 /* Mobile Breakpoint (max-width: 768px) */
+/* This media query is specifically for small mobile screens. It hides the desktop nav, shows the menu icon,
+   and makes the nav appear as a collapsible vertical list triggered by the checkbox. */
 @media (max-width: 768px) {
     .header {
-        flex-wrap: wrap;
+        flex-wrap: wrap; /* Allows the header to wrap the logo and menu icon as needed. */
     }
 
     /* Show hamburger icon on mobile */
     .hamburger {
-        display: block;
-        order: 2;
+        display: block; /* Reveals the menu icon so the user can open the nav on phones. */
+        order: 2; /* Places the icon after the logo in the header sequence. */
     }
 
     /* Hide nav by default on mobile */
     .flex-nav {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        gap: 0;
-        margin-top: 1rem;
-        order: 3;
+        display: none; /* Hides the nav list until the user taps the hamburger menu. */
+        width: 100%; /* Makes the mobile nav span the full width under the header. */
+        flex-direction: column; /* Stacks the links vertically for easy tapping. */
+        gap: 0; /* Removes spacing between mobile links so they form a clean stacked list. */
+        margin-top: 1rem; /* Adds space between the header and the hidden menu panel. */
+        order: 3; /* Places the nav below the logo and menu icon. */
     }
 
     /* Show nav when checkbox is checked */
     .nav-toggle:checked ~ .flex-nav {
-        display: flex;
+        display: flex; /* Displays the stacked mobile nav when the checkbox is checked by the hamburger label. */
     }
 
     .flex-nav a {
-        padding: 10px 8px;
+        padding: 10px 8px; /* Adds comfortable touch spacing to each menu item. */
     }
 
     /* Logo stays on first line on mobile */
     .logo {
-        order: 1;
+        order: 1; /* Keeps the logo in the first slot of the header layout. */
     }
 }
 
 /* BUTTONS beginning */
+/* These are the reusable call-to-action buttons used throughout the site, especially in the home hero section
+   and on pages that need a standard primary or secondary action. */
 .button {
-    border: none;
-    border-radius: 999px;
-    padding: 8px 12px;
-    background: #2f6fed;
-    color: #fff;
-    cursor: pointer;
+    border: none; /* Removes default browser button border. */
+    border-radius: 999px; /* Makes the buttons fully rounded for a modern pill shape. */
+    padding: 8px 12px; /* Adds comfortable spacing inside the buttons. */
+    background: #2f6fed; /* Primary blue button color used for the main action. */
+    color: #fff; /* White text for strong contrast on blue buttons. */
+    cursor: pointer; /* Shows click affordance. */
 }
 
 .button-primary {
-    background: #1e56d6;
+    background: #1e56d6; /* Darker blue variation for the prominent CTA button. */
 }
 
 .button-secondary {
-    background: #e8eefc;
-    color: #2f6fed;
+    background: #e8eefc; /* Light blue-gray background for secondary actions. */
+    color: #2f6fed; /* Keeps the secondary text in the same blue brand color. */
 }
 /* BUTTONS ending*/
 
 /* MAIN CONTAINER beginning */
+/* This container controls the main content width and spacing on all primary pages, including index.html and other page templates. */
 .content,
 main {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
+    max-width: 1000px; /* Limits width so content does not stretch too wide on large screens. */
+    margin: 0 auto; /* Centers the content block horizontally. */
+    padding: 20px; /* Adds spacing around the main content area. */
 }
 /* MAIN CONTAINER ending */
 
 /* HERO SECTION beginning */
+/* The hero block is the large promotional banner on the home page. It combines a headline, supporting text,
+   CTA buttons, and a right-side information card in a single blue panel. */
 .hero {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-    background: #2f6fed;
-    color: #fff;
-    border-radius: 16px;
-    align-items: stretch;
-    margin-bottom: 20px;
+    display: flex; /* Uses a horizontal layout for the text and info panel. */
+    gap: 20px; /* Adds space between the text column and the card column. */
+    padding: 20px; /* Adds internal spacing inside the blue panel. */
+    background: #2f6fed; /* Strong blue background gives the page a branded hero feel. */
+    color: #fff; /* White text ensures readability over the blue background. */
+    border-radius: 16px; /* Rounds the corners of the hero panel. */
+    align-items: stretch; /* Makes both columns share the same height within the hero. */
+    margin-bottom: 20px; /* Adds separation below the hero section. */
 }
 
 .hero-content {
-    flex: 1;
+    flex: 1; /* Allows the left text column to take available space. */
 }
 
 .hero h1 {
-    margin: 0 0 8px;
-    font-size: 1.8rem;
+    margin: 0 0 8px; /* Removes default heading margin and adds space below the heading. */
+    font-size: 1.8rem; /* Sets the main hero title size. */
 }
 
 .hero p {
-    margin: 0;
+    margin: 0; /* Removes default paragraph spacing in the hero content. */
 }
 
 /* Responsive Hero - Mobile (max-width: 768px) */
+/* On mobile screens, the hero switches from a two-column card to a single-column stacked layout. */
 @media (max-width: 768px) {
     .hero {
-        flex-direction: column;
-        padding: 16px;
+        flex-direction: column; /* Stacks the text and card vertically on small screens. */
+        padding: 16px; /* Reduces spacing to fit narrow mobile screens better. */
     }
 
     .hero h1 {
-        font-size: 1.5rem;
+        font-size: 1.5rem; /* Slightly reduces title size for smaller screens. */
     }
 }
 
 .hero-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 12px;
+    display: flex; /* Puts the CTA buttons in a row. */
+    gap: 10px; /* Adds spacing between the two buttons. */
+    margin-top: 12px; /* Separates the button row from the hero paragraph. */
 }
 
 .hero-card {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 16px;
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.15); /* Adds a subtle transparent white panel behind the right sidebar card. */
+    padding: 16px; /* Creates spacing inside the card. */
+    border-radius: 12px; /* Rounds the corners of the card. */
 }
 
 .tagline {
-    opacity: 0.95;
-    margin: 0 0 8px 0;
+    opacity: 0.95; /* Slightly reduces contrast to make the uppercase/label text feel softer. */
+    margin: 0 0 8px 0; /* Keeps spacing consistent around the label text. */
 }
 /* HERO SECTION ending */
+
 /* INTRO PANEL beginning */
+/* This section introduces the value proposition of the product beneath the hero banner, often used on the home page. */
 .intro-panel {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    margin-top: 20px;
-    padding: 16px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 12px;
+    display: flex; /* Keeps the heading area and descriptive paragraph side by side on larger screens. */
+    justify-content: space-between; /* Pushes the left heading block and right paragraph apart. */
+    gap: 20px; /* Adds space between the columns. */
+    margin-top: 20px; /* Creates space from the hero section above. */
+    padding: 16px; /* Adds internal spacing to the panel. */
+    background: #fff; /* White background for a clean card appearance. */
+    border: 1px solid #ddd; /* Soft gray border to separate it from the page background. */
+    border-radius: 12px; /* Rounds the panel corners. */
 }
 /* INTRO PANEL ending */
 
 /* GRID CARDS beginning */
+/* This block styles the reusable card grids used for feature tiles and other grouped content sections. */
 .grid {
-    display: grid;
-    gap: 16px;
-    margin-top: 20px;
+    display: grid; /* Establishes a CSS grid layout for all card groups. */
+    gap: 16px; /* Gives consistent spacing between cards. */
+    margin-top: 20px; /* Adds vertical space above each grid section. */
 }
 
 .grid.home {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr); /* Displays four equally sized feature cards across the home page. */
 }
 
 .grid.guides,
 .grid.diag {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* Uses a two-column layout for guide and diagnostic page listings. */
 }
 
 .card {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 16px;
+    background: #fff; /* White card background. */
+    border: 1px solid #ddd; /* Light border with subtle separation from the page background. */
+    border-radius: 12px; /* Rounds the corners to match the overall design language. */
+    padding: 16px; /* Creates comfortable spacing inside each card. */
 }
 
 /* Responsive Grid - Tablet (max-width: 1024px) */
+/* On tablets, feature cards reduce to two columns to prevent overly wide cards. */
 @media (max-width: 1024px) {
     .grid.home {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Responsive Grid - Mobile (max-width: 768px) */
-@media (max-width: 768px) {
-    .grid.home {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr); /* Reflows the home feature cards from 4 columns to 2 columns. */
     }
 
     .grid.guides,
     .grid.diag {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Stacks guide and diagnose content into one column when space is limited. */
+    }
+}
+
+/* Responsive Grid - Mobile (max-width: 768px) */
+/* On phone screens, every content card collapses to a single column for easy reading. */
+@media (max-width: 768px) {
+    .grid.home {
+        grid-template-columns: 1fr; /* Forces the home feature cards to stack vertically on mobile. */
+    }
+
+    .grid.guides,
+    .grid.diag {
+        grid-template-columns: 1fr; /* Keeps guide and diagnose lists readable in a single column. */
     }
 }
 
 .link {
-    display: inline-block;
-    margin-top: 10px;
-    color: #2f6fed;
+    display: inline-block; /* Makes links behave like inline-block elements so spacing and margin work correctly. */
+    margin-top: 10px; /* Adds space above the link relative to the nearby text. */
+    color: #2f6fed; /* Uses the branded blue color for card links. */
 }
 
 .code-badge {
-    display: inline-block;
-    padding: 4px 8px;
-    background: #e8eefc;
-    border-radius: 999px;
-    color: #2f6fed;
+    display: inline-block; /* Treats the badge as a compact inline box that can size to its content. */
+    padding: 4px 8px; /* Adds compact padding inside the badge. */
+    background: #e8eefc; /* Light blue background to distinguish the badge visually. */
+    border-radius: 999px; /* Makes the badge pill-shaped and modern. */
+    color: #2f6fed; /* Keeps the badge text consistent with the site color palette. */
 }
 
 .actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 12px;
+    display: flex; /* Aligns action buttons or links in a row. */
+    gap: 10px; /* Adds spacing between grouped action elements. */
+    margin-top: 12px; /* Adds top spacing from previous content. */
 }
 /* GRID CARDS ending */
 
 /* FOOTER beginning */
+/* This footer styles the final site footer and keeps it simple, clean, and unobtrusive. */
 .footer {
-    text-align: center;
-    padding: 20px;
-    color: #555;
+    text-align: center; /* Centers the footer content. */
+    padding: 20px; /* Creates consistent spacing around the footer. */
+    color: #555; /* Neutral gray text to keep the footer understated. */
 }
 /* FOOTER ending */
 
 /* AUTH PAGES beginning */
+/* This block styles the login/register-style pages, which use a two-panel layout with an intro section and a form card. */
 .auth-body {
-    min-height: 100vh;
-    background: var(--bg);
+    min-height: 100vh; /* Forces the background and content area to fill the full viewport height. */
+    background: var(--bg); /* Uses the global background color for consistent page appearance. */
 }
 
 .auth-page {
-    max-width: 900px;
-    margin: 20px auto 0;
+    max-width: 900px; /* Keeps auth content from becoming too wide on large screens. */
+    margin: 20px auto 0; /* Centers the page and adds spacing above it. */
 }
 
 .auth-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    display: grid; /* Uses a two-column grid for the intro panel and form. */
+    grid-template-columns: 1fr 1fr; /* Divides the auth layout into equal columns. */
+    gap: 16px; /* Adds space between the intro section and the form card. */
 }
 
 .auth-intro,
 .auth-card {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 16px;
+    background: #fff; /* White cards keep the auth panels visually consistent. */
+    border: 1px solid #ddd; /* Thin border to distinguish the panels from the page background. */
+    border-radius: 12px; /* Rounds the corners for the auth panels. */
+    padding: 16px; /* Adds internal spacing inside each panel. */
 }
 
 .auth-form {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    display: flex; /* Uses a column layout for form fields stacked vertically. */
+    flex-direction: column; /* Stacks inputs and controls one below the other. */
+    gap: 8px; /* Adds spacing between form elements. */
 }
 
 .auth-form input {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    padding: 8px; /* Gives input fields enough vertical and horizontal padding for usability. */
+    border: 1px solid #ddd; /* Border matches the rest of the site's layout. */
+    border-radius: 8px; /* Rounds the input corners for a modern appearance. */
 }
 
 .auth-link {
-    margin-top: 10px;
-    color: #555;
+    margin-top: 10px; /* Adds spacing above the secondary login/register text. */
+    color: #555; /* Neutral text color for the helper link row. */
 }
 
 .auth-link a {
-    color: #2f6fed;
+    color: #2f6fed; /* Makes the link appear interactive and consistent with the brand blue. */
 }
 
 /* Responsive Auth Layout - Mobile (max-width: 768px) */
+/* On small screens, the two-column auth layout collapses into a single-column stack. */
 @media (max-width: 768px) {
     .auth-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Forces the auth panels to stack vertically on mobile. */
     }
 
     .auth-page {
-        margin: 20px auto 0;
+        margin: 20px auto 0; /* Keeps the same centered spacing on mobile. */
     }
 }
 /* AUTH PAGES ending */
