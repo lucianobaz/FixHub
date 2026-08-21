@@ -56,14 +56,16 @@
     <h1>Register at FixHub</h1>
     <p class="auth-desc">Create a simple account to save your troubleshooting progress.</p>
 
-<!-- NAME-->
-<form class="auth-form">
-<label for="name">Name</label>
-<input type="text" id="name" name="name" placeholder="Luciano Bazzano">
+<!-- USERNAME-->
+<form class="auth-form" id="registerForm" novalidate>
+<label for="username">Username</label>
+<input type="text" id="username" name="username" placeholder="Luciano Bazzano">
+<small class="auth-error" id="usernameError" aria-live="polite"></small>
 
 <!-- PASSWORD -->
 <label for="password">Password</label>
 <input type="password" id="password" name="password" placeholder="*********">
+<small class="auth-error" id="passwordError" aria-live="polite"></small>
 
 <!-- CREATE ACCOUNT-->
 <button type="submit" class="button button-primary">Create account</button>
@@ -84,5 +86,6 @@
 </footer>
 <!-- FOOTER ENDING -->
 
+    <script src="../js/validate.js"></script>
 </body> <!-- BODY ENDING-->
 </html> <!-- HTML ENDING-->

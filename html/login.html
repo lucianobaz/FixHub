@@ -56,14 +56,16 @@
     <h1>Log in to FixHub</h1>
     <p class="auth-desc">Access your troubleshooting dashboard and continue where you left off.</p>
 
-<form class="auth-form">
-    <!-- NAME -->
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" placeholder="Rodrigo Navarro">
+<form class="auth-form" id="loginForm" novalidate>
+    <!-- USERNAME -->
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" placeholder="Rodrigo Navarro">
+    <small class="auth-error" id="usernameError" aria-live="polite"></small>
 
     <!-- PASSWORD -->
     <label for="password">Password</label>
     <input type="password" id="password" name="password" placeholder="*********">
+    <small class="auth-error" id="passwordError" aria-live="polite"></small>
 
     <!-- SIGN IN -->
     <button type="submit" class="button button-primary">Sign in</button>
@@ -85,5 +87,6 @@
 </footer>
 <!-- FOOTER ENDING -->
 
+    <script src="../js/validate.js"></script>
 </body> <!-- BODY ENDING -->
 </html> <!-- HTML ENDING -->
