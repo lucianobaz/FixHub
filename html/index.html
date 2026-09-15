@@ -1,0 +1,136 @@
+<!--INDEX-->
+<!DOCTYPE html>
+
+<!--PAGE LANGUAGE-->
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!--HEAD BEGGINING-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>FixHub | Computer Troubleshooting Platform</title>
+    <link rel="stylesheet" href="../css/myStyles.css">
+</head>
+<!--HEAD ENDING-->
+
+<!--BODY BEGGINING-->
+
+<body>
+    <script src="../js/translations.js"></script>
+    <!-- HEADER BEGINNING -->
+    <header class="header">
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <a class="logo" href="index.html">FixHub</a>
+        <label for="nav-toggle" class="hamburger"></label>
+        <nav class="flex-nav" aria-label="navbar">
+            <a data-i18n-block="navHome" href="index.html">Home</a>
+            <a data-i18n-block="navDiagnose" href="diagnose.html">Diagnose</a>
+            <a data-i18n-block="navGuides" href="guide.html">Guides</a>
+            <a data-i18n-block="navMaintenance" href="mainteinance.html">Maintenance</a>
+            <a data-i18n-block="navSupport" href="support.html">Support</a>
+            <a data-i18n-block="navLogin" class="login-btn" href="login.html">Login</a>
+            <a data-i18n-block="navLogout" class="logout-btn" href="../php/logout.php">Logout</a>
+        </nav>
+        <button id="lang-btn" onclick="toggleLanguage()">Español</button>
+    </header>
+    <!-- HEADER ENDING -->
+
+    <main>
+        <!-- PAGE CONTENT BEGINNING -->
+        <p class="welcome-message" id="welcomeMessage" hidden aria-live="polite"></p>
+        <!-- PAGE HERO BEGINNING -->
+        <section class="hero">
+            <div class="hero-content">
+                <p data-i18n-block="title" class="tagline">Computer Troubleshooting Platform</p>
+                <h1 data-i18n-block="aftitle1">Solve everyday computer issues with confidence.</h1>
+                <p data-i18n-block="aftitle2">FixHub helps you identify common problems, follow clear repair steps, and
+                    know when to ask for professional support.</p>
+                <div class="hero-actions">
+                    <a data-i18n-block="startDiagnosis" class="button button-primary" href="diagnose.html">Start
+                        Diagnosis</a>
+                    <a data-i18n-block="exploreGuides" class="button button-secondary" href="guide.html">Explore
+                        Guides</a>
+                </div>
+            </div>
+
+            <div class="hero-card">
+                <h2 data-i18n-block="heroCardTitle">What FixHub offers</h2>
+                <ul>
+                    <li data-i18n-block="heroCardItem1">Simple checks for common issues</li>
+                    <li data-i18n-block="heroCardItem2">Easy repair tutorials</li>
+                    <li data-i18n-block="heroCardItem3">Helpful maintenance advice</li>
+                </ul>
+            </div>
+        </section>
+        <!-- PAGE HERO ENDING -->
+
+
+        <!-- WHY USER LIKE FIXHUB BEGGINING -->
+        <section class="intro-panel">
+            <div>
+                <p class="tagline" data-i18n-block="whyUserLikeTitle">Why users like FixHub</p>
+                <h2 data-i18n-block="whyUserLikeH2">Simple support for real problems.</h2>
+            </div>
+            <p data-i18n-block="whyUserLikeP">From slow performance to connection issues, FixHub gives you a clear path
+                to identify the problem and choose the next step.</p>
+        </section>
+        <!--WHY USERS LIKE FIXHUB ENDING-->
+
+
+        <!-- FEATURE GRID CARDS BEGGINING -->
+        <section class="grid home" aria-label="Platform features">
+
+            <!--DIAGNOSE-->
+            <article class="card" id="diagnose">
+                <h3 data-i18n-block="cardDiagnoseTitle">Diagnose</h3>
+                <p data-i18n-block="cardDiagnoseDesc">Review common problems and find simple solutions without confusion.</p>
+                <a data-i18n-block="cardDiagnoseLink" class="link" href="diagnose.html">Try the diagnostic guide</a>
+            </article>
+
+            <!--GUIDES-->
+            <article class="card" id="guides">
+                <h3 data-i18n-block="cardGuidesTitle">Guides</h3>
+                <p data-i18n-block="cardGuidesDesc">Follow basic tutorials for cleaning hardware, improving speed, and checking connections.</p>
+                <a data-i18n-block="cardGuidesLink" class="link" href="guide.html">View repair tutorials</a>
+            </article>
+
+            <!--MAINTENANCE-->
+            <article class="card" id="maintenance">
+                <h3 data-i18n-block="cardMaintenanceTitle">Maintenance</h3>
+                <p data-i18n-block="cardMaintenanceDesc">Learn preventive habits that help you avoid common computer problems.</p>
+                <a data-i18n-block="cardMaintenanceLink" class="link" href="mainteinance.html">See maintenance tips</a>
+            </article>
+
+            <!--SUPPORT-->
+            <article class="card" id="support">
+                <h3 data-i18n-block="cardSupportTitle">Support</h3>
+                <p data-i18n-block="cardSupportDesc">If the issue is more serious, the site helps you decide when a technician is the right choice.</p>
+                <a data-i18n-block="cardSupportLink" class="link" href="support.html">Request technician help</a>
+            </article>
+
+        </section>
+        <!-- FEATURE GRID CARDS ENDING -->
+    </main>
+    <!-- PAGE CONTENT ENDING -->
+
+    <!-- FOOTER BEGINNING -->
+    <footer class="footer">
+        <p data-i18n-block="footerText">Copyright © 2026 FixHub. All rights reserved.</p>
+    </footer>
+    <!-- FOOTER ENDING -->
+
+    <script>
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        const username = new URLSearchParams(window.location.search).get('welcome');
+
+        if (username) {
+            welcomeMessage.textContent = `Bienvenido, ${username}!`;
+            welcomeMessage.hidden = false;
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    </script>
+    <script src="../js/auth.js"></script>
+</body> <!--BODY ENDING-->
+
+</html> <!--HMTL ENDING-->
