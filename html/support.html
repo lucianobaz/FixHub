@@ -5,6 +5,7 @@
 <html lang="en">
 
 <!-- HEAD BEGGINING -->
+
 <head>
     <meta charset="UTF-8">
     <title>FixHub | Support</title>
@@ -13,64 +14,70 @@
 <!-- HEAD ENDING -->
 
 <!-- BODY BEGGINING -->
+
 <body>
-<!-- HEADER BEGINNING -->
+    <script src="../js/translations.js"></script>
+    <!-- HEADER BEGINNING -->
     <header class="header">
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
         <a class="logo" href="index.html">FixHub</a>
         <label for="nav-toggle" class="hamburger"></label>
         <nav class="flex-nav" aria-label="navbar">
-            <a href="index.html">Home</a>
-            <a href="diagnose.html">Diagnose</a>
-            <a href="guide.html">Guides</a>
-            <a href="mainteinance.html">Maintenance</a>
-            <a href="support.html">Support</a>
-            <a class="login-btn" href="login.html">Login</a>
-            <a class="logout-btn" href="../php/logout.php">Logout</a>
+            <a data-i18n-block="navHome" href="index.html">Home</a>
+            <a data-i18n-block="navDiagnose" href="diagnose.html">Diagnose</a>
+            <a data-i18n-block="navGuides" href="guide.html">Guides</a>
+            <a data-i18n-block="navMaintenance" href="mainteinance.html">Maintenance</a>
+            <a data-i18n-block="navSupport" href="support.html">Support</a>
+            <a data-i18n-block="navLogin" class="login-btn" href="login.html">Login</a>
+            <a data-i18n-block="navLogout" class="logout-btn" href="../php/logout.php">Logout</a>
         </nav>
-        <button id="langButton" class="lang-btn" type="button" aria-label="Switch language">Español</button>
+        <button id="lang-btn" onclick="toggleLanguage()">Español</button>
     </header>
-<!-- HEADER ENDING -->
+    <!-- HEADER ENDING -->
 
 
-<!-- PAGE CONTENT BEGINNING -->
-<main class="content">
-        
-<!-- INTRO -->
-<section class="hero">
-    <div class="hero-content">
-        <p class="tagline">Support</p>
-        <h1>Need professional help?</h1>
-        <p>If the problem continues after basic checks, it may be time to request support from a technician or repair service.</p>
-    </div>
-</section>
+    <!-- PAGE CONTENT BEGINNING -->
+    <main class="content">
+
+        <!-- INTRO -->
+        <section class="hero">
+            <div class="hero-content">
+                <p class="tagline" data-i18n-block="supportHeroTagline">Support</p>
+                <h1 data-i18n-block="supportHeroTitle">Need professional help?</h1>
+                <p data-i18n-block="supportHeroDesc">If the problem continues after basic checks, it may be time to
+                    request support from a technician or repair service.</p>
+            </div>
+        </section>
 
 
-<!-- SUPPORT CARD BEGINNING -->
-<section class="card">
-    <h3>When to ask for help</h3>
-    <ul>
-        <li>The computer does not turn on at all</li>
-        <li>There are repeated blue screens even after updates</li>
-        <li>Hardware parts look damaged or overheated</li>
-        <li>You are not comfortable opening the device</li>
-    </ul>
-    <div class="actions">
-        <a class="button button-primary" href="mailto:support@fixhub.com">Contact a technician</a>
-        <a class="button button-secondary" href="login.html">Create an account</a>
-    </div>
-</section>
-<!-- SUPPORT CARD ENDING -->
+        <!-- SUPPORT CARD BEGINNING -->
+        <section class="card">
+            <h3 data-i18n-block="supportCardTitle">When to ask for help</h3>
+            <ul>
+                <li data-i18n-block="supportCardItem1">The computer does not turn on at all</li>
+                <li data-i18n-block="supportCardItem2">There are repeated blue screens even after updates</li>
+                <li data-i18n-block="supportCardItem3">Hardware parts look damaged or overheated</li>
+                <li data-i18n-block="supportCardItem4">You are not comfortable opening the device</li>
+            </ul>
+            <div class="actions">
+                <a class="button button-primary" href="mailto:support@fixhub.com"
+                    data-i18n-block="supportCardButton1">Contact a technician</a>
+                <a class="button button-secondary" href="login.html" data-i18n-block="supportCardButton2">Create an
+                    account</a>
+            </div>
+        </section>
+        <!-- SUPPORT CARD ENDING -->
 
-</main>
-<!-- PAGE CONTENT ENDING -->
+    </main>
+    <!-- PAGE CONTENT ENDING -->
 
-<!-- FOOTER BEGINNING -->
-<footer class="footer">
-    <p>Copyright © 2026 FixHub. All rights reserved.</p>
-</footer>
-<!-- FOOTER ENDING -->
+    <!-- FOOTER BEGINNING -->
+    <footer class="footer">
+        <p data-i18n-block="footerText">Copyright © 2026 FixHub. All rights reserved.</p>
+    </footer>
+    <!-- FOOTER ENDING -->
 
-<script src="../js/auth.js"></script>
+    <script src="../js/auth.js"></script>
 </body> <!-- BODY ENDING -->
+
 </html> <!-- HTML ENDING -->

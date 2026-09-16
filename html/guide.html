@@ -5,6 +5,7 @@
 <html lang="en">
 
 <!--HEAD BEGGINING-->
+
 <head>
     <meta charset="UTF-8">
     <title>FixHub | Guides</title>
@@ -13,102 +14,126 @@
 <!--HEAD ENDING-->
 
 <!--BODY BEGGINING-->
+
 <body>
 
-<!-- HEADER BEGINNING -->
-<header class="header">
-    <input type="checkbox" id="nav-toggle" class="nav-toggle">
-    <a class="logo" href="index.html">FixHub</a>
-    <label for="nav-toggle" class="hamburger"></label>
-    <nav class="flex-nav" aria-label="navbar">
-        <a href="index.html">Home</a>
-        <a href="diagnose.html">Diagnose</a>
-        <a href="guide.html">Guides</a>
-        <a href="mainteinance.html">Maintenance</a>
-        <a href="support.html">Support</a>
-        <a class="login-btn" href="login.html">Login</a>
-        <a class="logout-btn" href="../php/logout.php">Logout</a>
-    </nav>
-    <button id="langButton" class="lang-btn" type="button" aria-label="Switch language">Español</button>
-</header>
-<!-- HEADER ENDING -->
+    <script src="../js/translations.js"></script>
+    <!-- HEADER BEGINNING -->
+    <header class="header">
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <a class="logo" href="index.html">FixHub</a>
+        <label for="nav-toggle" class="hamburger"></label>
+        <nav class="flex-nav" aria-label="navbar">
+            <a data-i18n-block="navHome" href="index.html">Home</a>
+            <a data-i18n-block="navDiagnose" href="diagnose.html">Diagnose</a>
+            <a data-i18n-block="navGuides" href="guide.html">Guides</a>
+            <a data-i18n-block="navMaintenance" href="mainteinance.html">Maintenance</a>
+            <a data-i18n-block="navSupport" href="support.html">Support</a>
+            <a data-i18n-block="navLogin" class="login-btn" href="login.html">Login</a>
+            <a data-i18n-block="navLogout" class="logout-btn" href="../php/logout.php">Logout</a>
+        </nav>
+        <button id="lang-btn" onclick="toggleLanguage()">Español</button>
+    </header>
+    <!-- HEADER ENDING -->
 
-<!-- PAGE CONTENT BEGINNING -->
-<main class="content">
+    <!-- PAGE CONTENT BEGINNING -->
+    <main class="content">
 
-<!-- PAGE HERO BEGINNING -->
-<section class="hero">
-    <div class="hero-content">
-        <p class="tagline">Repair Guides</p>
-        <h1>Common Windowsblue screen issues and how to fix them.</h1>
-        <p>Use this guide to identify the error code and solve the problem.</p>
-    </div>
-</section>
-<!-- PAGE HERO ENDING -->
+        <!-- PAGE HERO BEGINNING -->
+        <section class="hero">
+            <div class="hero-content">
+                <p class="tagline" data-i18n-block="heroRepairTagline">Repair Guides</p>
+                <h1 data-i18n-block="heroRepairTitle">Common Windowsblue screen issues and how to fix them.</h1>
+                <p data-i18n-block="heroRepairDesc">Use this guide to identify the error code and solve the problem.</p>
+            </div>
+        </section>
+        <!-- PAGE HERO ENDING -->
 
-<!-- GUIDE CARDS GRID BEGINNING -->
-<section class="grid guides" aria-label="Blue screen guide cards">
+        <!-- GUIDE CARDS GRID BEGINNING -->
+        <section class="grid guides" aria-label="Blue screen guide cards">
 
-<!--BSOD 0x0000007B-->
-<article class="card">
-    <h3>BSOD 0x0000007B</h3>
-    <p class="code-badge">Error code: 0x7B</p>
-    <p>This usually points to a storage or hard drive connection problem. Check that the drive is connected properly and try Safe Mode.</p>
-    <ul>
-        <li>Reconnect the storage drive</li>
-        <li>Run startup repair</li>
-        <li>Check BIOS settings</li>
-    </ul>
-</article>
+            <!--BSOD 0x0000007B-->
+            <article class="card">
+                <h3 data-i18n-block="BSOD1Title">BSOD 0x0000007B</h3>
+                <p class="code-badge" data-i18n-block="BSOD1Badge">Error code: 0x7B</p>
+                <p data-i18n-block="BSOD1Desc">This usually points to a storage or hard drive connection problem. Check
+                    that the drive is connected
+                    properly and try Safe Mode.</p>
+                <ul>
+                    <li data-i18n-block="BSOD1Step1">Reconnect the storage drive</li>
+                    <li data-i18n-block="BSOD1Step2">Run startup repair</li>
+                    <li data-i18n-block="BSOD1Step3">Check BIOS settings</li>
+                </ul>
+            </article>
 
-<!--BSOD 0x0000001A-->
-<article class="card">
-    <h3>BSOD 0x0000001A</h3>
-    <p class="code-badge">Error code: 0x1A</p>
-    <p>This is often related to memory or faulty drivers. Start by removing recently installed hardware and updating drivers.</p>
-    <ul>
-        <li>Update graphics and chipset drivers</li>
-        <li>Remove and test RAM modules one by one</li>
-        <li>Revert recent updates</li>
-    </ul>
-</article>
+            <!--BSOD 0x0000001A-->
+            <article class="card">
+                <h3 data-i18n-block="BSOD2Title">BSOD 0x0000001A</h3>
+                <p class="code-badge" data-i18n-block="BSOD2Badge">Error code: 0x1A</p>
+                <p data-i18n-block="BSOD2Desc">This is often related to memory or faulty drivers. Start by removing
+                    recently installed hardware and
+                    updating drivers.</p>
+                <ul>
+                    <li data-i18n-block="BSOD2Step1">Update graphics and chipset drivers</li>
+                    <li data-i18n-block="BSOD2Step2">Remove and test RAM modules one by one</li>
+                    <li data-i18n-block="BSOD2Step3">Revert recent updates</li>
+                </ul>
+            </article>
 
-<!--BSOD 0x00000050-->
-<article class="card">
-    <h3>BSOD 0x00000050</h3>
-    <p class="code-badge">Error code: 0x50</p>
-    <p>This commonly appears after a bad driver or a corrupted system file. Restore the system or run SFC.</p>
-    <ul>
-        <li>Run System File Checker</li>
-        <li>Boot into Safe Mode</li>
-        <li>Uninstall the last problematic driver</li>
-    </ul>
-</article>
+            <!--BSOD 0x00000050-->
+            <article class="card">
+                <h3 data-i18n-block="BSOD3Title">BSOD 0x00000050</h3>
+                <p class="code-badge" data-i18n-block="BSOD3Badge">Error code: 0x50</p>
+                <p data-i18n-block="BSOD3Desc">This commonly appears after a bad driver or a corrupted system file.
+                    Restore the system or run SFC.
+                </p>
+                <ul>
+                    <li data-i18n-block="BSOD3Step1">Run System File Checker</li>
+                    <li data-i18n-block="BSOD3Step2">Boot into Safe Mode</li>
+                    <li data-i18n-block="BSOD3Step3">Uninstall the last problematic driver</li>
+                </ul>
+            </article>
 
-<!--BSOD 0x000000D1-->
-<article class="card">
-    <h3>BSOD 0x000000D1</h3>
-    <p class="code-badge">Error code: 0xD1</p>
-    <p>This can be caused by outdated or incompatible drivers. Update drivers and check if the problem started after recent changes.</p>
-    <ul>
-        <li>Check device drivers</li>
-        <li>Disable newly installed software</li>
-        <li>Use Windows Update</li>
-    </ul>
-</article>
+            <!--BSOD 0x000000D1-->
+            <article class="card">
+                <h3 data-i18n-block="BSOD4Title">BSOD 0x000000D1</h3>
+                <p class="code-badge" data-i18n-block="BSOD4Badge">Error code: 0xD1</p>
+                <p data-i18n-block="BSOD4Desc">This can be caused by outdated or incompatible drivers. Update drivers
+                    and check if the problem
+                    started after recent changes.</p>
+                <ul>
+                    <li data-i18n-block="BSOD4Step1">Check device drivers</li>
+                    <li data-i18n-block="BSOD4Step2">Disable newly installed software</li>
+                    <li data-i18n-block="BSOD4Step3">Use Windows Update</li>
+                </ul>
+            </article>
 
-</section>
-<!-- GUIDE CARDS GRID ENDING -->
+            <!--BSOD 0x000000F4-->
+            <article class="card">
+                <h3 data-i18n-block="BSOD5Title">BSOD 0x000000F4</h3>
+                <p class="code-badge" data-i18n-block="BSOD5Badge">Error code: 0xF4</p>
+                <p data-i18n-block="BSOD5Desc">This stop error often points to a problem with the hard drive or its
+                    connection. It can also be related to RAM issues or corrupted system files.</p>
+                <ul>
+                    <li data-i18n-block="BSOD5Step1">Check disk health and cables</li>
+                    <li data-i18n-block="BSOD5Step2">Scan for malware</li>
+                    <li data-i18n-block="BSOD5Step3">Run system file checker</li>
+                </ul>
+            </article>
 
-</main>
-<!-- PAGE CONTENT ENDING -->
+        </section>
+        <!-- GUIDE CARDS GRID ENDING -->
 
-<!-- FOOTER BEGINNING -->
-<footer class="footer">
-    <p>Copyright © 2026 FixHub. All rights reserved.</p>
-</footer>
-<!-- FOOTER ENDING -->
+    </main>
+    <!-- PAGE CONTENT ENDING -->
 
-<script src="../js/auth.js"></script>
+    <!-- FOOTER BEGINNING -->
+    <footer class="footer">
+        <p data-i18n-block="footerText">Copyright © 2026 FixHub. All rights reserved.</p>
+    </footer>
+    <!-- FOOTER ENDING -->
+
+    <script src="../js/auth.js"></script>
 </body>
+
 </html>

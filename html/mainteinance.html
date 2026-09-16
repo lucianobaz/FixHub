@@ -5,6 +5,7 @@
 <html lang="en">
 
 <!-- HEAD BEGGINING -->
+
 <head>
     <meta charset="UTF-8">
     <title>FixHub | Maintenance</title>
@@ -13,76 +14,84 @@
 <!-- HEAD ENDING -->
 
 <!-- BODY BEGGINING -->
+
 <body>
-<!-- HEADER BEGINNING -->
-<header class="header">
-    <input type="checkbox" id="nav-toggle" class="nav-toggle">
-    <a class="logo" href="index.html">FixHub</a>
-    <label for="nav-toggle" class="hamburger"></label>
-    <nav class="flex-nav" aria-label="navbar">
-        <a href="index.html">Home</a>
-        <a href="diagnose.html">Diagnose</a>
-        <a href="guide.html">Guides</a>
-        <a href="mainteinance.html">Maintenance</a>
-        <a href="support.html">Support</a>
-        <a class="login-btn" href="login.html">Login</a>
-        <a class="logout-btn" href="../php/logout.php">Logout</a>
-    </nav>
-    <button id="langButton" class="lang-btn" type="button" aria-label="Switch language">Español</button>
-</header>
-<!-- HEADER ENDING -->
+    <script src="../js/translations.js"></script>
+    <!-- HEADER BEGINNING -->
+    <header class="header">
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <a class="logo" href="index.html">FixHub</a>
+        <label for="nav-toggle" class="hamburger"></label>
+        <nav class="flex-nav" aria-label="navbar">
+            <a data-i18n-block="navHome" href="index.html">Home</a>
+            <a data-i18n-block="navDiagnose" href="diagnose.html">Diagnose</a>
+            <a data-i18n-block="navGuides" href="guide.html">Guides</a>
+            <a data-i18n-block="navMaintenance" href="mainteinance.html">Maintenance</a>
+            <a data-i18n-block="navSupport" href="support.html">Support</a>
+            <a data-i18n-block="navLogin" class="login-btn" href="login.html">Login</a>
+            <a data-i18n-block="navLogout" class="logout-btn" href="../php/logout.php">Logout</a>
+        </nav>
+        <button id="lang-btn" onclick="toggleLanguage()">Español</button>
+    </header>
+    <!-- HEADER ENDING -->
 
-<!-- PAGE CONTENT BEGINNING -->
-<main class="content">
+    <!-- PAGE CONTENT BEGINNING -->
+    <main class="content">
 
-<!-- HERO BEGGINING-->
-<section class="hero">
-    <div class="hero-content">
-        <p class="tagline">Maintenance</p>
-        <h1>Prevent problems before they start.</h1>
-        <p>Good habits can help your computer stay faster, cooler, and more reliable over time.</p>
-    </div>
-</section>
+        <!-- HERO BEGGINING-->
+        <section class="hero">
+            <div class="hero-content">
+                <p data-i18n-block="MaintenanceHeroTagline" class="tagline">Maintenance</p>
+                <h1 data-i18n-block="MaintenanceHeroTitle">Prevent problems before they start.</h1>
+                <p data-i18n-block="MaintenanceHeroDesc">Good habits can help your computer stay faster, cooler, and
+                    more reliable over time.</p>
+            </div>
+        </section>
 
-<!-- RECOMMENDATIONS GRID BEGGINING -->
-<section class="grid home">
+        <!-- RECOMMENDATIONS GRID BEGGINING -->
+        <section class="grid home">
 
-<!-- CLEAN HARDWARE -->
-<article class="card">
-    <h3>Clean hardware regularly</h3>
-    <p>Dust buildup can cause overheating and reduce performance. Clean vents and fans carefully.</p>
-</article>
+            <!-- CLEAN HARDWARE -->
+            <article class="card">
+                <h3 data-i18n-block="HardwareHero">Clean hardware regularly</h3>
+                <p data-i18n-block="HardwareHeroDesc">Dust buildup can cause overheating and reduce performance. Clean
+                    vents and fans carefully.</p>
+            </article>
 
-<!-- SOFTWARE UP TO DATE -->
-<article class="card">
-    <h3>Keep software updated</h3>
-    <p>Updates often fix security issues and improve stability. Install them when available.</p>
-</article>
+            <!-- SOFTWARE UP TO DATE -->
+            <article class="card">
+                <h3 data-i18n-block="SoftwareHero">Keep software updated</h3>
+                <p data-i18n-block="SoftwareHeroDesc">Updates often fix security issues and improve stability. Install
+                    them when available.</p>
+            </article>
 
-<!-- ANTIVIRUS -->
-<article class="card">
-    <h3>Use antivirus protection</h3>
-    <p>Protect your system from malware that may slow down your computer or cause strange errors.</p>
-</article>
+            <!-- ANTIVIRUS -->
+            <article class="card">
+                <h3 data-i18n-block="AntiVirusHero">Use antivirus protection</h3>
+                <p data-i18n-block="AntiVirusHeroDesc">Protect your system from malware that may slow down your computer
+                    or cause strange errors.</p>
+            </article>
 
-<!-- BACKUP -->
-<article class="card">
-    <h3>Back up important files</h3>
-    <p>A backup helps you recover data if a drive fails or the system crashes unexpectedly.</p>
-</article>
+            <!-- BACKUP -->
+            <article class="card">
+                <h3 data-i18n-block="BackupHero">Back up important files</h3>
+                <p data-i18n-block="BackupHeroDesc">A backup helps you recover data if a drive fails or the system
+                    crashes unexpectedly.</p>
+            </article>
 
-</section>
-<!-- MAINTENANCE CARDS GRID ENDING -->
+        </section>
+        <!-- MAINTENANCE CARDS GRID ENDING -->
 
-</main>
-<!-- PAGE CONTENT ENDING -->
+    </main>
+    <!-- PAGE CONTENT ENDING -->
 
-<!-- FOOTER BEGINNING -->
-<footer class="footer">
-    <p>Copyright © 2026 FixHub. All rights reserved.</p>
-</footer>
-<!-- FOOTER ENDING -->
+    <!-- FOOTER BEGINNING -->
+    <footer class="footer">
+        <p data-i18n-block="footerText">Copyright © 2026 FixHub. All rights reserved.</p>
+    </footer>
+    <!-- FOOTER ENDING -->
 
-<script src="../js/auth.js"></script>
+    <script src="../js/auth.js"></script>
 </body> <!-- BODY ENDING -->
+
 </html> <!-- HTML ENDING -->
