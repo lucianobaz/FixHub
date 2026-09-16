@@ -32,7 +32,22 @@
     "cardSupportDesc": "If the issue is more serious, the site helps you decide when a technician is the right choice.",
     "cardSupportLink": "Request technician help",
     "footerText": "Copyright © 2026 FixHub. All rights reserved.",
-    "buttonText": "Español"
+    "buttonText": "Español",
+    "heroDiagnoseTitle": "Start with the most common problems.",
+    "heroDiagnoseSubTitle": "Use the list below to find a quick cause and a simple solution.",
+    "heroDiagnoseText": "Use the list below to find a quick cause and a simple solution.",
+    "heroDiagnoseNoPower": "No power",
+    "heroDiagnoseNoPowerDesc": "Possible cause: the charger, cable, or outlet may be faulty.",
+    "heroDiagnoseNoPowerText": "Try: check the power cable, try another outlet, and look for lights on the device.",
+    "heroDiagnoseSlowPerformance": "Slow performance",
+    "heroDiagnoseSlowPerformanceDesc": "Possible cause: too many programs or low storage space.",
+    "heroDiagnoseSlowPerformanceText": "Try: close unused apps, restart the computer, and remove old files.",
+    "BlueScreenTitle": "Blue screen",
+    "BlueScreenCause": "Possible cause: a driver problem or a system error.",
+    "BlueScreenTry": "Try: restart the computer, update drivers, and check recent changes.",
+    "InternetProblemTitle": "Internet problems",
+    "InternetProblemCause": "Possible cause: weak connection or router issues.",
+    "InternetProblemTry": "Try: reboot the router, check the cable, and reconnect to Wi-Fi."
   },
   "es": {
     "navHome": "Inicio",
@@ -67,6 +82,19 @@
     "cardSupportDesc": "Si el problema es más grave, el sitio te ayuda a decidir cuándo un técnico es la opción correcta.",
     "cardSupportLink": "Solicitar ayuda técnica",
     "footerText": "Copyright © 2026 FixHub. Todos los derechos reservados.",
-    "buttonText": "English"
+    "buttonText": "English",
+    "heroDiagnoseTitle": "Empieza por los problemas más comunes.",
+    "heroDiagnoseSubTitle": "Usa la lista de abajo para encontrar una causa rápida y una solución sencilla.",
+    "heroDiagnoseText": "Revisa la lista de problemas comunes y encuentra una solución rápida para cada uno.",
+    "heroDiagnoseNoPower": "Sin energía",
+    "heroDiagnoseNoPowerDesc": "Causa posible: el cargador, el cable o el tomacorriente podrían estar fallando.",
+    "heroDiagnoseNoPowerText": "Intenta: revisar el cable de corriente, probar otro tomacorriente y buscar luces en el dispositivo.",
+    "heroDiagnoseSlowPerformance": "Rendimiento lento",
+    "BlueScreenTitle": "Pantalla azul",
+    "BlueScreenDesc": "Causa posible: un problema de controlador o un error del sistema.",
+    "BlueScreenText": "Intenta: reiniciar el equipo, actualizar los controladores y revisar los cambios recientes.",
+    "InternetProblemTitle": "Problemas de internet",
+    "InternetProblemCause": "Causa posible: conexión débil o problemas del router.",
+    "InternetProblemTry": "Intenta: reiniciar el router, revisar el cable y volver a conectarte a Wi-Fi."
   }
 }
