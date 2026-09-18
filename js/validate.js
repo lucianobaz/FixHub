@@ -18,32 +18,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (params.has("error")) {
         // Display server-side errors, such as invalid login details.
-        feedback.textContent = params.get("error");
+        const errorMsg = params.get("error");
         feedback.className = "error";
         feedback.style.color = "red";
         feedback.style.marginBottom = "10px";
+
+        if (errorMsg === "Invalid username or password") {
+            feedback.setAttribute("data-i18n-block", "errorInvalidCredentials");
+            const isSpanish = (typeof currentLang !== "undefined" && currentLang === "es") || document.documentElement.lang === "es";
+            feedback.textContent = isSpanish ? "Usuario o contraseña incorrectos" : errorMsg;
+        } else if (errorMsg === "Registration failed. Username may exist.") {
+            feedback.setAttribute("data-i18n-block", "errorRegistrationFailed");
+            const isSpanish = (typeof currentLang !== "undefined" && currentLang === "es") || document.documentElement.lang === "es";
+            feedback.textContent = isSpanish ? "El registro falló. El nombre de usuario podría ya existir." : errorMsg;
+        } else {
+            feedback.textContent = errorMsg;
+        }
     } else if (params.has("success")) {
         // Display successful actions, such as a completed registration.
-        feedback.textContent = params.get("success");
+        const successMsg = params.get("success");
         feedback.className = "success";
         feedback.style.color = "green";
         feedback.style.marginBottom = "10px";
+
+        if (successMsg.startsWith("Registration successful")) {
+            feedback.setAttribute("data-i18n-block", "successRegistration");
+            const isSpanish = (typeof currentLang !== "undefined" && currentLang === "es") || document.documentElement.lang === "es";
+            feedback.textContent = isSpanish ? "¡Registro exitoso! Por favor inicia sesión." : successMsg;
+        } else {
+            feedback.textContent = successMsg;
+        }
     }
-    // this funtion shows error if the password or user has invalid credentials in the login
-    function showPasswordUserLoginError(username, password) {
-        const usernameInput = document.getElementById("username");
-        const passwordInput = document.getElementById("password");
-        const usernameError = usernameInput.nextElementSibling;
-        const passwordError = passwordInput.nextElementSibling;
-        return "password or username invalid";
 
-    }
-
-
-
-
-    // Check that the username and password follow the form requirements.
+    // Check that the username and password follow the requirements (Registration only).
     function validateCredentials(username, password) {
+        const isSpanish = (typeof currentLang !== "undefined" && currentLang === "es") || document.documentElement.lang === "es";
 
         // Check each password requirement separately so a useful message can be returned.
         const hasLowercase = /[a-z]/.test(password);
@@ -51,29 +60,32 @@ document.addEventListener("DOMContentLoaded", () => {
         const hasDigit = /[0-9]/.test(password);
         const hasSpecialChar = /[!@#\$%\^&\*\(\)_\+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
 
-        const MinMax = username.length >= 8 && password.length >= 8 && username.length <= 20 && password.length <= 20;
+        const minMax = username.length >= 8 && password.length >= 8 && username.length <= 20 && password.length <= 20;
 
-
-
-        if (!MinMax) {
-            return "Username and password must be between 8 and 20 characters long.";
+        if (!minMax) {
+            return isSpanish
+                ? "El usuario y la contraseña deben tener entre 8 y 20 caracteres."
+                : "Username and password must be between 8 and 20 characters long.";
         }
         if (!hasSpecialChar) {
-            return "Password must contain at least one special character.";
+            return isSpanish
+                ? "La contraseña debe contener al menos un carácter especial."
+                : "Password must contain at least one special character.";
         }
         if (!hasLowercase || !hasUppercase || !hasDigit) {
-            return "Password must contain a lowercase, uppercase, number, and special character.";
+            return isSpanish
+                ? "La contraseña debe contener minúscula, mayúscula, número y un carácter especial."
+                : "Password must contain a lowercase, uppercase, number, and special character.";
         }
 
         return null; // No error means that all requirements were met.
     }
 
-    // Add the same validation behavior to whichever form exists on the current page.
-    function setupValidation(form, successText) {
+    // Registration validation: Enforce complexity rules before submitting to PHP.
+    function setupRegistrationValidation(form, successText) {
         if (!form) return;
 
         form.addEventListener('submit', function (event) {
-            // Read the values before allowing the form to be submitted to PHP.
             const username = document.getElementById('username') ? document.getElementById('username').value : '';
             const password = document.getElementById('password') ? document.getElementById('password').value : '';
 
@@ -96,10 +108,36 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Login validation: Only check that fields are not empty; let PHP authenticate credentials against the DB.
+    function setupLoginValidation(form) {
+        if (!form) return;
+
+        form.addEventListener('submit', function (event) {
+            const username = document.getElementById('username') ? document.getElementById('username').value.trim() : '';
+            const password = document.getElementById('password') ? document.getElementById('password').value.trim() : '';
+
+            if (!username || !password) {
+                event.preventDefault();
+                const isSpanish = (typeof currentLang !== "undefined" && currentLang === "es") || document.documentElement.lang === "es";
+                feedback.textContent = isSpanish
+                    ? "Por favor, introduce el usuario y la contraseña."
+                    : "Please enter both username and password.";
+                feedback.setAttribute("data-i18n-block", "emptyFieldsError");
+                feedback.className = "error";
+                feedback.style.color = "red";
+                feedback.style.marginBottom = "10px";
+            }
+            // When fields are entered, let form submit to ../php/login.php.
+            // If credentials are invalid, PHP redirects back with ?error=Invalid+username+or+password.
+        });
+    }
+
     const registerForm = document.getElementById('registerForm');
     const loginForm = document.getElementById('loginForm');
 
-    // Configure registration and login independently because only one exists per page.
-    setupValidation(registerForm, "Registration successful!");
-    setupValidation(loginForm, "Login successful!");
+    // Attach registration rules only to registerForm.
+    setupRegistrationValidation(registerForm, "Registration successful!");
+
+    // Attach basic submission check only to loginForm.
+    setupLoginValidation(loginForm);
 });

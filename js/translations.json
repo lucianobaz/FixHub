@@ -143,7 +143,11 @@
     "validatePassword": "Passwords do not match",
     "validateUsername": "Username must be at least 4 characters long",
     "validateEmail": "Please enter a valid email address",
-    "validatePasswordLength": "Password must be at least 6 characters long"
+    "validatePasswordLength": "Password must be at least 6 characters long",
+    "errorInvalidCredentials": "Invalid username or password",
+    "errorRegistrationFailed": "Registration failed. Username may exist.",
+    "emptyFieldsError": "Please enter both username and password",
+    "successRegistration": "Registration successful! Please log in."
   },
   "es": {
     "navHome": "Inicio",
@@ -289,6 +293,10 @@
     "validatePassword": "Las contraseñas no coinciden",
     "validateUsername": "El nombre de usuario debe tener al menos 4 caracteres",
     "validateEmail": "Por favor, introduce una dirección de correo electrónico válida",
-    "validatePasswordLength": "La contraseña debe tener al menos 6 caracteres"
+    "validatePasswordLength": "La contraseña debe tener al menos 6 caracteres",
+    "errorInvalidCredentials": "Usuario o contraseña incorrectos",
+    "errorRegistrationFailed": "El registro falló. El nombre de usuario podría ya existir.",
+    "emptyFieldsError": "Por favor, introduce el usuario y la contraseña",
+    "successRegistration": "¡Registro exitoso! Por favor inicia sesión."
   }
 }
