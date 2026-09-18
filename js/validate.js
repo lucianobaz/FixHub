@@ -29,6 +29,18 @@ document.addEventListener("DOMContentLoaded", () => {
         feedback.style.color = "green";
         feedback.style.marginBottom = "10px";
     }
+    // this funtion shows error if the password or user has invalid credentials in the login
+    function showPasswordUserLoginError(username, password) {
+        const usernameInput = document.getElementById("username");
+        const passwordInput = document.getElementById("password");
+        const usernameError = usernameInput.nextElementSibling;
+        const passwordError = passwordInput.nextElementSibling;
+        return "password or username invalid";
+
+    }
+
+
+
 
     // Check that the username and password follow the form requirements.
     function validateCredentials(username, password) {
@@ -38,11 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const hasUppercase = /[A-Z]/.test(password);
         const hasDigit = /[0-9]/.test(password);
         const hasSpecialChar = /[!@#\$%\^&\*\(\)_\+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
-    
-        const MinMax = username.length >= 8 && password.length >= 8 && username.length <= 20 && password.length <= 20;
-    
 
-        
+        const MinMax = username.length >= 8 && password.length >= 8 && username.length <= 20 && password.length <= 20;
+
+
+
         if (!MinMax) {
             return "Username and password must be between 8 and 20 characters long.";
         }
@@ -60,11 +72,11 @@ document.addEventListener("DOMContentLoaded", () => {
     function setupValidation(form, successText) {
         if (!form) return;
 
-        form.addEventListener('submit', function(event) {
+        form.addEventListener('submit', function (event) {
             // Read the values before allowing the form to be submitted to PHP.
             const username = document.getElementById('username') ? document.getElementById('username').value : '';
             const password = document.getElementById('password') ? document.getElementById('password').value : '';
- 
+
             const error = validateCredentials(username, password);
 
             if (error) {

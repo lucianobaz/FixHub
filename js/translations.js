@@ -50,5 +50,4 @@ function toggleLanguage() {
             block.textContent = translations[currentLang][key];
         }
     });
-}
-//
+}

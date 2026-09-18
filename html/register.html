@@ -5,6 +5,7 @@
 <html lang="en">
 
 <!-- HEAD BEGINNING -->
+
 <head>
     <meta charset="UTF-8">
     <title>FixHub | Register</title>
@@ -13,82 +14,90 @@
 <!-- HEAD ENDING -->
 
 <!-- BODY BEGGINING -->
+
 <body class="auth-body">
+    <script src="../js/translations.js"></script>
+    <!-- HEADER BEGINNING -->
+    <header class="header">
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <a class="logo" href="index.html">FixHub</a>
+        <label for="nav-toggle" class="hamburger"></label>
+        <nav class="flex-nav" aria-label="navbar">
+            <a data-i18n-block="navHome" href="index.html">Home</a>
+            <a data-i18n-block="navDiagnose" href="diagnose.html">Diagnose</a>
+            <a data-i18n-block="navGuides" href="guide.html">Guides</a>
+            <a data-i18n-block="navMaintenance" href="mainteinance.html">Maintenance</a>
+            <a data-i18n-block="navSupport" href="support.html">Support</a>
+            <a data-i18n-block="navLogin" class="login-btn" href="login.html">Login</a>
+            <a data-i18n-block="navLogout" class="logout-btn" href="../php/logout.php">Logout</a>
+        </nav>
+        <button id="lang-btn" onclick="toggleLanguage()">Español</button>
+    </header>
+    <!-- HEADER ENDING -->
 
-<!-- HEADER BEGINNING -->
-<header class="header">
-    <input type="checkbox" id="nav-toggle" class="nav-toggle">
-    <a class="logo" href="index.html">FixHub</a>
-    <label for="nav-toggle" class="hamburger"></label>
-    <nav class="flex-nav" aria-label="navbar">
-        <a href="index.html">Home</a>
-        <a href="diagnose.html">Diagnose</a>
-        <a href="guide.html">Guides</a>
-        <a href="mainteinance.html">Maintenance</a>
-        <a href="support.html">Support</a>
-        <a class="login-btn" href="login.html">Login</a>
-        <a class="logout-btn" href="../php/logout.php">Logout</a>
-    </nav>
-    <button id="langButton" class="lang-btn" type="button" aria-label="Switch language">Español</button>
-</header>
-<!-- HEADER ENDING -->
+    <!-- PAGE CONTENT BEGINNING -->
+    <div class="auth-page">
+        <main class="auth-layout">
 
-<!-- PAGE CONTENT BEGINNING -->
-<div class="auth-page">
-    <main class="auth-layout">
-            
-<!-- LEFT BOX BEGINNING -->
-<section class="auth-intro">
-    <p class="auth-tagline">Create account</p>
-    <h1>Get started with FixHub</h1>
-    <p class="auth-desc">Create a simple account to save troubleshooting progress and access support faster.</p>
-    <ul>
-        <li>Save your recent fixes</li>
-        <li>Access support quickly</li>
-        <li>Track troubleshooting steps</li>
-    </ul>
-</section>
-<!-- LEFT BOX ENDING -->
+            <!-- LEFT BOX BEGINNING -->
+            <section class="auth-intro">
+                <p class="auth-tagline" data-i18n-block="regAuthTagline">Get started with FixHub</p>
+                <h1 data-i18n-block="regAuthTitle">Create an account</h1>
+                <p class="auth-desc" data-i18n-block="regAuthDesc">Create a simple account to save troubleshooting
+                    progress and
+                    access support faster.
+                </p>
+                <ul>
+                    <li data-i18n-block="regAuthDesc1">Save your recent fixes</li>
+                    <li data-i18n-block="regAuthDesc2">Access support quickly</li>
+                    <li data-i18n-block="regAuthDesc3">Track troubleshooting steps</li>
+                </ul>
+            </section>
+            <!-- LEFT BOX ENDING -->
 
 
-<!-- RIGHT BOX BEGGINING (REGISTER FORM)-->
-<!-- Connect the register form using JavaScript -->
-<div class="auth-card" id="registerCard">
-    <p class="auth-tagline">Create account</p>
-    <h1>Register at FixHub</h1>
-    <p class="auth-desc">Create a simple account to save your troubleshooting progress.</p>
+            <!-- RIGHT BOX BEGGINING (REGISTER FORM)-->
+            <!-- Connect the register form using JavaScript -->
+            <div class="auth-card" id="registerCard">
+                <p class="auth-tagline" data-i18n-block="authTagline">Create account</p>
+                <h1>Register at FixHub</h1>
+                <p class="auth-desc" data-i18n-block="authDesc">Create a simple account to save your troubleshooting
+                    progress.</p>
 
-<!-- USERNAME-->
-<form class="auth-form" id="registerForm" action="../php/register.php" method="POST" validateCredentials>
-<label for="username">Username</label>
-<input type="text" id="username" name="username" placeholder="Username">
-<small class="auth-error" id="usernameError" aria-live="polite"></small>
+                <!-- USERNAME-->
+                <form class="auth-form" id="registerForm" action="../php/register.php" method="POST"
+                    validateCredentials>
+                    <label for="username" data-i18n-block="regAuthUsername">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Username">
+                    <small class="auth-error" id="usernameError" aria-live="polite"></small>
 
-<!-- PASSWORD -->
-<label for="password">Password</label>
-<input type="password" id="password" name="password" placeholder="*********">
-<small class="auth-error" id="passwordError" aria-live="polite"></small>
+                    <!-- PASSWORD -->
+                    <label for="password" data-i18n-block="regAuthPassword">Password</label>
+                    <input type="password" id="password" name="password" placeholder="*********">
+                    <small class="auth-error" id="passwordError" aria-live="polite"></small>
 
-<!-- CREATE ACCOUNT-->
-<button type="submit" class="button button-primary">Create account</button>
-</form>
+                    <!-- CREATE ACCOUNT-->
+                    <button type="submit" class="button button-primary">Create account</button>
+                </form>
 
-<!-- LOGIN REDIRECTION-->
-<p class="auth-link">Already have an account?<a href="login.html">Sign in</a></p>
-</div>
-<!-- RIGHT BOX ENDING (REGISTER FORM)-->
+                <!-- LOGIN REDIRECTION-->
+                <p class="auth-link" data-i18n-block="regAuthLink">Already have an account?<a href="login.html">Sign
+                        in</a></p>
+            </div>
+            <!-- RIGHT BOX ENDING (REGISTER FORM)-->
 
-</main>
-</div>
-<!-- PAGE CONTENT ENDING -->
+        </main>
+    </div>
+    <!-- PAGE CONTENT ENDING -->
 
-<!-- FOOTER BEGINNING -->
-<footer class="footer">
-    <p>Copyright © 2026 FixHub. All rights reserved.</p>
-</footer>
-<!-- FOOTER ENDING -->
+    <!-- FOOTER BEGINNING -->
+    <footer class="footer">
+        <p data-i18n-block="footerText">Copyright © 2026 FixHub. All rights reserved.</p>
+    </footer>
+    <!-- FOOTER ENDING -->
 
     <script src="../js/auth.js"></script>
     <script src="../js/validate.js"></script>
 </body> <!-- BODY ENDING-->
+
 </html> <!-- HTML ENDING-->

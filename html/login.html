@@ -16,24 +16,25 @@
 <!-- BODY BEGGINING -->
 
 <body class="auth-body">
-
+    <script src="../js/translations.js"></script>
     <!-- HEADER BEGINNING -->
     <header class="header">
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
         <a class="logo" href="index.html">FixHub</a>
         <label for="nav-toggle" class="hamburger"></label>
         <nav class="flex-nav" aria-label="navbar">
-            <a href="index.html">Home</a>
-            <a href="diagnose.html">Diagnose</a>
-            <a href="guide.html">Guides</a>
-            <a href="mainteinance.html">Maintenance</a>
-            <a href="support.html">Support</a>
-            <a class="login-btn" href="login.html">Login</a>
-            <a class="logout-btn" href="../php/logout.php">Logout</a>
+            <a data-i18n-block="navHome" href="index.html">Home</a>
+            <a data-i18n-block="navDiagnose" href="diagnose.html">Diagnose</a>
+            <a data-i18n-block="navGuides" href="guide.html">Guides</a>
+            <a data-i18n-block="navMaintenance" href="mainteinance.html">Maintenance</a>
+            <a data-i18n-block="navSupport" href="support.html">Support</a>
+            <a data-i18n-block="navLogin" class="login-btn" href="login.html">Login</a>
+            <a data-i18n-block="navLogout" class="logout-btn" href="../php/logout.php">Logout</a>
         </nav>
-        <button id="langButton" class="lang-btn" type="button" aria-label="Switch language">Español</button>
+        <button id="lang-btn" onclick="toggleLanguage()">Español</button>
     </header>
     <!-- HEADER ENDING -->
+
 
 
     <!-- PAGE CONTENT BEGINNING -->
@@ -62,16 +63,16 @@
                 <p class="auth-desc" data-i18n-block="loginCardDesc">Access your troubleshooting dashboard and continue
                     where you left off.</p>
 
-                <form class="auth-form" id="loginForm" action="../php/login.php" method="POST" validateCredentials>
+                <form class="auth-form" id="loginForm" action="../php/login.php" method="POST">
                     <!-- USERNAME -->
                     <label for="username" data-i18n-block="loginCardUsername">Username</label>
                     <input type="text" id="username" name="username" placeholder="Username">
-                    <small class="auth-error" id="usernameError" aria-live="polite"></small>
+                    <small class="auth-error" aria-live="polite" showPasswordUserLoginError></small>
 
                     <!-- PASSWORD -->
                     <label for="password" data-i18n-block="loginCardPassword">Password</label>
                     <input type="password" id="password" name="password" placeholder="*********">
-                    <small class="auth-error" id="passwordError" aria-live="polite"></small>
+                    <small class="auth-error" aria-live="polite" showPasswordUserLoginError></small>
 
                     <!-- SIGN IN -->
                     <button type="submit" class="button button-primary" data-i18n-block="loginCardButton">Sign
