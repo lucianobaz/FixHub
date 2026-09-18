@@ -168,15 +168,15 @@
     "heroCardItem3": "Consejos útiles de mantenimiento",
     "whyUserLikeTitle": "¿Por qué a los usuarios les gusta FixHub?",
     "whyUserLikeH2": "Soporte sencillo para problemas reales.",
-    "whyUserLikeP": "Desde rendimiento lento hasta problemas de conexión, FixHub te da un camino claro para identificar el problema y elegir el siguiente paso.",
+    "whyUserLikeP": "Desde rendimiento lento hasta problemas de conexión, FixHub te da ayuda a identificar el problema y elegir el siguiente paso.",
     "cardDiagnoseTitle": "Diagnóstico",
-    "cardDiagnoseDesc": "Revisa problemas comunes y encuentra soluciones simples sin confusiones.",
+    "cardDiagnoseDesc": "Revisa problemas comunes y encuentra soluciones simples sin confundirte.",
     "cardDiagnoseLink": "Probar la guía de diagnóstico",
     "cardGuidesTitle": "Guías",
     "cardGuidesDesc": "Sigue tutoriales básicos para limpiar hardware, mejorar la velocidad y revisar conexiones.",
     "cardGuidesLink": "Ver tutoriales de reparación",
     "cardMaintenanceTitle": "Mantenimiento",
-    "cardMaintenanceDesc": "Aprende hábitos preventivos que te ayuden a evitar problemas comunes en la computadora.",
+    "cardMaintenanceDesc": "Aprende habitos que te ayudan a evitar problemas comunes en la computadora.",
     "cardMaintenanceLink": "Ver consejos de mantenimiento",
     "cardSupportTitle": "Soporte",
     "cardSupportDesc": "Si el problema es más grave, el sitio te ayuda a decidir cuándo un técnico es la opción correcta.",
@@ -227,7 +227,7 @@
     "BSOD4Step3": "Usar Windows Update",
     "BSOD5Title": "Pantalla azul 0x000000F4",
     "BSOD5Badge": "Código de error: 0xF4",
-    "BSOD5Desc": "Este error de detención suele apuntar a un problema con el disco duro o su conexión. También puede estar relacionado con problemas de RAM o archivos de sistema corruptos.",
+    "BSOD5Desc": "Este error de detención suele indicar un problema con el disco duro o su conexión. También puede estar relacionado con problemas de RAM o archivos de sistema corruptos.",
     "BSOD5Step1": "Verificar la salud del disco y los cables",
     "BSOD5Step2": "Escanear en busca de malware",
     "BSOD5Step3": "Ejecutar el Comprobador de archivos de sistema",
@@ -297,6 +297,6 @@
     "errorInvalidCredentials": "Usuario o contraseña incorrectos",
     "errorRegistrationFailed": "El registro falló. El nombre de usuario podría ya existir.",
     "emptyFieldsError": "Por favor, introduce el usuario y la contraseña",
-    "successRegistration": "¡Registro exitoso! Por favor inicia sesión."
+    "successRegistration": "Registro exitoso, inicie sesión."
   }
 }
