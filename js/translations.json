@@ -147,7 +147,9 @@
     "errorInvalidCredentials": "Invalid username or password",
     "errorRegistrationFailed": "Registration failed. Username may exist.",
     "emptyFieldsError": "Please enter both username and password",
-    "successRegistration": "Registration successful! Please log in."
+    "successRegistration": "Registration successful! Please log in.",
+    "placeholderUsername": "Username",
+    "placeholderPassword": "Password"
   },
   "es": {
     "navHome": "Inicio",
@@ -297,6 +299,8 @@
     "errorInvalidCredentials": "Usuario o contraseña incorrectos",
     "errorRegistrationFailed": "El registro falló. El nombre de usuario podría ya existir.",
     "emptyFieldsError": "Por favor, introduce el usuario y la contraseña",
-    "successRegistration": "Registro exitoso, inicie sesión."
+    "successRegistration": "Registro exitoso, inicie sesión.",
+    "placeholderUsername": "Nombre de usuario",
+    "placeholderPassword": "Contraseña"
   }
 }
