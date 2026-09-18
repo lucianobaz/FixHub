@@ -27,10 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
             feedback.setAttribute("data-i18n-block", "errorInvalidCredentials");
             const isSpanish = (typeof currentLang !== "undefined" && currentLang === "es") || document.documentElement.lang === "es";
             feedback.textContent = isSpanish ? "Usuario o contraseña incorrectos" : errorMsg;
-        } else if (errorMsg === "Registration failed. Username may exist.") {
+        } else if (errorMsg === "Registration failed. Username may already exist") {
             feedback.setAttribute("data-i18n-block", "errorRegistrationFailed");
             const isSpanish = (typeof currentLang !== "undefined" && currentLang === "es") || document.documentElement.lang === "es";
-            feedback.textContent = isSpanish ? "El registro falló. El nombre de usuario podría ya existir." : errorMsg;
+            feedback.textContent = isSpanish ? "Fallo de registro" : errorMsg;
         } else {
             feedback.textContent = errorMsg;
         }
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (successMsg.startsWith("Registration successful")) {
             feedback.setAttribute("data-i18n-block", "successRegistration");
             const isSpanish = (typeof currentLang !== "undefined" && currentLang === "es") || document.documentElement.lang === "es";
-            feedback.textContent = isSpanish ? "¡Registro exitoso! Por favor inicia sesión." : successMsg;
+            feedback.textContent = isSpanish ? "Registro exitoso, inicie sesión" : successMsg;
         } else {
             feedback.textContent = successMsg;
         }
