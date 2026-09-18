@@ -43,11 +43,16 @@ function toggleLanguage() {
     // Find all container elements with the 'data-i18n-block' attribute
     const blocks = document.querySelectorAll("[data-i18n-block]");
 
-    // Loop through each element and replace its text content safely
+    // Loop through each element and replace its content safely
     blocks.forEach(block => {
         const key = block.getAttribute("data-i18n-block");
         if (translations[currentLang] && translations[currentLang][key] !== undefined) {
-            block.textContent = translations[currentLang][key];
+            const val = translations[currentLang][key];
+            if (typeof val === "string" && val.includes("<")) {
+                block.innerHTML = val;
+            } else {
+                block.textContent = val;
+            }
         }
     });
 }
