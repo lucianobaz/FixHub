@@ -8,6 +8,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FixHub | Diagnose</title>
     <link rel="stylesheet" href="../css/myStyles.css">
 </head>
@@ -41,7 +42,7 @@
         <!-- PAGE HERO BEGINNING -->
         <section class="hero">
             <div class="hero-content">
-                <p data-i18n-block="heroDiagnoseTitle" class="tagline">Diagnose</p>
+                <p data-i18n-block="heroDiagnoseTagline" class="tagline">Diagnose</p>
                 <h1 data-i18n-block="heroDiagnoseSubTitle">Start with the most common problems.</h1>
                 <p data-i18n-block="heroDiagnoseText">Use the list below to find a quick cause and a simple solution.
                 </p>
@@ -51,7 +52,6 @@
 
         <!-- DIAGNOSIS GRID BEGINNING -->
         <section class="grid diag">
-
 
             <!-- NO POWER -->
             <article class="card">
@@ -85,6 +85,78 @@
                 <p data-i18n-block="InternetProblemCause">Possible cause: weak connection or router issues.</p>
                 <p data-i18n-block="InternetProblemTry">Try: reboot the router, check the cable, and reconnect to Wi-Fi.
                 </p>
+            </article>
+
+            <!-- NO DISPLAY / BLACK SCREEN -->
+            <article class="card">
+                <h3 data-i18n-block="DiagnoseNoDisplayTitle">No display or black screen</h3>
+                <p data-i18n-block="DiagnoseNoDisplayDesc">Possible cause: loose video cable, monitor set to the wrong
+                    input, or cable plugged into the motherboard instead of the graphics card.</p>
+                <p data-i18n-block="DiagnoseNoDisplayTry">Try: check the HDMI or DisplayPort cable, verify the monitor
+                    is powered on, and plug the cable directly into your graphics card.</p>
+            </article>
+
+            <!-- RANDOM RESTARTS -->
+            <article class="card">
+                <h3 data-i18n-block="DiagnoseRandomRestartTitle">Random restarts</h3>
+                <p data-i18n-block="DiagnoseRandomRestartDesc">Possible cause: processor overheating, a failing power
+                    supply, or a loose power cable.</p>
+                <p data-i18n-block="DiagnoseRandomRestartTry">Try: check that cooling fans are spinning, clean dust from
+                    vents, and make sure the power cable is firmly plugged in.</p>
+            </article>
+
+            <!-- OVERHEATING & LOUD FANS -->
+            <article class="card">
+                <h3 data-i18n-block="DiagnoseOverheatingTitle">Overheating and loud fans</h3>
+                <p data-i18n-block="DiagnoseOverheatingDesc">Possible cause: dust buildup inside fans and heatsinks,
+                    blocked airflow, or dried-out thermal paste.</p>
+                <p data-i18n-block="DiagnoseOverheatingTry">Try: clean fans and filters with compressed air, place the
+                    PC in an open area, and avoid blocking air vents.</p>
+            </article>
+
+            <!-- NO AUDIO -->
+            <article class="card">
+                <h3 data-i18n-block="DiagnoseNoAudioTitle">No audio or sound</h3>
+                <p data-i18n-block="DiagnoseNoAudioDesc">Possible cause: sound is muted, wrong output device selected in
+                    Windows, or loose headphone/speaker jack.</p>
+                <p data-i18n-block="DiagnoseNoAudioTry">Try: check system volume, click the speaker icon to pick the
+                    right output device, and reconnect audio cables.</p>
+            </article>
+
+            <!-- NO BOOTABLE DEVICE -->
+            <article class="card">
+                <h3 data-i18n-block="DiagnoseNoBootTitle">No bootable device found</h3>
+                <p data-i18n-block="DiagnoseNoBootDesc">Possible cause: the computer cannot find the storage drive, or a
+                    connected USB drive is confusing the startup order.</p>
+                <p data-i18n-block="DiagnoseNoBootTry">Try: unplug any USB flash drives or external drives, restart the
+                    computer, and check if the drive appears in BIOS.</p>
+            </article>
+
+            <!-- BEEP CODES -->
+            <article class="card">
+                <h3 data-i18n-block="DiagnoseBeepCodesTitle">Computer beeps on startup</h3>
+                <p data-i18n-block="DiagnoseBeepCodesDesc">Possible cause: the motherboard detected a hardware problem
+                    during startup, most commonly loose RAM or graphics card.</p>
+                <p data-i18n-block="DiagnoseBeepCodesTry">Try: turn off the PC, unplug power, open the case, and firmly
+                    press the RAM sticks and graphics card into their slots.</p>
+            </article>
+
+            <!-- USB PROBLEMS -->
+            <article class="card">
+                <h3 data-i18n-block="DiagnoseUsbProblemTitle">USB ports or devices not working</h3>
+                <p data-i18n-block="DiagnoseUsbProblemDesc">Possible cause: power overload on USB ports, a damaged USB
+                    port, or disabled USB controllers.</p>
+                <p data-i18n-block="DiagnoseUsbProblemTry">Try: plug your mouse or keyboard into a port on the back of
+                    the PC, and test the device on another computer.</p>
+            </article>
+
+            <!-- COMPUTER FREEZING -->
+            <article class="card">
+                <h3 data-i18n-block="DiagnoseFreezingTitle">Computer freezes completely</h3>
+                <p data-i18n-block="DiagnoseFreezingDesc">Possible cause: too many demanding programs open at once, low
+                    available RAM, or storage drive reading errors.</p>
+                <p data-i18n-block="DiagnoseFreezingTry">Try: press Ctrl+Alt+Delete to close frozen apps, restart the
+                    computer, and remove programs you no longer use.</p>
             </article>
 
         </section>

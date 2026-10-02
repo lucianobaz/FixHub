@@ -55,4 +55,13 @@ function toggleLanguage() {
             }
         }
     });
+
+    // Find all elements with the 'data-i18n-placeholder' attribute
+    const placeholders = document.querySelectorAll("[data-i18n-placeholder]");
+    placeholders.forEach(el => {
+        const key = el.getAttribute("data-i18n-placeholder");
+        if (translations[currentLang] && translations[currentLang][key] !== undefined) {
+            el.placeholder = translations[currentLang][key];
+        }
+    });
 }

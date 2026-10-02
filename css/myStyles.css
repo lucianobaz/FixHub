@@ -251,12 +251,14 @@ a {
 /* BUTTONS beginning */
 /* These are the reusable call-to-action buttons used throughout the site, especially in the home hero section
    and on pages that need a standard primary or secondary action. */
-.button {
+.button,
+button,
+#lang-btn {
     border: none;
     /* Removes default browser button border. */
     border-radius: 999px;
     /* Makes the buttons fully rounded for a modern pill shape. */
-    padding: 8px 12px;
+    padding: 8px 16px;
     /* Adds comfortable spacing inside the buttons. */
     background: #2f6fed;
     /* Primary blue button color used for the main action. */
@@ -264,6 +266,24 @@ a {
     /* White text for strong contrast on blue buttons. */
     cursor: pointer;
     /* Shows click affordance. */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition-duration: 0.4s;
+    transition-property: box-shadow, background-color, transform;
+}
+
+.button:hover,
+button:hover,
+#lang-btn:hover,
+.button2:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.6);
+}
+
+.button1 {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.6);
 }
 
 .button-primary {
@@ -276,6 +296,15 @@ a {
     /* Light blue-gray background for secondary actions. */
     color: #2f6fed;
     /* Keeps the secondary text in the same blue brand color. */
+}
+
+#lang-btn {
+    background: #fff;
+    color: #2f6fed;
+    border: 1px solid #cbd5e1;
+    font-size: 0.88rem;
+    font-weight: 500;
+    padding: 6px 14px;
 }
 
 /* BUTTONS ending*/
@@ -409,10 +438,11 @@ main {
 
 /* GRID CARDS beginning */
 /* This block styles the reusable card grids used for feature tiles and other grouped content sections. */
-.grid {
+.grid,
+.grid_diag {
     display: grid;
     /* Establishes a CSS grid layout for all card groups. */
-    gap: 16px;
+    gap: 20px;
     /* Gives consistent spacing between cards. */
     margin-top: 20px;
     /* Adds vertical space above each grid section. */
@@ -424,7 +454,8 @@ main {
 }
 
 .grid.guides,
-.grid.diag {
+.grid.diag,
+.grid_diag {
     grid-template-columns: repeat(2, 1fr);
     /* Uses a two-column layout for guide and diagnostic page listings. */
 }
@@ -438,6 +469,13 @@ main {
     /* Rounds the corners to match the overall design language. */
     padding: 16px;
     /* Creates comfortable spacing inside each card. */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    border-color: #cbd5e1;
 }
 
 /* Responsive Grid - Tablet (max-width: 1024px) */
@@ -449,7 +487,8 @@ main {
     }
 
     .grid.guides,
-    .grid.diag {
+    .grid.diag,
+    .grid_diag {
         grid-template-columns: 1fr;
         /* Stacks guide and diagnose content into one column when space is limited. */
     }
@@ -464,7 +503,8 @@ main {
     }
 
     .grid.guides,
-    .grid.diag {
+    .grid.diag,
+    .grid_diag {
         grid-template-columns: 1fr;
         /* Keeps guide and diagnose lists readable in a single column. */
     }
@@ -598,3 +638,17 @@ main {
 }
 
 /* AUTH PAGES ending */
+
+/* GUIDE CARD LIST STYLES beginning */
+.card ul {
+    margin: 12px 0 0;
+    padding-left: 20px;
+    color: #374151;
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+.card ul li {
+    margin-bottom: 4px;
+}
+/* GUIDE CARD LIST STYLES ending */
