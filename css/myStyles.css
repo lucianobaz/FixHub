@@ -1,3 +1,6 @@
+/* GOOGLE FONTS IMPORT - BRAND TYPOGRAPHY (Montserrat) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
 /* VARIABLES AND RESET */
 /* This section defines global CSS variables and resets used across the whole site.
    It is shared by all HTML pages that include this stylesheet, such as index.html,
@@ -5,6 +8,22 @@
 :root {
     --bg: #f4f7fb;
     /* Main page background color used in the app shell and auth pages. */
+    --primary: #123A5B;
+    /* Primary corporate brand blue (dark navy) from mini-branding. */
+    --primary-hover: #0c263c;
+    /* Darker shade of primary blue for hover states. */
+    --accent: #82D0E2;
+    /* Secondary brand accent color (sky cyan) from mini-branding. */
+    --accent-hover: #6bc3d7;
+    /* Darker shade of accent cyan for interactive button hover. */
+    --accent-light: #eaf7fb;
+    /* Soft cyan tint used for subtle badges and secondary button backgrounds. */
+    --text-main: #111827;
+    /* Dark neutral text color for optimal contrast and readability. */
+    --text-muted: #4b5563;
+    /* Medium neutral gray for secondary labels and metadata. */
+    --border-subtle: #e2e8f0;
+    /* Neutral border color for structural dividers and card edges. */
 }
 
 * {
@@ -24,10 +43,12 @@
 body {
     margin: 0;
     /* Removes default browser spacing around the page body. */
-    font-family: Arial, Helvetica, sans-serif;
-    /* Default typeface for all text in the project. */
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    /* Brand typeface specified in mini-branding with system fallbacks. */
     background: var(--bg);
-    /* Applies the common soft-gray background to the page. */
+    /* Applies the common soft background to the page. */
+    color: var(--text-main);
+    /* Sets the default high-contrast body text color. */
 }
 
 a {
@@ -47,21 +68,37 @@ a {
     /* Pushes the logo to the left and the nav to the right. */
     align-items: center;
     /* Vertically centers everything inside the header. */
-    padding: 16px 20px;
+    padding: 12px 24px;
     /* Adds internal spacing around the header content. */
     background: #fff;
     /* White background for the top bar. */
-    border-bottom: 1px solid #ccc;
-    /* Subtle divider line under the header. */
+    border-bottom: 2px solid var(--accent);
+    /* Brand cyan accent border under the header to give it definition. */
+    box-shadow: 0 2px 8px rgba(18, 58, 91, 0.05);
+    /* Subtle shadow lifting the header above the page content. */
 }
 
 .logo {
-    font-size: 1.2rem;
-    /* Sets the branding text size. */
-    font-weight: 700;
-    /* Makes the FixHub word stronger and more prominent. */
-    color: #2f6fed;
-    /* Blue brand color used for the logo. */
+    display: inline-flex;
+    /* Aligns the logo image inside the anchor cleanly. */
+    align-items: center;
+    text-decoration: none;
+    line-height: 1;
+}
+
+.logo-img {
+    height: 38px;
+    /* Standardized height for the brand logo imagotipo. */
+    width: auto;
+    /* Preserves original aspect ratio. */
+    display: block;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.02);
+    /* Gentle micro-interaction on hover. */
 }
 
 /* Desktop Navigation */
@@ -78,15 +115,17 @@ a {
 }
 
 .flex-nav a {
-    padding: 6px 8px;
+    padding: 6px 12px;
     /* Adds clickable space around each nav link. */
-    color: #555;
-    /* Neutral gray text for navigation item color. */
+    color: var(--text-muted);
+    /* Neutral text for navigation item color. */
+    font-weight: 500;
+    transition: color 0.2s ease;
 }
 
 .flex-nav a:hover {
-    color: #2f6fed;
-    /* Blue hover color gives a subtle interactive highlight. */
+    color: var(--primary);
+    /* Brand navy hover color gives a clear interactive highlight. */
 }
 
 .flex-nav a.logout-btn {
@@ -163,7 +202,7 @@ a {
         /* Creates compact spacing between links while preserving readability. */
         padding-top: 8px;
         /* Adds space between the nav and the header line above it. */
-        border-top: 1px solid #ebeff5;
+        border-top: 1px solid var(--border-subtle);
         /* Adds a soft divider line separating the nav from the header content. */
     }
 
@@ -226,6 +265,8 @@ a {
         /* Removes spacing between mobile links so they form a clean stacked list. */
         margin-top: 1rem;
         /* Adds space between the header and the hidden menu panel. */
+        border-top: 1px solid var(--border-subtle);
+        padding-top: 8px;
         order: 3;
         /* Places the nav below the logo and menu icon. */
     }
@@ -258,12 +299,12 @@ button,
     /* Removes default browser button border. */
     border-radius: 999px;
     /* Makes the buttons fully rounded for a modern pill shape. */
-    padding: 8px 16px;
+    padding: 9px 18px;
     /* Adds comfortable spacing inside the buttons. */
-    background: #2f6fed;
-    /* Primary blue button color used for the main action. */
+    background: var(--primary);
+    /* Brand blue button color used for standard actions. */
     color: #fff;
-    /* White text for strong contrast on blue buttons. */
+    /* White text for strong contrast. */
     cursor: pointer;
     /* Shows click affordance. */
     text-align: center;
@@ -271,40 +312,83 @@ button,
     display: inline-block;
     font-size: 0.95rem;
     font-family: inherit;
-    transition-duration: 0.4s;
-    transition-property: box-shadow, background-color, transform;
+    font-weight: 600;
+    transition-duration: 0.3s;
+    transition-property: box-shadow, background-color, transform, border-color, color;
 }
 
 .button:hover,
 button:hover,
 #lang-btn:hover,
 .button2:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.6);
+    box-shadow: 0 6px 14px rgba(18, 58, 91, 0.25);
 }
 
 .button1 {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.6);
+    box-shadow: 0 6px 14px rgba(18, 58, 91, 0.25);
 }
 
+/* Primary CTA button: vibrant cyan (#82D0E2) with navy text (#123A5B) for dynamic contrast */
 .button-primary {
-    background: #1e56d6;
-    /* Darker blue variation for the prominent CTA button. */
+    background: var(--accent);
+    color: var(--primary);
+    font-weight: 700;
 }
 
+.button-primary:hover {
+    background: var(--accent-hover);
+    color: #081d2e;
+    transform: translateY(-1px);
+}
+
+/* Secondary CTA button inside hero: semi-transparent white with clean outline */
 .button-secondary {
-    background: #e8eefc;
-    /* Light blue-gray background for secondary actions. */
-    color: #2f6fed;
-    /* Keeps the secondary text in the same blue brand color. */
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    font-weight: 600;
+}
+
+.button-secondary:hover {
+    background: rgba(255, 255, 255, 0.28);
+    transform: translateY(-1px);
+}
+
+/* Buttons inside cards (outside dark hero banner) */
+.card .button-primary {
+    background: var(--primary);
+    color: #fff;
+}
+
+.card .button-primary:hover {
+    background: var(--primary-hover);
+    color: #fff;
+}
+
+.card .button-secondary {
+    background: var(--accent-light);
+    color: var(--primary);
+    border: 1px solid #c8edf6;
+}
+
+.card .button-secondary:hover {
+    background: #d8f3fa;
+    color: var(--primary-hover);
 }
 
 #lang-btn {
     background: #fff;
-    color: #2f6fed;
-    border: 1px solid #cbd5e1;
+    color: var(--primary);
+    border: 1.5px solid var(--accent);
     font-size: 0.88rem;
-    font-weight: 500;
-    padding: 6px 14px;
+    font-weight: 600;
+    padding: 6px 16px;
+}
+
+#lang-btn:hover {
+    background: var(--accent-light);
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(18, 58, 91, 0.12);
 }
 
 /* BUTTONS ending*/
@@ -325,7 +409,7 @@ main {
 
 .welcome-message {
     margin: 0 0 16px;
-    color: #1e56d6;
+    color: var(--primary);
     font-size: 1.35rem;
     font-weight: 700;
     text-align: center;
@@ -339,18 +423,22 @@ main {
     /* Uses a horizontal layout for the text and info panel. */
     gap: 20px;
     /* Adds space between the text column and the card column. */
-    padding: 20px;
-    /* Adds internal spacing inside the blue panel. */
-    background: #2f6fed;
-    /* Strong blue background gives the page a branded hero feel. */
+    padding: 24px;
+    /* Adds internal spacing inside the brand blue panel. */
+    background: var(--primary);
+    /* Brand deep navy blue background gives the page a solid identity. */
     color: #fff;
-    /* White text ensures readability over the blue background. */
+    /* White text ensures readability over the navy background. */
     border-radius: 16px;
     /* Rounds the corners of the hero panel. */
     align-items: stretch;
     /* Makes both columns share the same height within the hero. */
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     /* Adds separation below the hero section. */
+    border-bottom: 4px solid var(--accent);
+    /* Cyan accent border on bottom adds energy and depth to the hero. */
+    box-shadow: 0 8px 24px rgba(18, 58, 91, 0.16);
+    /* Soft shadow providing visual lift. */
 }
 
 .hero-content {
@@ -363,11 +451,15 @@ main {
     /* Removes default heading margin and adds space below the heading. */
     font-size: 1.8rem;
     /* Sets the main hero title size. */
+    font-weight: 800;
+    /* Montserrat ExtraBold for the hero headline. */
+    color: #fff;
 }
 
 .hero p {
     margin: 0;
     /* Removes default paragraph spacing in the hero content. */
+    line-height: 1.5;
 }
 
 /* Responsive Hero - Mobile (max-width: 768px) */
@@ -376,7 +468,7 @@ main {
     .hero {
         flex-direction: column;
         /* Stacks the text and card vertically on small screens. */
-        padding: 16px;
+        padding: 18px;
         /* Reduces spacing to fit narrow mobile screens better. */
     }
 
@@ -389,24 +481,30 @@ main {
 .hero-actions {
     display: flex;
     /* Puts the CTA buttons in a row. */
-    gap: 10px;
+    gap: 12px;
     /* Adds spacing between the two buttons. */
-    margin-top: 12px;
+    margin-top: 16px;
     /* Separates the button row from the hero paragraph. */
 }
 
 .hero-card {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.1);
     /* Adds a subtle transparent white panel behind the right sidebar card. */
-    padding: 16px;
+    border: 1px solid rgba(130, 208, 226, 0.35);
+    /* Subtle cyan outline to connect with the brand accent. */
+    padding: 18px;
     /* Creates spacing inside the card. */
     border-radius: 12px;
     /* Rounds the corners of the card. */
 }
 
 .tagline {
-    opacity: 0.95;
-    /* Slightly reduces contrast to make the uppercase/label text feel softer. */
+    color: var(--accent);
+    /* Cyan tagline provides immediate branded contrast. */
+    font-weight: 700;
+    font-size: 0.88rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
     margin: 0 0 8px 0;
     /* Keeps spacing consistent around the label text. */
 }
@@ -424,14 +522,23 @@ main {
     /* Adds space between the columns. */
     margin-top: 20px;
     /* Creates space from the hero section above. */
-    padding: 16px;
+    padding: 20px;
     /* Adds internal spacing to the panel. */
     background: #fff;
     /* White background for a clean card appearance. */
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-subtle);
     /* Soft gray border to separate it from the page background. */
+    border-top: 3px solid var(--accent);
+    /* Colored accent top border prevents a flat appearance. */
     border-radius: 12px;
     /* Rounds the panel corners. */
+    box-shadow: 0 4px 14px rgba(18, 58, 91, 0.04);
+}
+
+.intro-panel h2 {
+    margin-top: 0;
+    color: var(--primary);
+    font-weight: 700;
 }
 
 /* INTRO PANEL ending */
@@ -463,19 +570,29 @@ main {
 .card {
     background: #fff;
     /* White card background. */
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-subtle);
     /* Light border with subtle separation from the page background. */
+    border-top: 3px solid var(--accent);
+    /* Colored accent top border adds visual character without bloat. */
     border-radius: 12px;
     /* Rounds the corners to match the overall design language. */
-    padding: 16px;
+    padding: 20px;
     /* Creates comfortable spacing inside each card. */
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-top-color 0.25s ease;
 }
 
 .card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-    border-color: #cbd5e1;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(18, 58, 91, 0.08);
+    border-top-color: var(--primary);
+    /* Shifts top border to deep navy on hover for dynamic visual feedback. */
+}
+
+.card h2,
+.card h3 {
+    margin-top: 0;
+    color: var(--primary);
+    font-weight: 700;
 }
 
 /* Responsive Grid - Tablet (max-width: 1024px) */
@@ -515,21 +632,32 @@ main {
     /* Makes links behave like inline-block elements so spacing and margin work correctly. */
     margin-top: 10px;
     /* Adds space above the link relative to the nearby text. */
-    color: #2f6fed;
-    /* Uses the branded blue color for card links. */
+    color: var(--primary);
+    /* Uses the branded primary color for card links. */
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.link:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
 }
 
 .code-badge {
     display: inline-block;
     /* Treats the badge as a compact inline box that can size to its content. */
-    padding: 4px 8px;
+    padding: 4px 10px;
     /* Adds compact padding inside the badge. */
-    background: #e8eefc;
-    /* Light blue background to distinguish the badge visually. */
+    background: var(--accent-light);
+    /* Soft cyan background to distinguish the badge visually. */
+    border: 1px solid #c9ecf5;
+    /* Subtle matching border around badge. */
     border-radius: 999px;
     /* Makes the badge pill-shaped and modern. */
-    color: #2f6fed;
-    /* Keeps the badge text consistent with the site color palette. */
+    color: var(--primary);
+    /* Keeps the badge text consistent with the site primary color. */
+    font-weight: 600;
+    font-size: 0.85rem;
 }
 
 .actions {
@@ -537,7 +665,7 @@ main {
     /* Aligns action buttons or links in a row. */
     gap: 10px;
     /* Adds spacing between grouped action elements. */
-    margin-top: 12px;
+    margin-top: 14px;
     /* Adds top spacing from previous content. */
 }
 
@@ -548,10 +676,12 @@ main {
 .footer {
     text-align: center;
     /* Centers the footer content. */
-    padding: 20px;
+    padding: 24px;
     /* Creates consistent spacing around the footer. */
-    color: #555;
-    /* Neutral gray text to keep the footer understated. */
+    color: var(--text-muted);
+    /* Neutral text to keep the footer understated. */
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
 /* FOOTER ending */
@@ -568,7 +698,7 @@ main {
 .auth-page {
     max-width: 900px;
     /* Keeps auth content from becoming too wide on large screens. */
-    margin: 20px auto 0;
+    margin: 24px auto 0;
     /* Centers the page and adds spacing above it. */
 }
 
@@ -577,7 +707,7 @@ main {
     /* Uses a two-column grid for the intro panel and form. */
     grid-template-columns: 1fr 1fr;
     /* Divides the auth layout into equal columns. */
-    gap: 16px;
+    gap: 18px;
     /* Adds space between the intro section and the form card. */
 }
 
@@ -585,12 +715,35 @@ main {
 .auth-card {
     background: #fff;
     /* White cards keep the auth panels visually consistent. */
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-subtle);
     /* Thin border to distinguish the panels from the page background. */
+    border-top: 3px solid var(--accent);
+    /* Cyan top accent border matches cards across the site. */
     border-radius: 12px;
     /* Rounds the corners for the auth panels. */
-    padding: 16px;
+    padding: 20px;
     /* Adds internal spacing inside each panel. */
+    box-shadow: 0 4px 14px rgba(18, 58, 91, 0.04);
+}
+
+.auth-intro h1 {
+    color: var(--primary);
+    font-weight: 800;
+    margin-top: 4px;
+}
+
+.auth-card h2 {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.auth-tagline {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin: 0;
 }
 
 .auth-form {
@@ -598,29 +751,44 @@ main {
     /* Uses a column layout for form fields stacked vertically. */
     flex-direction: column;
     /* Stacks inputs and controls one below the other. */
-    gap: 8px;
+    gap: 10px;
     /* Adds spacing between form elements. */
 }
 
 .auth-form input {
-    padding: 8px;
+    padding: 10px 12px;
     /* Gives input fields enough vertical and horizontal padding for usability. */
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-subtle);
     /* Border matches the rest of the site's layout. */
     border-radius: 8px;
     /* Rounds the input corners for a modern appearance. */
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(130, 208, 226, 0.3);
 }
 
 .auth-link {
-    margin-top: 10px;
+    margin-top: 12px;
     /* Adds spacing above the secondary login/register text. */
-    color: #555;
+    color: var(--text-muted);
     /* Neutral text color for the helper link row. */
+    font-size: 0.9rem;
 }
 
 .auth-link a {
-    color: #2f6fed;
+    color: var(--primary);
     /* Makes the link appear interactive and consistent with the brand blue. */
+    font-weight: 600;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
 }
 
 /* Responsive Auth Layout - Mobile (max-width: 768px) */
