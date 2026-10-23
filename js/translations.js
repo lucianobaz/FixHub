@@ -1,158 +1,172 @@
-// Global translation state
-let translations = {};
-let currentLang = "en";
+/**
+ * FixHub - Bilingual Translation System (translations.js)
+ * 
+ * Purpose: This script is in charge of providing full bilingual support (English / Spanish)
+ * across all pages of FixHub without needing separate HTML files for each language.
+ * 
+ * Formula: We use an external JSON file ("translations.json") to store all dictionary texts,
+ * and we use localStorage in order to save the user's language choice so that it persists
+ * when navigating between different sections of the website.
+ */
 
-// Retrieve saved language from localStorage, defaulting to "en"
-try {
-    const savedLang = localStorage.getItem("preferredLang");
-    if (savedLang === "es" || savedLang === "en") {
-        currentLang = savedLang;
-    }
-} catch (e) {
-    console.warn("Unable to access localStorage:", e);
+// Global variables to store the loaded dictionary and the current active language
+let translations = {};
+let currentLang = "en"; // Default language is English
+
+/**
+ * Step 1: Read the user's saved language preference from localStorage.
+ * We use localStorage.getItem() in order to check if the user previously selected Spanish.
+ */
+const savedLanguage = localStorage.getItem("preferredLang");
+if (savedLanguage === "es" || savedLanguage === "en") {
+    currentLang = savedLanguage;
 }
 
-// Set html lang attribute as early as possible
+// Update the <html> lang attribute as early as possible for accessibility and SEO
 if (document.documentElement) {
     document.documentElement.lang = currentLang;
 }
 
-// Attempt to load cached translations from sessionStorage for instant section switching
-try {
-    const cachedTranslations = sessionStorage.getItem("fixhub_translations_cache");
-    if (cachedTranslations) {
-        translations = JSON.parse(cachedTranslations);
+/**
+ * Step 2: Try to load cached translations from sessionStorage for instant page transitions.
+ * This prevents any visual delay or flickering when clicking between pages.
+ */
+const cachedData = sessionStorage.getItem("fixhub_translations_cache");
+if (cachedData) {
+    try {
+        translations = JSON.parse(cachedData);
+    } catch (e) {
+        translations = {};
     }
-} catch (e) {
-    // Ignore cache retrieval errors
 }
 
-// Resolve the path to translations.json relative to translations.js or fallback to '../js/translations.json'
-const jsonUrl = (document.currentScript && document.currentScript.src)
-    ? new URL('translations.json', document.currentScript.src).href
-    : '../js/translations.json';
-
-// Fetch the external JSON file when the script loads
-const translationsPromise = fetch(jsonUrl)
-    .then(response => {
+/**
+ * Step 3: Fetch the translations dictionary from the JSON file.
+ * We use fetch() to request "../js/translations.json" asynchronously.
+ */
+const translationsPromise = fetch('../js/translations.json')
+    .then(function (response) {
         if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            throw new Error("Could not load translations.json file");
         }
-        return response.json();
+        return response.json(); // Convert JSON file into a JavaScript object
     })
-    .then(data => {
+    .then(function (data) {
         translations = data;
-        try {
-            sessionStorage.setItem("fixhub_translations_cache", JSON.stringify(data));
-        } catch (e) {
-            // Ignore quota errors
-        }
-        console.log("Translations loaded successfully.");
+        // Save to sessionStorage so subsequent pages load instantly
+        sessionStorage.setItem("fixhub_translations_cache", JSON.stringify(data));
 
-        // Apply translations on load once JSON is ready
-        applyWhenDomReady(currentLang);
+        // Apply translations once the DOM elements are ready
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", function () {
+                applyLanguage(currentLang);
+            });
+        } else {
+            applyLanguage(currentLang);
+        }
         return data;
     })
-    .catch(error => {
-        console.error("Failed to load translation file:", error);
+    .catch(function (error) {
+        console.error("Error loading translations:", error);
     });
 
-// Helper to ensure DOM is ready before applying translations
-function applyWhenDomReady(lang) {
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", () => {
-            applyLanguage(lang);
-        }, { once: true });
-    } else {
-        applyLanguage(lang);
-    }
-}
-
-// If we already have translations in memory from sessionStorage, apply immediately once DOM is ready
+// If cached data was already found in memory, apply it right away
 if (Object.keys(translations).length > 0) {
-    applyWhenDomReady(currentLang);
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () {
+            applyLanguage(currentLang);
+        });
+    } else {
+        applyLanguage(currentLang);
+    }
 }
 
-// Apply selected language to the DOM and persist preference
+/**
+ * Function: applyLanguage(lang)
+ * 
+ * Purpose: This function is in charge of updating all visible text on the webpage.
+ * 
+ * Formula: We search for elements with the custom attribute [data-i18n-block]
+ * in order to replace their text with the translation found in the JSON dictionary.
+ * 
+ * @param {string} lang - The language code to apply ("en" or "es")
+ */
 function applyLanguage(lang) {
-    if (!translations || Object.keys(translations).length === 0) {
-        return;
-    }
-
-    if (!translations[lang]) {
-        console.warn(`Translation dictionary for "${lang}" not found.`);
+    // If translations data is not yet loaded, wait
+    if (!translations || !translations[lang]) {
         return;
     }
 
     currentLang = lang;
 
-    // Persist choice across page navigations
-    try {
-        localStorage.setItem("preferredLang", currentLang);
-    } catch (e) {
-        console.warn("Unable to save preferredLang to localStorage:", e);
-    }
+    // We save the selected language in localStorage so the browser remembers it
+    localStorage.setItem("preferredLang", currentLang);
 
-    // Update html lang attribute
+    // Update the HTML lang attribute
     document.documentElement.lang = currentLang;
 
-    // Update toggle button text
-    const buttons = document.querySelectorAll("#lang-btn, #langButton, .lang-btn");
-    buttons.forEach(btn => {
+    // 1. Update the language button text (if currently in English, button offers "Español")
+    const langButton = document.getElementById("lang-btn");
+    if (langButton) {
         if (translations[currentLang] && translations[currentLang]["buttonText"]) {
-            btn.textContent = translations[currentLang]["buttonText"];
+            langButton.textContent = translations[currentLang]["buttonText"];
         } else {
-            btn.textContent = (currentLang === "es") ? "English" : "Español";
+            langButton.textContent = (currentLang === "es") ? "English" : "Español";
         }
-    });
+    }
 
-    // Update all text blocks with data-i18n-block
-    const blocks = document.querySelectorAll("[data-i18n-block]");
-    blocks.forEach(block => {
-        const key = block.getAttribute("data-i18n-block");
-        if (translations[currentLang] && translations[currentLang][key] !== undefined) {
-            const val = translations[currentLang][key];
-            if (typeof val === "string" && val.includes("<")) {
-                block.innerHTML = val;
+    // 2. Update all text blocks that have the "data-i18n-block" attribute
+    const textElements = document.querySelectorAll("[data-i18n-block]");
+    textElements.forEach(function (element) {
+        const key = element.getAttribute("data-i18n-block");
+        const translatedValue = translations[currentLang][key];
+
+        if (translatedValue !== undefined) {
+            // If the translation contains HTML tags (like <b> or <br>), use innerHTML; otherwise textContent
+            if (typeof translatedValue === "string" && translatedValue.includes("<")) {
+                element.innerHTML = translatedValue;
             } else {
-                block.textContent = val;
+                element.textContent = translatedValue;
             }
         }
     });
 
-    // Update all input placeholders with data-i18n-placeholder
-    const placeholders = document.querySelectorAll("[data-i18n-placeholder]");
-    placeholders.forEach(el => {
-        const key = el.getAttribute("data-i18n-placeholder");
-        if (translations[currentLang] && translations[currentLang][key] !== undefined) {
-            el.placeholder = translations[currentLang][key];
+    // 3. Update all input fields that have a "data-i18n-placeholder" attribute
+    const inputElements = document.querySelectorAll("[data-i18n-placeholder]");
+    inputElements.forEach(function (input) {
+        const key = input.getAttribute("data-i18n-placeholder");
+        const placeholderValue = translations[currentLang][key];
+        if (placeholderValue !== undefined) {
+            input.placeholder = placeholderValue;
         }
     });
-
-    // Dispatch event in case other scripts need to react
-    window.dispatchEvent(new CustomEvent("languageChanged", { detail: { lang: currentLang } }));
 }
 
-// Triggered when user clicks the toggle button
+/**
+ * Function: toggleLanguage()
+ * 
+ * Purpose: This function is in charge of switching the language when the user clicks the button.
+ * 
+ * Formula: We check the current language so that if it is "en" we change to "es",
+ * and if it is "es" we change to "en", then call applyLanguage().
+ */
 function toggleLanguage() {
-    const nextLang = (currentLang === "en") ? "es" : "en";
+    const nextLanguage = (currentLang === "en") ? "es" : "en";
 
-    // If translations haven't finished loading yet, wait for promise
+    // If the JSON dictionary is still downloading, wait for it before toggling
     if (!translations || Object.keys(translations).length === 0) {
         if (translationsPromise) {
-            translationsPromise.then(() => {
-                applyLanguage(nextLang);
-            }).catch(() => {
-                alert("Translation data is still loading. Please try again in a moment.");
+            translationsPromise.then(function () {
+                applyLanguage(nextLanguage);
             });
             return;
         }
     }
 
-    applyLanguage(nextLang);
+    applyLanguage(nextLanguage);
 }
 
-// Expose functions globally
+// Make functions available globally so HTML onclick="toggleLanguage()" can trigger them
 window.currentLang = currentLang;
 window.applyLanguage = applyLanguage;
-window.toggleLanguage = toggleLanguage;
+window.toggleLanguage = toggleLanguage;

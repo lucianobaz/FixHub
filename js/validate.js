@@ -1,143 +1,182 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // Create the message area used by both the login and registration forms.
-    function ensureFeedback() {
-        let el = document.getElementById("feedback");
-        if (!el) {
-            el = document.createElement("div");
-            el.id = "feedback";
-            // Put the message at the top of the form card, or at the top of the page if no card exists.
+/**
+ * FixHub - Form Validation Script (validate.js)
+ * 
+ * Purpose: This script is in charge of client-side validation for both the Login
+ * and Registration forms before data is submitted to PHP and MySQL.
+ * 
+ * Formula: We use event.preventDefault() to stop form submission when input is invalid,
+ * in order to provide instant feedback to the user without reloading the page.
+ * We also use URLSearchParams in order to display server-side messages returned by PHP.
+ */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    /**
+     * Helper function: getFeedbackContainer()
+     * 
+     * Purpose: This function is in charge of finding or creating the feedback message container
+     * inside the authentication card so that success or error messages can be displayed.
+     */
+    function getFeedbackContainer() {
+        let feedbackElement = document.getElementById("feedback");
+        if (!feedbackElement) {
+            feedbackElement = document.createElement("div");
+            feedbackElement.id = "feedback";
+            
+            // Insert feedback at the top of the auth card
             const container = document.querySelector('.auth-card') || document.body;
-            container.insertBefore(el, container.firstChild);
+            container.insertBefore(feedbackElement, container.firstChild);
         }
-        return el;
+        return feedbackElement;
     }
 
-    // Read error or success messages sent back in the URL after a PHP redirect.
-    const feedback = ensureFeedback();
-    const params = new URLSearchParams(window.location.search);
+    const feedback = getFeedbackContainer();
 
-    if (params.has("error")) {
-        // Display server-side errors, such as invalid login details.
-        const errorMsg = params.get("error");
+    /**
+     * Check for server-side responses in the URL.
+     * We use URLSearchParams in order to read GET parameters (e.g., ?error=... or ?success=...)
+     * sent back by PHP after an authentication attempt.
+     */
+    const urlParameters = new URLSearchParams(window.location.search);
+
+    // 1. Handle error messages from PHP
+    if (urlParameters.has("error")) {
+        const errorMsg = urlParameters.get("error");
         feedback.className = "error";
-        feedback.style.color = "red";
-        feedback.style.marginBottom = "10px";
+        feedback.style.color = "#dc2626"; // Clear red color
+        feedback.style.marginBottom = "14px";
+        feedback.style.fontWeight = "600";
+
+        const isSpanish = (typeof currentLang !== "undefined" && currentLang === "es") || document.documentElement.lang === "es";
 
         if (errorMsg === "Invalid username or password") {
             feedback.setAttribute("data-i18n-block", "errorInvalidCredentials");
-            const isSpanish = (typeof currentLang !== "undefined" && currentLang === "es") || document.documentElement.lang === "es";
-            feedback.textContent = isSpanish ? "Usuario o contraseña incorrectos" : errorMsg;
+            feedback.textContent = isSpanish ? "Usuario o contraseña incorrectos." : errorMsg;
         } else if (errorMsg === "Registration failed. Username may already exist") {
             feedback.setAttribute("data-i18n-block", "errorRegistrationFailed");
-            const isSpanish = (typeof currentLang !== "undefined" && currentLang === "es") || document.documentElement.lang === "es";
-            feedback.textContent = isSpanish ? "Fallo de registro" : errorMsg;
+            feedback.textContent = isSpanish ? "El nombre de usuario ya existe o hubo un fallo en el registro." : errorMsg;
         } else {
             feedback.textContent = errorMsg;
         }
-    } else if (params.has("success")) {
-        // Display successful actions, such as a completed registration.
-        const successMsg = params.get("success");
+    }
+
+    // 2. Handle success messages from PHP
+    if (urlParameters.has("success")) {
+        const successMsg = urlParameters.get("success");
         feedback.className = "success";
-        feedback.style.color = "green";
-        feedback.style.marginBottom = "10px";
+        feedback.style.color = "#16a34a"; // Clear green color
+        feedback.style.marginBottom = "14px";
+        feedback.style.fontWeight = "600";
+
+        const isSpanish = (typeof currentLang !== "undefined" && currentLang === "es") || document.documentElement.lang === "es";
 
         if (successMsg.startsWith("Registration successful")) {
             feedback.setAttribute("data-i18n-block", "successRegistration");
-            const isSpanish = (typeof currentLang !== "undefined" && currentLang === "es") || document.documentElement.lang === "es";
-            feedback.textContent = isSpanish ? "Registro exitoso, inicie sesión" : successMsg;
+            feedback.textContent = isSpanish ? "¡Registro exitoso! Por favor inicia sesión." : successMsg;
         } else {
             feedback.textContent = successMsg;
         }
     }
 
-    // Check that the username and password follow the requirements (Registration only).
-    function validateCredentials(username, password) {
+    /**
+     * Function: validatePasswordStrength(username, password)
+     * 
+     * Purpose: This function is in charge of checking password complexity for new accounts.
+     * 
+     * Formula: We use Regular Expressions (RegEx) to test characters in order to guarantee
+     * that passwords are strong and secure.
+     * 
+     * @returns {string|null} - Error message if invalid, or null if valid.
+     */
+    function validatePasswordStrength(username, password) {
         const isSpanish = (typeof currentLang !== "undefined" && currentLang === "es") || document.documentElement.lang === "es";
 
-        // Check each password requirement separately so a useful message can be returned.
-        const hasLowercase = /[a-z]/.test(password);
-        const hasUppercase = /[A-Z]/.test(password);
-        const hasDigit = /[0-9]/.test(password);
-        const hasSpecialChar = /[!@#\$%\^&\*\(\)_\+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
-
-        const minMax = username.length >= 8 && password.length >= 8 && username.length <= 20 && password.length <= 20;
-
-        if (!minMax) {
+        // Check length: between 8 and 20 characters
+        const isLengthValid = username.length >= 8 && username.length <= 20 &&
+                              password.length >= 8 && password.length <= 20;
+        if (!isLengthValid) {
             return isSpanish
                 ? "El usuario y la contraseña deben tener entre 8 y 20 caracteres."
                 : "Username and password must be between 8 and 20 characters long.";
         }
+
+        // Test for special characters using a Regular Expression
+        const hasSpecialChar = /[!@#\$%\^&\*\(\)_\+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
         if (!hasSpecialChar) {
             return isSpanish
-                ? "La contraseña debe contener al menos un carácter especial."
-                : "Password must contain at least one special character.";
+                ? "La contraseña debe contener al menos un carácter especial (!@#$%...)."
+                : "Password must contain at least one special character (!@#$%...).";
         }
+
+        // Test for lowercase, uppercase, and digits
+        const hasLowercase = /[a-z]/.test(password);
+        const hasUppercase = /[A-Z]/.test(password);
+        const hasDigit = /[0-9]/.test(password);
+
         if (!hasLowercase || !hasUppercase || !hasDigit) {
             return isSpanish
-                ? "La contraseña debe contener minúscula, mayúscula, número y un carácter especial."
-                : "Password must contain a lowercase, uppercase, number, and special character.";
+                ? "La contraseña debe incluir mayúsculas, minúsculas y números."
+                : "Password must contain lowercase, uppercase, and numbers.";
         }
 
-        return null; // No error means that all requirements were met.
+        return null; // All validation checks passed!
     }
 
-    // Registration validation: Enforce complexity rules before submitting to PHP.
-    function setupRegistrationValidation(form, successText) {
-        if (!form) return;
+    /**
+     * Registration Form Validation
+     * We attach an event listener to the "submit" event of registerForm in order to validate
+     * credentials before sending them to register.php.
+     */
+    const registerForm = document.getElementById('registerForm');
+    if (registerForm) {
+        registerForm.addEventListener('submit', function (event) {
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
 
-        form.addEventListener('submit', function (event) {
-            const username = document.getElementById('username') ? document.getElementById('username').value : '';
-            const password = document.getElementById('password') ? document.getElementById('password').value : '';
+            const username = usernameInput ? usernameInput.value.trim() : '';
+            const password = passwordInput ? passwordInput.value : '';
 
-            const error = validateCredentials(username, password);
+            const validationError = validatePasswordStrength(username, password);
 
-            if (error) {
-                // Stop the request and show the validation error in the browser.
+            if (validationError) {
+                // We use event.preventDefault() so that the form does NOT submit to PHP
                 event.preventDefault();
-                feedback.textContent = error;
+
+                feedback.textContent = validationError;
                 feedback.className = "error";
-                feedback.style.color = "red";
-                feedback.style.marginBottom = "10px";
-            } else {
-                // Let the form continue to PHP after showing a temporary success message.
-                feedback.textContent = successText;
-                feedback.className = "success";
-                feedback.style.color = "green";
-                feedback.style.marginBottom = "10px";
+                feedback.style.color = "#dc2626";
+                feedback.style.marginBottom = "14px";
             }
         });
     }
 
-    // Login validation: Only check that fields are not empty; let PHP authenticate credentials against the DB.
-    function setupLoginValidation(form) {
-        if (!form) return;
+    /**
+     * Login Form Validation
+     * For login, we only check that inputs are not left empty.
+     * PHP will check whether the username and password match the database.
+     */
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function (event) {
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
 
-        form.addEventListener('submit', function (event) {
-            const username = document.getElementById('username') ? document.getElementById('username').value.trim() : '';
-            const password = document.getElementById('password') ? document.getElementById('password').value.trim() : '';
+            const username = usernameInput ? usernameInput.value.trim() : '';
+            const password = passwordInput ? passwordInput.value.trim() : '';
 
-            if (!username || !password) {
+            if (username === '' || password === '') {
+                // Prevent form submission if fields are blank
                 event.preventDefault();
+
                 const isSpanish = (typeof currentLang !== "undefined" && currentLang === "es") || document.documentElement.lang === "es";
                 feedback.textContent = isSpanish
                     ? "Por favor, introduce el usuario y la contraseña."
                     : "Please enter both username and password.";
                 feedback.setAttribute("data-i18n-block", "emptyFieldsError");
                 feedback.className = "error";
-                feedback.style.color = "red";
-                feedback.style.marginBottom = "10px";
+                feedback.style.color = "#dc2626";
+                feedback.style.marginBottom = "14px";
             }
-            // When fields are entered, let form submit to ../php/login.php.
-            // If credentials are invalid, PHP redirects back with ?error=Invalid+username+or+password.
         });
     }
-
-    const registerForm = document.getElementById('registerForm');
-    const loginForm = document.getElementById('loginForm');
-
-    // Attach registration rules only to registerForm.
-    setupRegistrationValidation(registerForm, "Registration successful!");
-
-    // Attach basic submission check only to loginForm.
-    setupLoginValidation(loginForm);
 });
