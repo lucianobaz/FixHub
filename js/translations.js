@@ -1,36 +1,29 @@
-/**
- * FixHub - Bilingual Translation System (translations.js)
- * 
- * Purpose: This script is in charge of providing full bilingual support (English / Spanish)
- * across all pages of FixHub without needing separate HTML files for each language.
- * 
- * Formula: We use an external JSON file ("translations.json") to store all dictionary texts,
- * and we use localStorage in order to save the user's language choice so that it persists
- * when navigating between different sections of the website.
- */
+//TRANSLATIONS - JAVASCRIPT
+//This script is in charge of changing the language of the website between English and Spanish.
 
-// Global variables to store the loaded dictionary and the current active language
+/* -------------------------------------------------------------- */
+/* KEYWORDS EXPLANATION: */
+/* -------------------------------------------------------------- */
+
+//What is let for? let is a keyword used to declare a variable that can be changed later.
+//What is const for? const is a keyword that is used to declare a variable that is constant, meaning it cannot be changed.
+
+
+//We declare variables to store the dictionary data and the current language.
 let translations = {};
-let currentLang = "en"; // Default language is English
+let currentLang = "en"; //Default language is English
 
-/**
- * Step 1: Read the user's saved language preference from localStorage.
- * We use localStorage.getItem() in order to check if the user previously selected Spanish.
- */
+
+//We check localStorage in order to see if the user previously selected Spanish or English.
+//What is localStorage for? localStorage is a browser tool used to save data on the computer so that information stays saved even if you close or change pages.
 const savedLanguage = localStorage.getItem("preferredLang");
 if (savedLanguage === "es" || savedLanguage === "en") {
     currentLang = savedLanguage;
 }
 
-// Update the <html> lang attribute as early as possible for accessibility and SEO
-if (document.documentElement) {
-    document.documentElement.lang = currentLang;
-}
-
-/**
- * Step 2: Try to load cached translations from sessionStorage for instant page transitions.
- * This prevents any visual delay or flickering when clicking between pages.
- */
+//We check sessionStorage to load the translations. 
+//What is JSON.parse for? It is a method used to convert a JSON string into a JavaScript object.
+//what is sessionStorage for? sessionStorage is similar to localStorage, but data is only saved while the current browser tab is open.
 const cachedData = sessionStorage.getItem("fixhub_translations_cache");
 if (cachedData) {
     try {
@@ -40,38 +33,40 @@ if (cachedData) {
     }
 }
 
-/**
- * Step 3: Fetch the translations dictionary from the JSON file.
- * We use fetch() to request "../js/translations.json" asynchronously.
- */
-const translationsPromise = fetch('../js/translations.json')
+//What is fetch for? Is a method that is used to make requests to a server or load files.
+//In this case, we use fetch() to request "translations.json" in order to load all the words in both languages.
+const translationsFile = fetch('../js/translations.json')
+
+    //What is .then for? .then is: do something after the previous thing is done.   
     .then(function (response) {
+        //If the file cannot be loaded, we throw an error.
         if (!response.ok) {
             throw new Error("Could not load translations.json file");
         }
-        return response.json(); // Convert JSON file into a JavaScript object
+        //This converts the JSON response into a JavaScript object.
+        return response.json();
     })
     .then(function (data) {
         translations = data;
-        // Save to sessionStorage so subsequent pages load instantly
+        //What is JSON.stringify for? It is a method used to convert a JavaScript object into a JSON text string.
+        //We save the dictionary in sessionStorage so that other pages load instantly without downloading it again.
         sessionStorage.setItem("fixhub_translations_cache", JSON.stringify(data));
 
-        // Apply translations once the DOM elements are ready
-        if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", function () {
-                applyLanguage(currentLang);
-            });
-        } else {
-            applyLanguage(currentLang);
-        }
+        //We wait for HTML elements to load before applying the language.
+        applyWhenReady();
         return data;
     })
+
+    //What is .catch for? .catch is a method that is used to handle errors of a fetch request. it means "do something if something goes wrong".
     .catch(function (error) {
+        //If there is an error loading translations, we show an error in the console.
         console.error("Error loading translations:", error);
     });
 
-// If cached data was already found in memory, apply it right away
-if (Object.keys(translations).length > 0) {
+//------------------------------------------------------------------------------------------
+//FUNCTION - This function is in charge of waiting for the HTML to be ready before applying translations.
+//------------------------------------------------------------------------------------------
+function applyWhenReady() {
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", function () {
             applyLanguage(currentLang);
@@ -81,58 +76,63 @@ if (Object.keys(translations).length > 0) {
     }
 }
 
-/**
- * Function: applyLanguage(lang)
- * 
- * Purpose: This function is in charge of updating all visible text on the webpage.
- * 
- * Formula: We search for elements with the custom attribute [data-i18n-block]
- * in order to replace their text with the translation found in the JSON dictionary.
- * 
- * @param {string} lang - The language code to apply ("en" or "es")
- */
+//If translations were already saved in cache, we apply them immediately once the page is ready.
+if (Object.keys(translations).length > 0) {
+    applyWhenReady();
+}
+
+//------------------------------------------------------------------------------------------
+//FUNCTION - This function is in charge of updating all visible text on the webpage.
+//------------------------------------------------------------------------------------------
 function applyLanguage(lang) {
-    // If translations data is not yet loaded, wait
+    //If the translations data is not loaded yet, we stop here.
     if (!translations || !translations[lang]) {
         return;
     }
 
     currentLang = lang;
 
-    // We save the selected language in localStorage so the browser remembers it
+    //We save the chosen language in localStorage so that the browser remembers it.
     localStorage.setItem("preferredLang", currentLang);
 
-    // Update the HTML lang attribute
+    //We update the HTML lang attribute.
     document.documentElement.lang = currentLang;
 
-    // 1. Update the language button text (if currently in English, button offers "Español")
+    //We update the text of the language button (if English, it says "Español"; if Spanish, it says "English").
+    //What is document.getElementById for? Is a method that is used to select one specific element by its unique id.
     const langButton = document.getElementById("lang-btn");
     if (langButton) {
-        if (translations[currentLang] && translations[currentLang]["buttonText"]) {
+        if (translations[currentLang]["buttonText"]) {
             langButton.textContent = translations[currentLang]["buttonText"];
         } else {
             langButton.textContent = (currentLang === "es") ? "English" : "Español";
         }
     }
 
-    // 2. Update all text blocks that have the "data-i18n-block" attribute
+    //We select all elements with data-i18n-block in order to replace their text with the selected language.
+    //What is document.querySelectorAll for? Is a method that is used to select all elements that match a specific CSS selector.
     const textElements = document.querySelectorAll("[data-i18n-block]");
+
+    //What is forEach for? Is a method used to loop through every item in a list.
     textElements.forEach(function (element) {
         const key = element.getAttribute("data-i18n-block");
         const translatedValue = translations[currentLang][key];
 
         if (translatedValue !== undefined) {
-            // If the translation contains HTML tags (like <b> or <br>), use innerHTML; otherwise textContent
+            //If the translated text has HTML tags (like <b> or <br>), we use innerHTML; otherwise textContent.
             if (typeof translatedValue === "string" && translatedValue.includes("<")) {
+                //What is innerHTML for? Is a property used to change or insert HTML tags and text inside an element.
                 element.innerHTML = translatedValue;
             } else {
+                //What is textContent for? Is a property used to change or read the plain text inside an HTML element.
                 element.textContent = translatedValue;
             }
         }
     });
 
-    // 3. Update all input fields that have a "data-i18n-placeholder" attribute
+    //We select all input fields with data-i18n-placeholder in order to update their placeholder text.
     const inputElements = document.querySelectorAll("[data-i18n-placeholder]");
+    //What is forEach for? Is a method used to loop through every item in a list.
     inputElements.forEach(function (input) {
         const key = input.getAttribute("data-i18n-placeholder");
         const placeholderValue = translations[currentLang][key];
@@ -141,22 +141,17 @@ function applyLanguage(lang) {
         }
     });
 }
-
-/**
- * Function: toggleLanguage()
- * 
- * Purpose: This function is in charge of switching the language when the user clicks the button.
- * 
- * Formula: We check the current language so that if it is "en" we change to "es",
- * and if it is "es" we change to "en", then call applyLanguage().
- */
+//------------------------------------------------------------------------------------------
+//FUNCTION - Switches language between English and Spanish when the user clicks the button.
+//------------------------------------------------------------------------------------------
 function toggleLanguage() {
+    //If current language is English, we switch to Spanish. If it is Spanish, we switch to English.
     const nextLanguage = (currentLang === "en") ? "es" : "en";
 
-    // If the JSON dictionary is still downloading, wait for it before toggling
+    //If the dictionary is still downloading, we wait for it before switching.
     if (!translations || Object.keys(translations).length === 0) {
-        if (translationsPromise) {
-            translationsPromise.then(function () {
+        if (translationsFile) {
+            translationsFile.then(function () {
                 applyLanguage(nextLanguage);
             });
             return;
@@ -165,8 +160,3 @@ function toggleLanguage() {
 
     applyLanguage(nextLanguage);
 }
-
-// Make functions available globally so HTML onclick="toggleLanguage()" can trigger them
-window.currentLang = currentLang;
-window.applyLanguage = applyLanguage;
-window.toggleLanguage = toggleLanguage;
