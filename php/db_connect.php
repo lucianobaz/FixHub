@@ -1,23 +1,22 @@
 <?php
 /* DB_CONNECT - PHP */
-/* This script is in charge of connecting PHP to our MySQL database. */
+/* Here we have the file that connects our website to the MySQL database. */
 
-//We define the server connection credentials to connect to our local MySQL database.
-$servername = "localhost";
-$username = "root";
-$password = ""; //Default XAMPP database password (empty by default)
-$dbname = "registration"; //Database that stores the users table
+//With the $ symbol we create variables in PHP.
+//Here we are creating 4 variables to save the information needed to enter our local database:
 
-//What is mysqli for? mysqli is an extension in PHP used to communicate with and run queries on a MySQL database.
-//What is new for? new is a keyword used to create a new instance (object) of a class.
-//We use new mysqli() in order to open a database connection so that our other PHP scripts can reuse it to query data.
+$servername = "localhost"; //The name of the server (localhost because it runs on our computer)
+$username = "root";        //The default user in XAMPP
+$password = "";            //The password is empty by default in XAMPP
+$dbname = "registration";  //The name of our database where the users table is saved
+
+//We are creating a new variable called $conn that opens a connection to MySQL using the values of the 4 variables above (servername, username, password, and dbname).
+//This variable $conn is later taken and used on the files login.php and register.php to talk to the database.
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-//This condition allows us to check if the connection failed so that we can handle the error safely.
-//If there is a connection error: we stop the script and display the error message.
+//We check if there was any problem when trying to connect to the database.
 if ($conn->connect_error) {
-    //What is die() for? die() is a function used to print an error message and immediately stop the execution of the script.
-    //We use die() in order to stop the request if the application cannot reach MySQL.
+    //If the connection fails, we use die() to stop the code right here and show a message on the screen with the error.
     die("Connection failed: " . $conn->connect_error);
 }
 ?>

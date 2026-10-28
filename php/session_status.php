@@ -1,20 +1,18 @@
 <?php
 /* SESSION_STATUS - PHP */
-/* This script is in charge of telling JavaScript whether a user is logged in or not. */
+/* Here we have a file that tells our JavaScript code (on the file auth.js) if there is a user logged in right now or not. */
 
-//What is session_start() for? session_start() is a function used to start or resume a session so that PHP can read session data.
-//We use session_start() in order to resume the current session so that we can check if a user is logged in.
+//First we open the current session so we can check if there is a username saved inside it.
+//This function is also used on the files login.php, register.php, logout.php, and welcome.php.
 session_start();
 
-//What is header() for? header() is a function used to send raw HTTP headers to tell the browser what format of content to expect.
-//We use header() in order to tell the browser to expect a JSON response instead of standard HTML.
+//Here we tell the browser that this file is going to answer using JSON format (which is a text format that JavaScript understands easily) instead of a normal HTML page.
+//header() is also used on the files login.php, register.php, logout.php, and welcome.php.
 header('Content-Type: application/json; charset=utf-8');
 
-//What is json_encode() for? json_encode() is a function used to convert a PHP array into a JSON text string so that JavaScript can read it.
-//What is isset() for? isset() is a function used to check if a variable or array key exists and is not null.
-//What does null mean? null is a special data type that represents an empty or nonexistent value.
-//This code allows us to package the login information into JSON format so that auth.js can show or hide the navigation buttons.
-//isset($_SESSION['username']) returns true if the user is logged in, and false if they are not.
+//Here we use json_encode() to send a message to JavaScript (used on the file auth.js) with 2 pieces of information:
+//'loggedIn': uses isset() to check if $_SESSION['username'] (taken from login.php) exists (gives true if logged in, or false if not). isset() is also used on the file welcome.php.
+//'username': sends the name of the logged-in user (taken from login.php), or null (empty) if nobody is logged in.
 echo json_encode([
     'loggedIn' => isset($_SESSION['username']),
     'username' => $_SESSION['username'] ?? null

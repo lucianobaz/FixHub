@@ -1,56 +1,55 @@
 <?php
 /* REGISTER - PHP */
-/* This script is in charge of registering new users into the database with encrypted passwords. */
+/* Here we have the file that creates a new account and saves the user in the MySQL database. */
 
-//What is session_start() for? session_start() is a function used to start or resume a session so that PHP can manage user state across pages.
-//We use session_start() in order to start or resume a session so that registration can redirect back to the authentication pages with messages.
+//We start the session at the beginning of the file.
+//This function is also used on the files login.php, logout.php, session_status.php, and welcome.php.
 session_start();
 
-//We configure PHP in order to display all errors so that we can easily debug issues during development.
+//These 3 lines tell PHP to show any errors on the screen in case something goes wrong while we are testing the code.
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-//What is require_once for? require_once is a statement used to include and run another PHP file once; if the file is missing, the script stops.
-//We use require_once in order to load "db_connect.php" so that this script can reuse our shared MySQL database connection.
+//Here we bring in "db_connect.php" so we can use the $conn variable (taken from db_connect.php) to connect to our database.
+//This require_once statement is also used on the file login.php.
 require_once 'db_connect.php';
 
-//If the form was submitted using the POST method: we process the registration data.
+//We check if the user sent the registration form in register.html using the POST method.
+//This same condition is also used on the file login.php.
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    //What is htmlspecialchars() for? htmlspecialchars() is a function used to convert special HTML characters (like < and >) into harmless HTML entities to prevent Cross-Site Scripting (XSS) attacks.
-    //What is $_POST for? $_POST is a superglobal array used to collect form data sent securely with the HTTP POST method.
-    //We use htmlspecialchars() in order to sanitize the submitted username so that attackers cannot inject malicious HTML or JavaScript code.
+    //Here we create the variable $user with the username from the form, using htmlspecialchars() to clean it so nobody can type malicious HTML code.
+    //htmlspecialchars() is also used on the file welcome.php, and $_POST is also used on the file login.php.
     $user = htmlspecialchars($_POST['username']);
-    //We read the raw password from the form before hashing it.
+    //We create the variable $pass to save the password that the user typed in the form.
     $pass = $_POST['password'];
 
-    //What is password_hash() for? password_hash() is a function used to create a secure, one-way encrypted password hash using algorithms like BCRYPT.
-    //This hash function allows us to encrypt the user passwords so that their data is secure.
+    //Here we create a new variable called $hashed_password that scrambles (encrypts) the password using PASSWORD_BCRYPT so nobody can read the real password in the database.
+    //Later, on the file login.php, we check this encrypted password using password_verify().
     $hashed_password = password_hash($pass, PASSWORD_BCRYPT);
 
-    //What is prepare() for? prepare() is a method used to write an SQL statement with placeholders (?) so that user input cannot alter the database query structure (SQL Injection).
-    //This prepared statement allows us to insert new users safely so that user input cannot alter our SQL query.
+    //We prepare the SQL command using $conn (taken from db_connect.php) to add a new row into the "users" table with 2 question marks (?,?) where the username and password will go.
+    //prepare(), bind_param(), and execute() are also used on the file login.php.
     $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?,?)");
 
-    //What is bind_param() for? bind_param() is a method used to bind variables to the placeholders in a prepared statement ("ss" means two strings).
-    //We use bind_param() in order to link $user and $hashed_password to the placeholders ("ss" means both parameters are strings).
+    //Here we replace the 2 question marks (?,?) with the values of our variables $user and $hashed_password ("ss" means both values are text/strings).
     $stmt->bind_param("ss", $user, $hashed_password);
 
-    //What is execute() for? execute() is a method used to run the prepared statement in MySQL.
-    //If the user was saved successfully in the database: we redirect to login.html with a success message so that the user can now log in.
+    //We run the command in MySQL, and check if the new user was saved without problems.
     if ($stmt->execute()) {
-        //What is header() for? header() is a function used to send raw HTTP headers to redirect the browser to another page.
+        //If everything went well, we send the user to login.html with a message telling them they can now log in.
+        //header() and exit() are also used on the files login.php, logout.php, and welcome.php.
         header("Location: ../html/login.html?success=Registration successful! Please log in.");
-        //What is exit() for? exit() is a function used to terminate script execution immediately after a redirect.
+        //We stop the code right here after sending the user to the login page.
         exit();
     } else {
-        //If the query failed (for example, if the username already exists): we redirect back to register.html with an error message.
+        //If there was an error (for example, if that username is already taken), we send them back to register.html with an error message.
         header("Location: ../html/register.html?error=Registration failed. Username may exist.");
         exit();
     }
 
-    //We close the statement and the database connection in order to free server resources.
+    //Finally, we close the search and the database connection because we don't need them anymore.
     $stmt->close();
     $conn->close();
 }

@@ -1,24 +1,21 @@
 <?php
 /* LOGOUT - PHP */
-/* This script is in charge of ending the user session and logging them out securely. */
+/* Here we have the file that closes the user session when they click the Logout button. */
 
-//What is session_start() for? session_start() is a function used to start or resume a session so that PHP can access and modify session variables.
-//We use session_start() in order to resume the current session so that its login data can be accessed and removed.
+//First we open the current session so PHP knows which user wants to log out.
+//This function is also used on the files login.php, register.php, session_status.php, and welcome.php.
 session_start();
 
-//What is session_unset() for? session_unset() is a function used to free all session variables currently registered in $_SESSION.
-//We use session_unset() in order to clear all stored session values.
+//Here we use session_unset() to erase all the saved information inside $_SESSION (like $_SESSION['username'], which was taken from login.php).
 session_unset();
 
-//What is session_destroy() for? session_destroy() is a function used to completely destroy all session data registered on the server.
-//This function allows us to destroy the active session on the server so that the user is completely logged out.
+//Then we use session_destroy() to completely close and delete the session on the server.
 session_destroy();
 
-//What is header() for? header() is a function used to send raw HTTP headers to redirect the browser to another URL.
-//We use header() in order to redirect the user back to the login page with a confirmation message so that they know logout was successful.
+//Now that the user is logged out, we send them back to login.html with a message saying they logged out successfully.
+//header() and exit() are also used on the files login.php, register.php, and welcome.php.
 header("Location: ../html/login.html?success=You have been successfully logged out.");
 
-//What is exit() for? exit() is a function used to immediately terminate the script so that no further code runs after a redirect.
-//We use exit() in order to stop executing the script immediately after redirecting.
+//We use exit() to stop running this file right after sending the user to the login page.
 exit();
 ?>
