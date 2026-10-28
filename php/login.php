@@ -3,7 +3,7 @@
 /* Here we have the file that checks the username and password to let the user log into the website. */
 
 //Here we start the session so the website can remember who is logged in while browsing different pages.
-//This function is also used on the files register.php, logout.php, session_status.php, and welcome.php.
+//This function is also used on the files logout.php, session_status.php, and welcome.php.
 session_start();
 
 //Here we bring in the code from "db_connect.php" so we can use the $conn variable (taken from db_connect.php) to talk to our database.
@@ -18,21 +18,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $input_user = $_POST['username'];
     $input_pass = $_POST['password'];
 
+
     //We create a variable with the SQL message asking MySQL to look for a user with that exact username.
     //We put a question mark (?) so the code knows something exists and doesn't give the value directly.
     $sql = "SELECT * FROM users WHERE username = ?";
+
 
     //Here we prepare the SQL search using our database connection ($conn, taken from db_connect.php) and save it in the variable $stmt.
     //prepare(), bind_param(), and execute() are also used on the file register.php.
     $stmt = $conn->prepare($sql);
 
+
     //Now we replace the question mark (?) with the actual username stored in $input_user ("s" means it is a text/string).
     $stmt->bind_param("s", $input_user);
+
 
     //Here we run the search in the database and save the answer we get back inside the variable $result.
     $stmt->execute();
     $result = $stmt->get_result();
 
+    
     //We check if the database found 1 user with that username.
     if ($result->num_rows === 1) {
         //Here we save all the information of that user (like their username and secret password) into the variable $user.

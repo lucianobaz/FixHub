@@ -2,15 +2,6 @@
 /* REGISTER - PHP */
 /* Here we have the file that creates a new account and saves the user in the MySQL database. */
 
-//We start the session at the beginning of the file.
-//This function is also used on the files login.php, logout.php, session_status.php, and welcome.php.
-session_start();
-
-//These 3 lines tell PHP to show any errors on the screen in case something goes wrong while we are testing the code.
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 //Here we bring in "db_connect.php" so we can use the $conn variable (taken from db_connect.php) to connect to our database.
 //This require_once statement is also used on the file login.php.
 require_once 'db_connect.php';
@@ -48,9 +39,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../html/register.html?error=Registration failed. Username may exist.");
         exit();
     }
-
-    //Finally, we close the search and the database connection because we don't need them anymore.
-    $stmt->close();
-    $conn->close();
 }
 ?>

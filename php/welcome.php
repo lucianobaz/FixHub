@@ -3,7 +3,7 @@
 /* Here we have a welcome page that only logged-in users are allowed to see. */
 
 //We open the current session so we can check if the user is logged in.
-//This function is also used on the files login.php, register.php, logout.php, and session_status.php.
+//This function is also used on the files login.php, logout.php, and session_status.php.
 session_start();
 
 //Here we check if $_SESSION['username'] (which is taken from login.php) does NOT exist (the ! symbol means NOT).

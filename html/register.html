@@ -8,6 +8,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FixHub | Register</title>
     <link rel="stylesheet" href="../css/myStyles.css">
 </head>
@@ -45,7 +46,7 @@
             <section class="auth-intro">
                 <p class="auth-tagline" data-i18n-block="regAuthTagline">Get started with FixHub</p>
                 <h1 data-i18n-block="regAuthTitle">Create an account</h1>
-                <p class="auth-desc" data-i18n-block="regAuthDesc">Create a simple account to save troubleshooting
+                <p data-i18n-block="regAuthDesc">Create a simple account to save troubleshooting
                     progress and
                     access support faster.
                 </p>
@@ -60,24 +61,21 @@
 
             <!-- RIGHT BOX BEGGINING (REGISTER FORM)-->
             <!-- Connect the register form using JavaScript -->
-            <div class="auth-card" id="registerCard">
+            <div class="auth-card">
                 <p class="auth-tagline" data-i18n-block="registerCardTagline">Create account</p>
                 <h1 data-i18n-block="registerCardTitle">Register at FixHub</h1>
-                <p class="auth-desc" data-i18n-block="registerCardDesc">Create a simple account to save your
+                <p data-i18n-block="registerCardDesc">Create a simple account to save your
                     troubleshooting
                     progress.</p>
 
                 <!-- USERNAME-->
-                <form class="auth-form" id="registerForm" action="../php/register.php" method="POST"
-                    validateCredentials>
+                <form class="auth-form" id="registerForm" action="../php/register.php" method="POST">
                     <label for="username" data-i18n-block="regAuthUsername">Username</label>
                     <input type="text" id="username" name="username" placeholder="Username">
-                    <small class="auth-error" id="usernameError" aria-live="polite"></small>
 
                     <!-- PASSWORD -->
                     <label for="password" data-i18n-block="regAuthPassword">Password</label>
                     <input type="password" id="password" name="password" placeholder="*********">
-                    <small class="auth-error" id="passwordError" aria-live="polite"></small>
 
                     <!-- CREATE ACCOUNT-->
                     <button type="submit" class="button button-primary" data-i18n-block="regAuthButton">Create

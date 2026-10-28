@@ -23,13 +23,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateNavigation(isLoggedIn) {
         //Configure the Login button
         loginButtons.forEach(function (button) {
-            button.hidden = isLoggedIn;
             button.style.display = isLoggedIn ? 'none' : 'inline';
         });
 
         //Configure the Logout button
         logoutButtons.forEach(function (button) {
-            button.hidden = !isLoggedIn;
             button.style.display = isLoggedIn ? 'inline' : 'none';
         });
     }

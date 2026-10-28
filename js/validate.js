@@ -19,37 +19,26 @@ document.addEventListener("DOMContentLoaded", function () {
         return document.documentElement.lang === "es";
     }
 
-    //------------------------------------------------------------------------------------------
-    //FUNCTION - This function is in charge of finding or creating the feedback message box inside the form card.
-    //------------------------------------------------------------------------------------------
-    function getFeedbackContainer() {
-        //what is document.getElementById for? Is a method that is used to select one specific element by its unique id.
-        let feedbackElement = document.getElementById("feedback");
-        if (!feedbackElement) {
-            //what is document.createElement for? Is a method that is used to create a new HTML element dynamically with JavaScript.
-            //If the feedback box does not exist, we create a new div element.
-            feedbackElement = document.createElement("div");
-            feedbackElement.id = "feedback";
-            
-            //what is document.querySelector for? Is a method that is used to find the first element that matches a specific CSS selector.
-            //We insert the feedback message at the top of the form card so that the user sees it easily.
-            const container = document.querySelector('.auth-card') || document.body;
-            container.insertBefore(feedbackElement, container.firstChild);
-        }
-        return feedbackElement;
-    }
+    //what is document.createElement for? Is a method that is used to create a new HTML element dynamically with JavaScript.
+    //We create a new div element to display error or success messages at the top of the form card.
+    const feedback = document.createElement("div");
+    feedback.id = "feedback";
+    feedback.style.marginBottom = "14px";
+    feedback.style.fontWeight = "600";
 
-    const feedback = getFeedbackContainer();
+    //what is document.querySelector for? Is a method that is used to find the first element that matches a specific CSS selector.
+    //We insert the feedback message at the top of the form card so that the user sees it easily.
+    const container = document.querySelector('.auth-card');
+    if (container) {
+        container.insertBefore(feedback, container.firstChild);
+    }
 
     //------------------------------------------------------------------------------------------
     //FUNCTION - This function is in charge of displaying an error message in red color.
     //------------------------------------------------------------------------------------------
     function showError(message) {
         feedback.textContent = message;
-        feedback.className = "error";
         feedback.style.color = "#dc2626"; //Red color for error
-        feedback.style.marginBottom = "14px";
-        feedback.style.fontWeight = "600";
     }
 
     //------------------------------------------------------------------------------------------
@@ -57,10 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //------------------------------------------------------------------------------------------
     function showSuccess(message) {
         feedback.textContent = message;
-        feedback.className = "success";
         feedback.style.color = "#16a34a"; //Green color for success
-        feedback.style.marginBottom = "14px";
-        feedback.style.fontWeight = "600";
     }
 
     //what is URLSearchParams for? Is an object used to read parameters from the website URL, such as "?error=" or "?success=".

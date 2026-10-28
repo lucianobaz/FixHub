@@ -4,10 +4,11 @@
 <!-- PAGE LANGUAGE -->
 <html lang="en">
 
-<!-- HEAD ENDING -->
+<!-- HEAD BEGINNING -->
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FixHub | Login</title>
     <link rel="stylesheet" href="../css/myStyles.css">
 </head>
@@ -47,7 +48,7 @@
             <section class="auth-intro">
                 <p class="auth-tagline" data-i18n-block="loginIntroTagline">Easy access</p>
                 <h1 data-i18n-block="loginIntroTitle">Sign in and continue troubleshooting</h1>
-                <p class="auth-desc" data-i18n-block="loginIntroDesc">Use your account to keep track of common fixes and
+                <p data-i18n-block="loginIntroDesc">Use your account to keep track of common fixes and
                     visit the support pages faster.</p>
                 <ul>
                     <li data-i18n-block="loginIntroItem1">Simple access to the main pages</li>
@@ -59,22 +60,20 @@
 
             <!-- RIGHT BOX BEGINNING (LOGIN) -->
             <!-- Connect the login form using JavaScript -->
-            <div class="auth-card" id="loginCard">
+            <div class="auth-card">
                 <p class="auth-tagline" data-i18n-block="loginCardTagline">Welcome back</p>
                 <h1 data-i18n-block="loginCardTitle">Log in to FixHub</h1>
-                <p class="auth-desc" data-i18n-block="loginCardDesc">Access your troubleshooting dashboard and continue
+                <p data-i18n-block="loginCardDesc">Access your troubleshooting dashboard and continue
                     where you left off.</p>
 
                 <form class="auth-form" id="loginForm" action="../php/login.php" method="POST">
                     <!-- USERNAME -->
                     <label for="username" data-i18n-block="loginCardUsername">Username</label>
                     <input type="text" id="username" name="username" placeholder="Username">
-                    <small class="auth-error" id="usernameError" aria-live="polite"></small>
 
                     <!-- PASSWORD -->
                     <label for="password" data-i18n-block="loginCardPassword">Password</label>
                     <input type="password" id="password" name="password" placeholder="*********">
-                    <small class="auth-error" id="passwordError" aria-live="polite"></small>
 
                     <!-- SIGN IN -->
                     <button type="submit" class="button button-primary" data-i18n-block="loginCardButton">Sign

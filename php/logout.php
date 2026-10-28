@@ -3,7 +3,7 @@
 /* Here we have the file that closes the user session when they click the Logout button. */
 
 //First we open the current session so PHP knows which user wants to log out.
-//This function is also used on the files login.php, register.php, session_status.php, and welcome.php.
+//This function is also used on the files login.php, session_status.php, and welcome.php.
 session_start();
 
 //Here we use session_unset() to erase all the saved information inside $_SESSION (like $_SESSION['username'], which was taken from login.php).
