@@ -1,0 +1,740 @@
+/* ============================================================================== */
+/* STYLE - CSS (style.css) */
+/* Here we have the CSS file that changes the colors, sizes, and positions of all elements on our HTML pages. */
+/* This file is linked inside the <head> of all our HTML pages and welcome.php. */
+/* ============================================================================== */
+
+/* -------------------------------------------------------------- */
+/* KEYWORDS EXPLANATION: */
+/* -------------------------------------------------------------- */
+
+/*What is CSS for? CSS (Cascading Style Sheets) is the language we use to design the website (colors, fonts, sizes, and layout).*/
+/*What is a selector for? It is the name we write before the { } brackets to tell CSS which HTML element we want to change.*/
+
+/*If it starts with a dot (like .header), it selects an HTML class (class="header").*/
+/*If it starts with a hashtag (like #lang-btn), it selects an HTML id (id="lang-btn").*/
+/*If it has no symbol (like body or a), it selects that HTML tag directly (<body> or <a>).*/
+
+/*What is a property for? It is the visual characteristic we want to change inside the { } brackets (like color, background, or padding).*/
+
+/* -------------------------------------------------------------- */
+/* FRONT-END REQUIREMENT LOCATION (FLEXBOX, GRID & NAVIGATION BAR): */
+/* -------------------------------------------------------------- */
+/* Requirement: "La página deberá contener y hacer uso de: flexbox, grid y un navigation bar" */
+/* 1. NAVIGATION BAR: Programmed in Section 3 (.header and .flex-nav), styling the <header> and <nav> menu with <a> links across all HTML pages. */
+/* 2. FLEXBOX (display: flex): Programmed in: */
+/*    - .header and .flex-nav: aligns the logo, navigation bar links, and language button in a row. */
+/*    - .hero-index, .hero-actions, and the inner banners (.hero-diagnose, .hero-guides, .hero-maintenance, .hero-support): centers banner texts and puts banner buttons side by side. */
+/*    - .actions, .intro-panel, and .password-box: aligns card buttons, the bottom info panel on index.html, and the password box. */
+/*    - .auth-form: stacks the login and register form inputs vertically (flex-direction: column). */
+/* 3. CSS GRID (display: grid): Programmed in: */
+/*    - Section 8: .grid-home, .grid-guides, and .grid-diag to organize all cards into 4 or 2 columns. */
+/*    - Section 9: .auth-layout to split login.html and register.html into 2 equal columns (1fr 1fr). */
+/*    - Section 11 (@media): adjusts the Grid columns to 2 columns on tablets (1024px) and 1 column on phones (768px). */
+
+
+/* ------------------------------------------------------------------------------ */
+/* 1. GLOBAL VARIABLES & TYPOGRAPHY */
+/* ------------------------------------------------------------------------------ */
+
+/*Here we use @import to download the "Montserrat" font from Google Fonts so we can use it on all our pages.*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+/* What is :root for? :root is where we create color variables (starting with --) for the whole website. */
+/* Instead of writing color codes like #123A5B many times, we save them here with a name and use var() later. */
+:root {
+    --bg: #f4f7fb;              /*Here we save the light gray color for the page background*/
+    --primary: #123A5B;         /*Here we save the main dark navy blue color of FixHub*/
+    --primary-hover: #0c263c;   /*Here we save a darker blue used when the mouse passes over a button*/
+    --accent: #82D0E2;          /*Here we save the light cyan color used for borders and highlights*/
+    --accent-hover: #6bc3d7;    /*Here we save a slightly darker cyan for when the mouse passes over*/
+    --accent-light: #eaf7fb;    /*Here we save a very soft cyan for small labels and button backgrounds*/
+    --text-main: #111827;       /*Here we save the main dark text color (almost black) so it is easy to read*/
+    --text-muted: #4b5563;      /*Here we save a gray text color for secondary descriptions and links*/
+    --border-subtle: #e2e8f0;   /*Here we save a soft gray color for the borders of the cards*/
+}
+
+/* ------------------------------------------------------------------------------ */
+/* 2. BASE RESET & BOX MODEL */
+/* ------------------------------------------------------------------------------ */
+
+/*Here we change the style of all elements on the page using the * symbol (which means "everything").*/
+/*What is box-sizing: border-box for? It makes sure that when we add padding or borders to a box, the box does not grow bigger than its width and break the page.*/
+* {
+    box-sizing: border-box;
+}
+
+/*Here we change the style of the <body> tag (the main screen of all our HTML pages).*/
+body {
+    margin: 0; /*Removes the empty white space that browsers put around the edges by default*/
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif; /*Sets the Montserrat font we imported above*/
+    background: var(--bg); /*Uses var() to apply our light gray background variable (--bg)*/
+    color: var(--text-main); /*Uses var() to apply our dark text color variable (--text-main)*/
+}
+
+/*Here we change the style of all <a> tags (all clickable links on the website).*/
+a {
+    text-decoration: none; /*Removes the default underline from all links*/
+}
+
+/* ------------------------------------------------------------------------------ */
+/* 3. HEADER & NAVIGATION BAR */
+/* ------------------------------------------------------------------------------ */
+
+/*Here we change the style of the .header container (the top white bar on all our HTML pages).*/
+/*What is display: flex for? Flexbox is a tool that puts the elements inside a container side by side in a row.*/
+.header {
+    display: flex; /*Puts the logo, navigation links, and language button in the same horizontal row*/
+    justify-content: space-between; /*Pushes the logo to the left side and the menu/buttons to the right side*/
+    align-items: center; /*Centers all items vertically in the middle of the bar*/
+    padding: 12px 24px; /*Adds 12px of inner space on top/bottom and 24px on left/right*/
+    background: #ffffff; /*White background color*/
+    border-bottom: 2px solid var(--accent); /*Adds a 2px cyan line at the bottom of the header*/
+    box-shadow: 0 2px 8px rgba(18, 58, 91, 0.05); /*Adds a very soft shadow under the header (rgba adds color with 5% transparency)*/
+}
+
+/*Here we change the style of the .logo-img image (the FixHub logo inside the header).*/
+.logo-img {
+    height: 38px; /*Sets the height of the logo to 38 pixels (the width adjusts automatically)*/
+    display: block; /*Removes any extra empty space below the image*/
+}
+
+/*Here we change the style of the .flex-nav container (the <nav> menu that holds the page links).*/
+.flex-nav {
+    display: flex; /*Puts all the navigation links side by side in a row*/
+    gap: 12px; /*Leaves 12px of empty space between each link*/
+    align-items: center; /*Centers the links vertically*/
+}
+
+/*Here we change the style of the <a> links inside the .flex-nav container.*/
+.flex-nav a {
+    padding: 6px 12px; /*Adds clickable inner space around each word in the menu*/
+    color: var(--text-muted); /*Paints the menu links in gray color*/
+    font-weight: 500; /*Makes the letters medium thickness*/
+    transition: 0.2s; /*Makes the color change smoothly in 0.2 seconds when hovering*/
+}
+
+/*Here we change the style of the .flex-nav links when the user puts the mouse over them (:hover means mouse over).*/
+.flex-nav a:hover {
+    color: var(--primary); /*Changes the link color from gray to dark navy blue*/
+}
+
+/*Here we change the style of the .login-btn and .logout-btn links inside .flex-nav.*/
+/*This connects with auth.js: we hide both buttons first, and then auth.js shows only the right one depending on session_status.php.*/
+.flex-nav a.login-btn,
+.flex-nav a.logout-btn {
+    display: none; /*Hides both buttons by default until JavaScript checks if the user is logged in*/
+}
+
+/*Here we change the style of the .logout-btn link so it looks red.*/
+.flex-nav a.logout-btn {
+    color: #e53e3e; /*Paints the Logout text in red*/
+}
+
+/*Here we change the style of .logout-btn when the mouse is over it (:hover).*/
+.flex-nav a.logout-btn:hover {
+    color: #b91c1c; /*Changes the Logout text to a darker red*/
+}
+
+/*Here we change the style of the .nav-toggle checkbox (used to open and close the menu on phones).*/
+.nav-toggle {
+    display: none; /*Hides the little checkbox square so nobody sees it on the screen*/
+}
+
+/*Here we change the style of the .hamburger label (the 3-bars menu icon for mobile phones).*/
+.hamburger {
+    display: none; /*Hides the hamburger icon on computer screens (it only turns on for phones in the @media section at the bottom)*/
+    width: 30px; /*Sets the width of the icon to 30px*/
+    height: 30px; /*Sets the height of the icon to 30px*/
+    background-image: url('../resources/menu.png'); /*Loads the 3-bars image from the resources folder*/
+    background-size: contain; /*Scales the image so it fits inside the 30x30px box*/
+    background-repeat: no-repeat; /*Stops the image from repeating like tiles*/
+    background-position: center; /*Centers the image in the middle of the box*/
+    cursor: pointer; /*Changes the mouse arrow into a little hand when pointing at it*/
+}
+
+/* ------------------------------------------------------------------------------ */
+/* 4. BUTTONS & INTERACTIVE CONTROLS */
+/* ------------------------------------------------------------------------------ */
+
+/*Here we change the base style of all .button-primary, .button-secondary links and <button> elements across the website.*/
+.button-primary,
+.button-secondary,
+button {
+    border: none; /*Removes default borders*/
+    border-radius: 50px; /*Rounds the corners completely so the button looks like a pill*/
+    padding: 9px 18px; /*Adds space inside the button (9px top/bottom, 18px left/right)*/
+    background: var(--primary); /*Sets the background color to dark navy blue*/
+    color: #fff; /*Sets the text color to white*/
+    cursor: pointer; /*Changes the mouse arrow into a clicking hand*/
+    text-align: center; /*Centers the text inside the button*/
+    display: inline-block; /*Allows the button to have padding and sit next to other buttons*/
+    font-size: 0.95rem; /*What is rem for? 1rem is the normal text size of the browser (16px), so 0.95rem is slightly smaller*/
+    font-family: inherit; /*Forces the button to use our Montserrat font from body*/
+    font-weight: 600; /*Makes the button text semi-bold*/
+    transition: 0.2s; /*Makes background and shadow changes animate smoothly in 0.2 seconds*/
+}
+
+/*Here we change the style of .button-primary, .button-secondary and <button> when the mouse is over them (:hover).*/
+.button-primary:hover,
+.button-secondary:hover,
+button:hover {
+    box-shadow: 0 6px 14px rgba(18, 58, 91, 0.25); /*Adds a shadow under the button when hovering*/
+}
+
+/*Here we change the style of the .button-primary button (the main highlighted button on banners and forms).*/
+.button-primary {
+    background: var(--accent); /*Changes background to light cyan*/
+    color: var(--primary); /*Changes text color to dark navy blue so it contrasts with the cyan*/
+    font-weight: 700; /*Makes the text bold*/
+}
+
+/*Here we change the style of .button-primary when the mouse is over it (:hover).*/
+.button-primary:hover {
+    background: var(--accent-hover); /*Changes background to a slightly darker cyan*/
+}
+
+/*Here we change the style of the .button-secondary button (the second button in the banner on index.html).*/
+.button-secondary {
+    background: rgba(255, 255, 255, 0.16); /*Uses white color with 16% opacity so it looks semi-transparent*/
+    color: #fff; /*White text*/
+    border: 1px solid rgba(255, 255, 255, 0.4); /*Semi-transparent white border*/
+    font-weight: 600;
+}
+
+/*Here we change the style of .button-secondary when the mouse is over it (:hover).*/
+.button-secondary:hover {
+    background: rgba(255, 255, 255, 0.28); /*Makes the semi-transparent white background brighter (28% opacity)*/
+}
+
+/*Here we change the style of .button-primary when it is inside a white .card container (used on support.html).*/
+/*Because the card is white, we change the button to dark navy blue so it stands out better.*/
+.card .button-primary {
+    background: var(--primary);
+    color: #fff;
+}
+
+/*Here we change the style of .card .button-primary when the mouse is over it (:hover).*/
+.card .button-primary:hover {
+    background: var(--primary-hover);
+}
+
+/*Here we change the style of .button-secondary when it is inside a white .card container (used on support.html).*/
+.card .button-secondary {
+    background: var(--accent-light); /*Soft cyan background*/
+    color: var(--primary); /*Dark navy blue text*/
+    border: 1px solid #c8edf6; /*Light cyan border*/
+}
+
+/*Here we change the style of .card .button-secondary when the mouse is over it (:hover).*/
+.card .button-secondary:hover {
+    background: #d8f3fa;
+    color: var(--primary-hover);
+}
+
+/*Here we change the style of the #lang-btn button (the Español / English button in the header that runs toggleLanguage() from translations.js).*/
+#lang-btn {
+    background: #fff; /*White background*/
+    color: var(--primary); /*Navy blue text*/
+    border: 1.5px solid var(--accent); /*Cyan border*/
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 6px 16px;
+}
+
+/*Here we change the style of #lang-btn when the mouse is over it (:hover).*/
+#lang-btn:hover {
+    background: var(--accent-light); /*Soft cyan background on hover*/
+    border-color: var(--primary); /*Navy blue border on hover*/
+    box-shadow: 0 2px 8px rgba(18, 58, 91, 0.12);
+}
+
+/* ------------------------------------------------------------------------------ */
+/* 5. PAGE LAYOUT CONTAINERS */
+/* ------------------------------------------------------------------------------ */
+
+/*Here we change the style of the <main> container (the main content area on all our HTML pages).*/
+main {
+    max-width: 1000px; /*Stops the content from stretching wider than 1000px on big computer screens*/
+    margin: 0 auto; /*What is margin: 0 auto for? 0 is for top/bottom, and "auto" pushes equally from left and right to center the container in the middle of the screen*/
+    padding: 20px; /*Adds 20px of inner space on all 4 sides*/
+}
+
+/*Here we change the style of the .welcome-message text (used on index.html to show "Bienvenido, username!" after logging in).*/
+.welcome-message {
+    margin: 0 0 16px; /*Adds 16px of space below the message*/
+    color: var(--primary); /*Navy blue text*/
+    font-size: 1.35rem; /*Makes the greeting text bigger*/
+    font-weight: 700; /*Bold text*/
+    text-align: center; /*Centers the greeting in the middle of the page*/
+}
+
+/* ------------------------------------------------------------------------------ */
+/* 6. HERO SECTION - HOMEPAGE (INDEX FULL-WIDTH COVER) */
+/* ------------------------------------------------------------------------------ */
+
+/*Here we change the style of the .hero-index container (the big full-width banner at the top of index.html).*/
+/*What is linear-gradient() for? It puts a dark shadow layer on top of the photo (darker on the left at 92%, clearer on the right at 20%) so the white text on the left is easy to read.*/
+.hero-index {
+    background-image: linear-gradient(to right, rgba(8, 20, 36, 0.92), rgba(8, 20, 36, 0.2)), url('../resources/banners/indexBG.jpg');
+    background-size: cover; /*Makes the background photo cover the whole banner without stretching*/
+    background-position: center; /*Centers the background photo*/
+    background-repeat: no-repeat; /*Prevents the photo from repeating*/
+    min-height: 480px; /*Makes sure the banner is at least 480px tall on computer screens*/
+    display: flex; /*Uses Flexbox so we can center the text vertically*/
+    align-items: center; /*Centers the text box vertically inside the banner*/
+    padding: 50px 24px;
+    border-bottom: 4px solid var(--accent); /*Cyan line at the bottom of the banner*/
+    box-shadow: 0 4px 20px rgba(18, 58, 91, 0.12);
+}
+
+/*Here we change the style of the .hero-index-container box inside the homepage banner.*/
+.hero-index-container {
+    max-width: 1000px; /*Matches the 1000px width of <main> so the text lines up with the cards below*/
+    margin: 0 auto; /*Centers this container in the middle of the banner*/
+    width: 100%;
+}
+
+/*Here we change the style of the .hero-index-content container that holds the title, paragraph, and buttons on index.html.*/
+.hero-index-content {
+    max-width: 540px; /*Limits the text to 540px on the left side so it does not cover the right side of the photo*/
+    color: #fff; /*White text for everything inside this container*/
+}
+
+/*Here we change the style of the <h1> main title inside .hero-index-content.*/
+.hero-index-content h1 {
+    font-size: 2.2rem; /*Big title size*/
+    font-weight: 800; /*Extra bold letters*/
+    line-height: 1.25; /*Controls the vertical space between lines of text so they don't touch*/
+    margin: 8px 0 14px;
+}
+
+/*Here we change the style of the <p> description paragraph inside .hero-index-content.*/
+.hero-index-content p {
+    font-size: 1.05rem;
+    line-height: 1.6; /*Leaves comfortable space between lines of the paragraph*/
+    margin: 0;
+    color: #e2e8f0; /*Soft light gray-white color*/
+}
+
+/*Here we change the style of the .hero-actions container (the box that holds the 2 buttons inside the homepage banner).*/
+.hero-actions {
+    display: flex; /*Puts "Start Diagnosis" and "Explore Guides" side by side*/
+    gap: 12px; /*Leaves 12px of space between the 2 buttons*/
+    margin-top: 22px; /*Leaves 22px of space above the buttons*/
+}
+
+/* ------------------------------------------------------------------------------ */
+/* 7. HERO BANNERS - INNER SECTIONS (DIAGNOSE, GUIDES, MAINTENANCE, SUPPORT) */
+/* ------------------------------------------------------------------------------ */
+
+/*Here we change the shared style of the 4 inner page banners (.hero-diagnose, .hero-guides, .hero-maintenance, and .hero-support).*/
+.hero-diagnose,
+.hero-guides,
+.hero-maintenance,
+.hero-support {
+    display: flex;
+    padding: 24px;
+    background-color: var(--primary); /*Fallback navy blue color while the image loads*/
+    background-size: cover; /*Makes the background photo fill the whole box*/
+    background-position: center right; /*Focuses on the right side of the photo*/
+    background-repeat: no-repeat;
+    min-height: 280px; /*Sets a minimum height of 280px for the banner*/
+    align-items: center; /*Centers the text vertically inside the banner*/
+    color: #fff; /*White text*/
+    border-radius: 16px; /*Rounds the 4 corners of the banner by 16px*/
+    margin-bottom: 24px; /*Leaves 24px of space between the banner and the cards below*/
+    border-bottom: 4px solid var(--accent); /*Cyan bottom border*/
+    box-shadow: 0 8px 24px rgba(18, 58, 91, 0.16);
+}
+
+/*Here we change the style of the .hero-content container (the text area inside each inner banner).*/
+.hero-content {
+    max-width: 540px; /*Keeps the text on the left half of the banner (up to 540px wide)*/
+}
+
+/*Here we change the style of the <h1> title inside .hero-content.*/
+.hero-content h1 {
+    margin: 8px 0 12px;
+    font-size: 2.2rem;
+    line-height: 1.2;
+    font-weight: 800;
+}
+
+/*Here we change the style of the <p> paragraph inside .hero-content.*/
+.hero-content p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.5;
+}
+
+/*Here we change the background image of each inner page banner (.hero-diagnose, .hero-guides, .hero-maintenance, and .hero-support).*/
+/*Just like in .hero-index, we use linear-gradient(to right, ...) so the left side is dark (92%) to read the white text, and the right side is almost transparent (15%) to see the photo.*/
+
+/*Changes the background photo for the banner on diagnose.html*/
+.hero-diagnose {
+    background-image: linear-gradient(to right, rgba(8, 20, 36, 0.92), rgba(8, 20, 36, 0.15)), url('../resources/banners/diagnoseBG.jpg');
+}
+
+/*Changes the background photo for the banner on guide.html*/
+.hero-guides {
+    background-image: linear-gradient(to right, rgba(8, 20, 36, 0.92), rgba(8, 20, 36, 0.15)), url('../resources/banners/guidesBG.jpg');
+}
+
+/*Changes the background photo for the banner on mainteinance.html*/
+.hero-maintenance {
+    background-image: linear-gradient(to right, rgba(8, 20, 36, 0.92), rgba(8, 20, 36, 0.15)), url('../resources/banners/mainteinanceBG.jpg');
+}
+
+/*Changes the background photo for the banner on support.html*/
+.hero-support {
+    background-image: linear-gradient(to right, rgba(8, 20, 36, 0.92), rgba(8, 20, 36, 0.15)), url('../resources/banners/supportBG.jpg');
+}
+
+/*Here we change the style of the .tagline and .auth-tagline text (the small cyan subtitle above the main titles).*/
+.tagline,
+.auth-tagline {
+    color: var(--accent); /*Cyan text color*/
+    font-weight: 700; /*Bold text*/
+    font-size: 0.88rem;
+    letter-spacing: 0.5px; /*Adds a tiny space between each letter*/
+    text-transform: uppercase; /*Automatically turns all letters into CAPITAL LETTERS*/
+    margin: 0 0 8px 0;
+}
+
+/* ------------------------------------------------------------------------------ */
+/* 8. FEATURE CARDS & GRID LAYOUT */
+/* [REQUIREMENT: "La página deberá contener y hacer uso de: flexbox, grid y un navigation bar"] */
+/* Here is where CSS GRID (display: grid) is programmed to organize the cards into columns and rows. */
+/* ------------------------------------------------------------------------------ */
+
+/*Here we change the style of our Grid containers (.grid-home, .grid-guides, and .grid-diag) to organize our cards into rows and columns.*/
+/*What is display: grid for? CSS Grid is a layout system that creates a table of columns and rows for cards.*/
+.grid-home,
+.grid-guides,
+.grid-diag {
+    display: grid; /*[GRID] Activates CSS Grid layout on the card containers*/
+    gap: 20px; /*Leaves 20px of space between every card*/
+    margin-top: 20px;
+}
+
+/*Here we change the style of the .grid-home container (used on index.html and mainteinance.html).*/
+/*What is 1fr 1fr 1fr 1fr for? It divides the row into 4 equal columns (1fr means 1 equal fraction of the space).*/
+.grid-home {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+/*Here we change the style of the .grid-guides and .grid-diag containers (used on guide.html and diagnose.html).*/
+/*1fr 1fr divides the row into 2 equal columns.*/
+.grid-guides,
+.grid-diag {
+    grid-template-columns: 1fr 1fr;
+}
+
+/*Here we change the style of the .card container (each white box with information on our pages).*/
+.card {
+    background: #fff; /*White background*/
+    border: 1px solid var(--border-subtle); /*Thin light gray border around the card*/
+    border-top: 3px solid var(--accent); /*Thicker 3px cyan bar at the very top of the card*/
+    border-radius: 12px; /*Rounds the corners of the card*/
+    padding: 20px; /*Inner space between the card border and the text*/
+    transition: 0.2s; /*Smooth animation in 0.2 seconds when hovering*/
+}
+
+/*Here we change the style of the .card container when the user puts the mouse over it (:hover).*/
+.card:hover {
+    box-shadow: 0 8px 20px rgba(18, 58, 91, 0.08); /*Adds a soft shadow underneath the card*/
+    border-top-color: var(--primary); /*Changes the top bar from cyan to dark navy blue*/
+}
+
+/*Here we change the style of the <h3> title inside .card and the <h2> title inside .intro-panel.*/
+.card h3,
+.intro-panel h2 {
+    margin-top: 0; /*Removes extra space at the top of the title*/
+    color: var(--primary); /*Navy blue color*/
+    font-weight: 700;
+}
+
+/*Here we change the style of the <ul> bullet list inside the .card container (used on guide.html and support.html).*/
+.card ul {
+    margin: 12px 0 0;
+    padding-left: 20px; /*Moves the bullet points slightly to the right so they stay inside the card*/
+    color: #374151;
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+/*Here we change the style of each <li> item inside the card's bullet list.*/
+.card ul li {
+    margin-bottom: 4px; /*Adds 4px of space between each bullet point*/
+}
+
+/*Here we change the style of the .link text links at the bottom of the cards on index.html.*/
+.link {
+    display: inline-block; /*Allows us to add top margin to the link*/
+    margin-top: 10px;
+    color: var(--primary); /*Navy blue color*/
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+/*Here we change the style of .link when the mouse is over it (:hover).*/
+.link:hover {
+    color: var(--accent-hover); /*Changes the text color to cyan*/
+    text-decoration: underline; /*Adds an underline when hovering*/
+}
+
+/*Here we change the style of the .code-badge label (the small cyan pill that shows "Error code: 0x7B" on guide.html).*/
+.code-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--accent-light); /*Very soft cyan background*/
+    border: 1px solid #c9ecf5;
+    border-radius: 50px; /*Makes it pill-shaped*/
+    color: var(--primary); /*Navy blue text*/
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/*Here we change the style of the .actions container (holds the 2 buttons at the bottom of the card on support.html).*/
+.actions {
+    display: flex; /*Puts the buttons side by side*/
+    gap: 10px; /*Leaves 10px of space between the buttons*/
+    margin-top: 14px;
+}
+
+/*Here we change the style of the .intro-panel container (the bottom white box "Why users like FixHub" on index.html).*/
+.intro-panel {
+    display: flex; /*Puts the title on the left and the description paragraph on the right*/
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid var(--border-subtle);
+    border-top: 3px solid var(--accent);
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(18, 58, 91, 0.04);
+}
+
+/* ------------------------------------------------------------------------------ */
+/* 9. AUTHENTICATION PAGES (LOGIN & REGISTER) */
+/* ------------------------------------------------------------------------------ */
+
+/*Here we change the style of the .auth-page container that wraps the content on login.html and register.html.*/
+.auth-page {
+    max-width: 900px; /*Limits the width to 900px*/
+    margin: 20px auto 0; /*Adds 20px on top and centers the box horizontally with "auto"*/
+}
+
+/*Here we change the style of the .auth-layout container (splits login.html and register.html into 2 columns).*/
+/*1fr 1fr creates 2 equal columns: the information box on the left and the form box on the right.*/
+.auth-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+/*Here we change the style of the .auth-intro (left box) and .auth-card (right form box) containers on login.html and register.html.*/
+.auth-intro,
+.auth-card {
+    background: #fff;
+    border: 1px solid var(--border-subtle);
+    border-top: 3px solid var(--accent);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 14px rgba(18, 58, 91, 0.04);
+}
+
+/*Here we change the style of the <h1> titles inside .auth-intro and .auth-card.*/
+.auth-intro h1,
+.auth-card h1 {
+    color: var(--primary);
+    font-weight: 800;
+    margin-top: 4px;
+}
+
+/*Here we change the style of the .auth-form container (the <form> on login.html and register.html).*/
+/*What is flex-direction: column for? Instead of putting items side by side, it stacks the labels, inputs, and button one below the other.*/
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /*Leaves 10px of vertical space between each input and label*/
+}
+
+/*Here we change the style of the <input> text boxes inside .auth-form where the user types their username and password.*/
+.auth-form input {
+    padding: 10px 12px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    font-family: inherit; /*Uses the Montserrat font inside the text boxes*/
+    font-size: 0.95rem;
+    transition: 0.2s;
+}
+
+/*Here we change the style of .auth-form input when the user clicks inside the text box to type (:focus means currently clicked/active).*/
+.auth-form input:focus {
+    outline: none; /*Removes the default browser outline*/
+    border-color: var(--accent); /*Changes the border color to cyan when typing*/
+}
+
+/*Here we change the style of the .password-box container so the password input and the Show/Hide button sit side by side in a row.*/
+.password-box {
+    display: flex; /*Puts the password input and the Show/Hide button in the same horizontal row*/
+    gap: 8px; /*Leaves 8px of space between the input and the button*/
+}
+
+/*Here we change the style of the <input> inside .password-box so it expands to fill the available space next to the button.*/
+.password-box input {
+    flex: 1; /*Makes the password box take up all remaining width in the row*/
+}
+
+/*Here we change the style of the .auth-link paragraph at the bottom of the form ("New here? Create an account").*/
+.auth-link {
+    margin-top: 12px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/*Here we change the style of the <a> link inside .auth-link.*/
+.auth-link a {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/*Here we change the style of .auth-link a when the mouse is over it (:hover).*/
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+/* ------------------------------------------------------------------------------ */
+/* 10. FOOTER */
+/* ------------------------------------------------------------------------------ */
+
+/*Here we change the style of the .footer container at the very bottom of all our HTML pages.*/
+.footer {
+    text-align: center; /*Centers the copyright text*/
+    padding: 24px;
+    color: var(--text-muted); /*Gray text color*/
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* ------------------------------------------------------------------------------ */
+/* 11. RESPONSIVE DESIGN (MEDIA QUERIES) */
+/* ------------------------------------------------------------------------------ */
+
+/*What is @media for? Media Queries let us change the CSS styles automatically when the screen is smaller (like on a tablet or a mobile phone) so the website doesn't look squished.*/
+
+/*Here we change the styles when the screen width is 1024px or smaller (Tablets).*/
+@media (max-width: 1024px) {
+    /*Here we change the .header container so its items can jump to a second line (flex-wrap: wrap) if there is not enough space.*/
+    .header {
+        flex-wrap: wrap;
+        gap: 12px 18px;
+    }
+
+    /*Here we change the .flex-nav menu container so it moves to the bottom row of the header (order: 3) and takes 100% of the width on tablets.*/
+    .flex-nav {
+        width: 100%;
+        order: 3;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px 14px;
+        padding-top: 8px;
+        border-top: 1px solid var(--border-subtle);
+    }
+
+    /*Here we change the .grid-home container from 4 columns down to 2 columns (1fr 1fr) so the cards fit better on tablet screens.*/
+    .grid-home {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /*Here we change the .grid-guides and .grid-diag containers from 2 columns down to 1 single column (1fr).*/
+    .grid-guides,
+    .grid-diag {
+        grid-template-columns: 1fr;
+    }
+}
+
+/*Here we change the styles when the screen width is 768px or smaller (Mobile Phones).*/
+@media (max-width: 768px) {
+    /*Here we change the .hamburger icon from display: none to display: block so the 3-bars menu icon becomes visible on phones.*/
+    .hamburger {
+        display: block;
+    }
+
+    /*Here we change the .flex-nav menu container to hide it by default on phones and stack its links vertically (flex-direction: column).*/
+    .flex-nav {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        margin-top: 16px;
+    }
+
+    /*How does the mobile menu open without JavaScript?*/
+    /*When the user taps the hamburger label, the hidden checkbox (.nav-toggle) gets checked (:checked).*/
+    /*The ~ symbol looks for .flex-nav next to it and changes it to display: flex so the menu appears on screen.*/
+    .nav-toggle:checked ~ .flex-nav {
+        display: flex;
+    }
+
+    /*Here we change the .hero-index banner on phones to make it more compact and darken the whole photo (0.9 opacity) so white text is easy to read on small screens.*/
+    .hero-index {
+        min-height: auto;
+        padding: 36px 18px;
+        background-image: linear-gradient(rgba(8, 20, 36, 0.9), rgba(8, 20, 36, 0.9)), url('../resources/banners/indexBG.jpg');
+    }
+
+    /*Here we change the <h1> title inside .hero-index-content to a smaller font size (1.45rem) so it fits on a phone screen.*/
+    .hero-index-content h1 {
+        font-size: 1.45rem;
+    }
+
+    /*Here we change the 4 inner page banners so they have less padding and adjust their height automatically on phones.*/
+    .hero-diagnose,
+    .hero-guides,
+    .hero-maintenance,
+    .hero-support {
+        padding: 18px;
+        min-height: auto;
+    }
+
+    /*Here we change the <h1> title inside .hero-content to a smaller font size (1.5rem) on phones.*/
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+
+    /*Why do we change the background-image of the 4 banners on mobile phones?*/
+    /*On phones, the text takes up the whole width of the banner. So instead of fading to transparent on the right, we put an 88% dark layer (rgba(8, 20, 36, 0.88)) over the entire photo so the white text is easy to read everywhere.*/
+    .hero-diagnose {
+        background-image: linear-gradient(rgba(8, 20, 36, 0.88), rgba(8, 20, 36, 0.88)), url('../resources/banners/diagnoseBG.jpg');
+    }
+
+    .hero-guides {
+        background-image: linear-gradient(rgba(8, 20, 36, 0.88), rgba(8, 20, 36, 0.88)), url('../resources/banners/guidesBG.jpg');
+    }
+
+    .hero-maintenance {
+        background-image: linear-gradient(rgba(8, 20, 36, 0.88), rgba(8, 20, 36, 0.88)), url('../resources/banners/mainteinanceBG.jpg');
+    }
+
+    .hero-support {
+        background-image: linear-gradient(rgba(8, 20, 36, 0.88), rgba(8, 20, 36, 0.88)), url('../resources/banners/supportBG.jpg');
+    }
+
+    /*Here we change the .grid-home container down to 1 single column so cards stack one below the other on phones.*/
+    .grid-home {
+        grid-template-columns: 1fr;
+    }
+
+    /*Here we change the .intro-panel container on index.html so the title and paragraph stack vertically on phones.*/
+    .intro-panel {
+        flex-direction: column;
+    }
+
+    /*Here we change the .auth-layout container on login.html and register.html to 1 single column so the form appears below the intro box on phones.*/
+    .auth-layout {
+        grid-template-columns: 1fr;
+    }
+}

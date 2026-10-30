@@ -5,100 +5,95 @@
 <html lang="en">
 
 <!-- HEAD BEGINNING -->
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FixHub | Login</title>
-    <link rel="stylesheet" href="../css/myStyles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FixHub | Login</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <!-- HEAD ENDING -->
 
 <!-- BODY BEGGINING -->
-
 <body class="auth-body">
-    <script src="../js/translations.js"></script>
-    <!-- HEADER BEGINNING -->
-    <header class="header">
-        <input type="checkbox" id="nav-toggle" class="nav-toggle">
-        <a class="logo" href="index.html" aria-label="FixHub">
-            <img class="logo-img" src="../resources/LOGOS/fixhub_logo_azul.png" alt="FixHub">
-        </a>
-        <label for="nav-toggle" class="hamburger"></label>
-        <nav class="flex-nav" aria-label="navbar">
-            <a data-i18n-block="navHome" href="index.html">Home</a>
-            <a data-i18n-block="navDiagnose" href="diagnose.html">Diagnose</a>
-            <a data-i18n-block="navGuides" href="guide.html">Guides</a>
-            <a data-i18n-block="navMaintenance" href="mainteinance.html">Maintenance</a>
-            <a data-i18n-block="navSupport" href="support.html">Support</a>
-            <a data-i18n-block="navLogin" class="login-btn" href="login.html">Login</a>
-            <a data-i18n-block="navLogout" class="logout-btn" href="../php/logout.php">Logout</a>
-        </nav>
-        <button id="lang-btn" onclick="toggleLanguage()">Español</button>
-    </header>
-    <!-- HEADER ENDING -->
+  <script src="../js/translations.js"></script>
+  <!-- HEADER BEGINNING -->
+  <header class="header">
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <a class="logo" href="index.html" aria-label="FixHub">
+      <img class="logo-img" src="../resources/LOGOS/fixhub_logo_azul.png" alt="FixHub">
+    </a>
+    <label for="nav-toggle" class="hamburger"></label>
+    <nav class="flex-nav" aria-label="navbar">
+      <a data-i18n-block="navHome" href="index.html">Home</a>
+      <a data-i18n-block="navDiagnose" href="diagnose.html">Diagnose</a>
+      <a data-i18n-block="navGuides" href="guide.html">Guides</a>
+      <a data-i18n-block="navMaintenance" href="mainteinance.html">Maintenance</a>
+      <a data-i18n-block="navSupport" href="support.html">Support</a>
+      <a data-i18n-block="navLogin" class="login-btn" href="login.html">Login</a>
+      <a data-i18n-block="navLogout" class="logout-btn" href="../php/logout.php">Logout</a>
+    </nav>
+    <button id="lang-btn" onclick="toggleLanguage()">Español</button>
+  </header>
+  <!-- HEADER ENDING -->
 
+  <!-- PAGE CONTENT BEGINNING -->
+  <div class="auth-page">
+    <main class="auth-layout">
 
+      <!-- LEFT BOX BEGINNING -->
+      <section class="auth-intro">
+        <p class="auth-tagline" data-i18n-block="loginIntroTagline">Easy access</p>
+        <h1 data-i18n-block="loginIntroTitle">Sign in and continue troubleshooting</h1>
+        <p data-i18n-block="loginIntroDesc">Use your account to keep track of common fixes and visit the support pages faster.</p>
+        <ul>
+          <li data-i18n-block="loginIntroItem1">Simple access to the main pages</li>
+          <li data-i18n-block="loginIntroItem2">Fast help for common computer problems</li>
+          <li data-i18n-block="loginIntroItem3">Clear support steps for each issue</li>
+        </ul>
+      </section>
+      <!-- LEFT BOX ENDING -->
 
-    <!-- PAGE CONTENT BEGINNING -->
-    <div class="auth-page">
-        <main class="auth-layout">
+      <!-- RIGHT BOX BEGINNING (LOGIN) -->
+      <!-- Connect the login form using JavaScript -->
+      <div class="auth-card">
+        <p class="auth-tagline" data-i18n-block="loginCardTagline">Welcome back</p>
+        <h1 data-i18n-block="loginCardTitle">Log in to FixHub</h1>
+        <p data-i18n-block="loginCardDesc">Access your troubleshooting dashboard and continue where you left off.</p>
 
-            <!-- LEFT BOX BEGINNING -->
-            <section class="auth-intro">
-                <p class="auth-tagline" data-i18n-block="loginIntroTagline">Easy access</p>
-                <h1 data-i18n-block="loginIntroTitle">Sign in and continue troubleshooting</h1>
-                <p data-i18n-block="loginIntroDesc">Use your account to keep track of common fixes and
-                    visit the support pages faster.</p>
-                <ul>
-                    <li data-i18n-block="loginIntroItem1">Simple access to the main pages</li>
-                    <li data-i18n-block="loginIntroItem2">Fast help for common computer problems</li>
-                    <li data-i18n-block="loginIntroItem3">Clear support steps for each issue</li>
-                </ul>
-            </section>
-            <!-- LEFT BOX ENDING -->
+        <form class="auth-form" id="loginForm" action="../php/login.php" method="POST">
+          <!-- USERNAME -->
+          <label for="username" data-i18n-block="loginCardUsername">Username</label>
+          <input type="text" id="username" name="username" placeholder="Username">
 
-            <!-- RIGHT BOX BEGINNING (LOGIN) -->
-            <!-- Connect the login form using JavaScript -->
-            <div class="auth-card">
-                <p class="auth-tagline" data-i18n-block="loginCardTagline">Welcome back</p>
-                <h1 data-i18n-block="loginCardTitle">Log in to FixHub</h1>
-                <p data-i18n-block="loginCardDesc">Access your troubleshooting dashboard and continue
-                    where you left off.</p>
+          <!-- PASSWORD -->
+          <label for="password" data-i18n-block="loginCardPassword">Password</label>
+          <div class="password-box">
+            <input type="password" id="password" name="password" placeholder="*********">
+            <button type="button" id="togglePassword" data-i18n-block="showPasswordBtn">Show</button>
+          </div>
 
-                <form class="auth-form" id="loginForm" action="../php/login.php" method="POST">
-                    <!-- USERNAME -->
-                    <label for="username" data-i18n-block="loginCardUsername">Username</label>
-                    <input type="text" id="username" name="username" placeholder="Username">
+          <!-- SIGN IN -->
+          <button type="submit" class="button-primary" data-i18n-block="loginCardButton">Sign in</button>
+        </form>
 
-                    <!-- PASSWORD -->
-                    <label for="password" data-i18n-block="loginCardPassword">Password</label>
-                    <input type="password" id="password" name="password" placeholder="*********">
+        <!-- REGISTER REDIRECTION -->
+        <p class="auth-link" data-i18n-block="loginCardRegister">New here? <a href="register.html">Create an account</a></p>
 
-                    <!-- SIGN IN -->
-                    <button type="submit" class="button button-primary" data-i18n-block="loginCardButton">Sign
-                        in</button>
-                </form>
+      </div>
+      <!-- RIGHT BOX ENDING (LOGIN) -->
 
-                <!-- REGISTER REDIRECTION -->
-                <p class="auth-link" data-i18n-block="loginCardRegister">New here?<a href="register.html">Create an
-                        account</a></p>
+    </main>
+  </div>
+  <!-- PAGE CONTENT ENDING -->
 
-            </div>
-            <!-- RIGHT BOX ENDING (LOGIN) -->
+  <!-- FOOTER BEGINNING -->
+  <footer class="footer">
+    <p data-i18n-block="footerText">Copyright © 2026 FixHub. All rights reserved.</p>
+  </footer>
+  <!-- FOOTER ENDING -->
 
-        </main>
-    </div>
-    <!-- PAGE CONTENT ENDING -->
-
-    <!-- FOOTER BEGINNING -->
-    <footer class="footer">
-        <p data-i18n-block="footerText">Copyright © 2026 FixHub. All rights reserved.</p>
-    </footer>
-    <!-- FOOTER ENDING -->
-
-    <script src="../js/auth.js"></script>
-    <script src="../js/validate.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/validate.js"></script>
 </body> <!-- BODY ENDING -->
 
 </html> <!-- HTML ENDING -->

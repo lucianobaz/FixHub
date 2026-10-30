@@ -81,37 +81,67 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     //------------------------------------------------------------------------------------------
+    //SHOW / HIDE PASSWORD BUTTON - This section is in charge of showing or hiding the password when clicking the button.
+    //------------------------------------------------------------------------------------------
+    const passwordInput = document.getElementById("password");
+    const togglePasswordBtn = document.getElementById("togglePassword");
+
+    if (passwordInput && togglePasswordBtn) {
+        togglePasswordBtn.addEventListener("click", function () {
+            //If the input type is "password" (hidden with dots), we change it to "text" so the user can see the letters.
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                togglePasswordBtn.setAttribute("data-i18n-block", "hidePasswordBtn");
+                togglePasswordBtn.textContent = isSpanish() ? "Ocultar" : "Hide";
+            } else {
+                //If it is already "text", we change it back to "password" to hide it again.
+                passwordInput.type = "password";
+                togglePasswordBtn.setAttribute("data-i18n-block", "showPasswordBtn");
+                togglePasswordBtn.textContent = isSpanish() ? "Mostrar" : "Show";
+            }
+        });
+    }
+
+    //------------------------------------------------------------------------------------------
     //FUNCTION - This function is in charge of checking if the username and password meet all the security rules for new accounts.
     //------------------------------------------------------------------------------------------
     function validatePasswordStrength(username, password) {
-        //We check if username and password have between 8 and 20 characters.
-        const isLengthValid = username.length >= 8 && username.length <= 20 &&
-                              password.length >= 8 && password.length <= 20;
+        //1. We check if username and password have between 6 and 12 characters.
+        const isLengthValid = username.length >= 6 && username.length <= 12 &&
+                              password.length >= 6 && password.length <= 12;
         if (!isLengthValid) {
             return isSpanish()
-                ? "El usuario y la contraseña deben tener entre 8 y 20 caracteres."
-                : "Username and password must be between 8 and 20 characters long.";
+                ? "El usuario y la contraseña deben tener entre 6 y 12 caracteres."
+                : "Username and password must be between 6 and 12 characters long.";
         }
 
         //what is a Regular Expression (RegEx)? A pattern of characters used to test or validate if text meets specific rules.
         //what is .test() for? Is a RegEx method that returns true if text matches the pattern, or false if it does not.
-        //We use a Regular Expression in order to test if the password has at least one special character.
-        const hasSpecialChar = /[!@#\$%\^&\*\(\)_\+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
-        if (!hasSpecialChar) {
+        //What does /[^a-zA-Z0-9]/ mean? The ^ symbol inside [] means NOT, so it looks for any character that is NOT a letter or a number (in other words, a symbol).
+
+        //2. We check that the username does NOT contain any symbols (!"#$%&¿?).
+        if (/[^a-zA-Z0-9]/.test(username)) {
             return isSpanish()
-                ? "La contraseña debe contener al menos un carácter especial (!@#$%...)."
-                : "Password must contain at least one special character (!@#$%...).";
+                ? "El nombre de usuario no puede contener símbolos (!\"#$%&¿?)."
+                : "Username cannot contain symbols (!\"#$%&¿?).";
         }
 
-        //We use Regular Expressions in order to test if the password has lowercase, uppercase, and numbers.
-        const hasLowercase = /[a-z]/.test(password);
-        const hasUppercase = /[A-Z]/.test(password);
-        const hasDigit = /[0-9]/.test(password);
-
-        if (!hasLowercase || !hasUppercase || !hasDigit) {
+        //3. We check that the username contains at least one number ([0-9]).
+        if (!/[0-9]/.test(username)) {
             return isSpanish()
-                ? "La contraseña debe incluir mayúsculas, minúsculas y números."
-                : "Password must contain lowercase, uppercase, and numbers.";
+                ? "El nombre de usuario debe contener al menos un número."
+                : "Username must contain at least one number.";
+        }
+
+        //4. We check that the password contains at least one letter ([a-zA-Z]), one number ([0-9]), and one symbol ([^a-zA-Z0-9]).
+        const hasLetter = /[a-zA-Z]/.test(password);
+        const hasNumber = /[0-9]/.test(password);
+        const hasSymbol = /[^a-zA-Z0-9]/.test(password);
+
+        if (!hasLetter || !hasNumber || !hasSymbol) {
+            return isSpanish()
+                ? "La contraseña debe contener al menos una letra, un número y un símbolo."
+                : "Password must contain at least one letter, one number, and one symbol.";
         }
 
         //If all requirements are met, we return null meaning there are no errors.

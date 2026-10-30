@@ -25,7 +25,7 @@ if (!isset($_SESSION['username'])) {
 <head>
     <meta charset="UTF-8">
     <title>Welcome</title>
-    <link rel="stylesheet" href="../css/myStyles.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <div style="text-align: center; margin-top: 50px; font-family: sans-serif;">
