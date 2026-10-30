@@ -221,10 +221,9 @@
     "loginCardRegister": "New here? <a href='register.html'>Create an account</a>",
     "regAuthTagline": "Get started with FixHub",
     "regAuthTitle": "Create an account",
-    "regAuthDesc": "Create a simple account to save troubleshooting progress and access support faster.",
-    "regAuthDesc1": "Save your recent fixes",
-    "regAuthDesc2": "Access support quickly",
-    "regAuthDesc3": "Track troubleshooting steps",
+    "regAuthDesc": "Follow these requirements to register your account:",
+    "regAuthDesc1": "Your username must have: 6 to 12 characters, at least one number, and no symbols (!\"#$%&¿?).",
+    "regAuthDesc2": "Your password must have: 6 to 12 characters, at least one letter, one number, and one symbol.",
     "regAuthUsername": "Username",
     "regAuthPassword": "Password",
     "regAuthButton": "Create account",
@@ -237,7 +236,8 @@
     "emptyFieldsError": "Please enter both username and password",
     "successRegistration": "Registration successful! Please log in.",
     "showPasswordBtn": "Show",
-    "hidePasswordBtn": "Hide"
+    "hidePasswordBtn": "Hide",
+    "welcomeUser": "Welcome"
   },
   "es": {
     "navHome": "Inicio",
@@ -461,10 +461,9 @@
     "loginCardRegister": "¿Nuevo aquí? <a href='register.html'>Crear una cuenta</a>",
     "regAuthTagline": "Comienza con FixHub",
     "regAuthTitle": "Crear una cuenta",
-    "regAuthDesc": "Crea una cuenta simple para guardar el progreso de resolución de problemas y acceder a soporte más rápido.",
-    "regAuthDesc1": "Guarda tus soluciones recientes",
-    "regAuthDesc2": "Accede a soporte rápidamente",
-    "regAuthDesc3": "Haz seguimiento de los pasos de solución de problemas",
+    "regAuthDesc": "Sigue estos requisitos para registrar tu cuenta:",
+    "regAuthDesc1": "Tu usuario debe tener: de 6 a 12 caracteres, al menos un número y no usar símbolos (!\"#$%&¿?).",
+    "regAuthDesc2": "Tu contraseña debe tener: de 6 a 12 caracteres, al menos una letra, un número y un símbolo.",
     "regAuthUsername": "Nombre de usuario",
     "regAuthPassword": "Contraseña",
     "regAuthButton": "Crear cuenta",
@@ -477,6 +476,7 @@
     "emptyFieldsError": "Por favor, introduce el usuario y la contraseña",
     "successRegistration": "Registro exitoso, inicie sesión.",
     "showPasswordBtn": "Mostrar",
-    "hidePasswordBtn": "Ocultar"
+    "hidePasswordBtn": "Ocultar",
+    "welcomeUser": "Bienvenido"
   }
 }

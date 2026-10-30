@@ -54,7 +54,7 @@
 
   <!-- PAGE CONTENT BEGINNING -->
   <main>
-    <p class="welcome-message" id="welcomeMessage" hidden aria-live="polite"></p>
+    <p class="welcome-message" id="welcomeMessage" hidden><span data-i18n-block="welcomeUser">Welcome</span>, <span id="welcomeName"></span>!</p>
 
     <!-- FEATURE GRID CARDS BEGINNING -->
     <section class="grid-home" aria-label="Platform features">
@@ -111,12 +111,12 @@
 
   <script>
     const welcomeMessage = document.getElementById('welcomeMessage');
+    const welcomeName = document.getElementById('welcomeName');
     const username = new URLSearchParams(window.location.search).get('welcome');
 
     if (username) {
-      welcomeMessage.textContent = `Bienvenido, ${username}!`;
+      welcomeName.textContent = username;
       welcomeMessage.hidden = false;
-      window.history.replaceState({}, document.title, window.location.pathname);
     }
   </script>
   <script src="../js/auth.js"></script>

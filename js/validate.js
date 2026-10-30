@@ -117,10 +117,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         //what is a Regular Expression (RegEx)? A pattern of characters used to test or validate if text meets specific rules.
         //what is .test() for? Is a RegEx method that returns true if text matches the pattern, or false if it does not.
-        //What does /[^a-zA-Z0-9]/ mean? The ^ symbol inside [] means NOT, so it looks for any character that is NOT a letter or a number (in other words, a symbol).
+        //What does /[^a-zA-Z0-9_]/ mean? The ^ symbol inside [] means NOT, so it allows letters, numbers, and "_", and blocks symbols like (!"#$%&¿?).
 
-        //2. We check that the username does NOT contain any symbols (!"#$%&¿?).
-        if (/[^a-zA-Z0-9]/.test(username)) {
+        //2. We check that the username does NOT contain invalid symbols (!"#$%&¿?), while allowing "_".
+        if (/[^a-zA-Z0-9_]/.test(username)) {
             return isSpanish()
                 ? "El nombre de usuario no puede contener símbolos (!\"#$%&¿?)."
                 : "Username cannot contain symbols (!\"#$%&¿?).";
